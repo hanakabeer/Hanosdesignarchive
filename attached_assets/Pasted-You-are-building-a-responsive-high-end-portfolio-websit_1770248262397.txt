@@ -1,0 +1,225 @@
+You are building a responsive, high-end portfolio website for a multidisciplinary designer called “HANO”.
+The website is a single landing page made of multiple stacked sections, BUT each section must be coded as its own isolated “component” file so edits to one section do not affect the others.
+
+TECH STACK (important)
+- Use Vite + React (JavaScript or TypeScript)
+- Styling: CSS Modules OR styled-components (choose ONE and be consistent)
+  - Preferred: CSS Modules for clean isolation
+- No UI libraries (no Bootstrap, no MUI, no Tailwind unless I explicitly ask later)
+- Animations: pure CSS + small vanilla JS OR Framer Motion (only if needed). Keep it minimal.
+- Create a clean, scalable folder structure: /src/components/sections/*
+
+PROJECT STRUCTURE (must follow)
+- /src/components/sections/
+  - Navbar/
+  - Hero/
+  - ProjectStackReveal/
+  - ApproachNetwork/
+  - Playground/
+  - FooterContact/
+- Each section folder contains:
+  - index.jsx (or .tsx)
+  - styles.module.css
+- One main page:
+  - /src/pages/Home.jsx (or App.jsx) that imports sections and renders them in order
+- Global styles:
+  - /src/styles/global.css for variables, typography defaults, and background colors
+- Use CSS variables for colors and spacing so I can tweak the theme safely.
+
+REQUIREMENT: SECTION ISOLATION
+- Each section must have its own wrapper class and internal layout rules.
+- No section’s CSS should leak into others.
+- Avoid global selectors like `h1 {}` or `.container {}` unless scoped to that section wrapper.
+- Home page should just stack components one after another:
+  <Navbar />
+  <Hero />
+  <ProjectStackReveal />
+  <ApproachNetwork />
+  <Playground />
+  <FooterContact />
+- Each component should be editable independently without breaking spacing or layout elsewhere.
+
+GLOBAL DESIGN SYSTEM (match my vibe)
+Aesthetic: calm, editorial, minimal, intelligent, atmospheric — like a design archive / museum / systems-thinking.
+No template look. No generic cards. No grids. No visible containers.
+Use strong whitespace and quiet typography.
+
+COLOR PALETTE (use CSS variables)
+- --bg-dark: #0f1320 (deep charcoal/navy)
+- --bg-light: #f6f6f4 (off-white)
+- --ink: #101319 (near-black)
+- --muted: rgba(255,255,255,0.72)
+- --muted2: rgba(255,255,255,0.5)
+- --navy: #1b2740
+- --slate: #697089
+- --steel: #a7adbb
+- --accent-soft: #7aa6c2 (very restrained)
+Add subtle grain/noise via CSS overlay (very low opacity).
+
+TYPOGRAPHY
+- Use 2 fonts via Google Fonts:
+  - Display: “BRICKS SANS” (for big headings like the title)
+  - Body: “Inter” (for text)
+- Clear hierarchy:
+  - Hero title: very large, bold, tight tracking
+  - Section titles: bold, confident, not playful
+  - Body text: quiet, minimal
+
+INTERACTIONS (must be subtle)
+- Prefer fade + slight translate
+- No bouncy easing
+- Respect prefers-reduced-motion
+- Hover states: slight lift, opacity shifts, soft shadows only
+
+NAVBAR COMPONENT (Navbar)
+- Minimal top nav with links:
+  Intro, Work, Approach, Playground, Contact
+- Smooth scroll to anchors
+- Sticky but subtle (blurred background only when scrolling)
+- Hover: underline fade or opacity change
+
+SECTION 1 — HERO COMPONENT (Hero)
+Layout:
+- Full viewport height
+- Top nav overlays
+- Large title: “HANO’S DESIGN ARCHIVE”
+- Under title: two pill tags: “Industrial Designer” and “UI/UX Designer”
+- Microcopy: “An evolving archive of work across industrial design, interfaces, and systems.”
+- CTA on right: “View work” scrolls to Work section
+
+Background:
+- Use a blurred editorial human figure image as a placeholder (use any local placeholder image if none provided).
+- Background should be soft, atmospheric, high-key, not harsh.
+- No hard edges; add subtle vignette.
+- Keep the overall hero mostly light/off-white like in my layout, with dark typography.
+
+SECTION 2 — WORK / PROJECT FILE REVEAL COMPONENT (ProjectStackReveal)
+IMPORTANT: This section is NOT a decorative divider. It is 6 projects and they reveal one-by-one on scroll.
+
+Visual:
+- Full-width block on dark navy background or transitioning from hero
+- 6 horizontal overlapping “file slabs” (architectural, cut-paper layers)
+- Muted greys + navy tones, staggered heights and offsets like steps
+- No text visible by default (clean)
+
+Reveal behavior (core):
+- Each slab appears sequentially as user scrolls down:
+  slab1 then slab2 ... slab6
+- Each slab animates in only once.
+- Use IntersectionObserver to trigger each slab when ~35% visible.
+
+Animation style:
+- Start: opacity 0, translateY 24px, optional blur 6px
+- End: opacity 1, translateY 0, blur 0
+- Duration: 700–900ms
+- Stagger delay: 140ms between slabs
+- Quiet ease-out (no bounce)
+
+Interaction:
+- Each slab is fully clickable and routes to a project page.
+- On hover (desktop, only after visible):
+  - slab lifts slightly (translateY -3px)
+  - shadow increases subtly
+  - other slabs dim slightly
+  - OPTIONAL: show a tiny pill label near the slab edge with the project title (appears only on hover)
+
+Data-driven:
+- Define 6 projects in a JS array:
+  [
+    { id:'p1', title:'Project One', category:'UI/UX', year:'2024', route:'/work/project-1' },
+    ...
+  ]
+- Each slab uses that data.
+- Slabs should have aria-labels for accessibility.
+
+Routing:
+- Use React Router.
+- Create /work/project-1 ... /work/project-6 pages as separate routes.
+- Each project page can be a simple template for now:
+  - title, year, role
+  - overview paragraph
+  - placeholder images
+  - next/prev navigation
+
+SECTION 3 — MY APPROACH COMPONENT (ApproachNetwork)
+Background:
+- Deep charcoal (#0f1320) with subtle grain
+- Title: “MY APPROACH” (left aligned, bold display)
+
+Main visual:
+- Abstract network visualization:
+  - small floating dots scattered in space
+  - dots vary slightly in size/brightness for depth
+  - thin dashed lines connect select dots
+  - paths are incomplete and asymmetrical (non-linear thinking)
+- Pill labels near select nodes:
+  “Research”, “Prototype”, “System”, “Interface”, “Material”
+- No grids, no charts, no boxes, no flow arrows.
+
+Motion:
+- Very subtle drift (slow, calm)
+- Gentle glow pulsing (quiet)
+- On hover:
+  - nearest connected dots brighten slightly
+  - dashed paths glow subtly
+Implementation:
+- Use HTML canvas OR SVG (choose one).
+- Prefer canvas for organic motion.
+- Must be lightweight and performant.
+- Respect prefers-reduced-motion (pause animation).
+
+SECTION 4 — PLAYGROUND COMPONENT (Playground)
+Background:
+- Off-white (#f6f6f4)
+- Title centered: “PLAYGROUND”
+- Short description under it (quiet text)
+
+Thumbnails:
+- Several floating tilted images arranged loosely (not a grid)
+- They can “orbit” slightly or appear scattered
+- Hover: slight rotate straighten + scale up + soft shadow
+- Click: open a modal with bigger preview + title (simple)
+
+SECTION 5 — FOOTER / CONTACT COMPONENT (FooterContact)
+Background:
+- Dark gradient or deep charcoal
+- Big editorial “Thank You”
+- Subtext: “Looking Forward to Connect with You!”
+- Centered minimal abstract object graphic (use placeholder SVG or image)
+- Contact list on left:
+  Email, Phone, LinkedIn, Instagram
+- Sign-off on right:
+  “Warm Regards,” + signature placeholder
+
+RESPONSIVE RULES
+- Mobile:
+  - Navbar collapses into minimal menu (simple)
+  - Hero title scales smoothly
+  - Project slabs become taller and more tappable
+  - Playground thumbnails reduce count and stack gracefully
+- Ensure spacing never feels cramped.
+
+POLISH REQUIREMENTS
+- Add smooth scrolling
+- Add section anchors with ids: #intro #work #approach #playground #contact
+- Add subtle background grain overlay (very low opacity)
+- Avoid layout shift
+- Add loading-safe font strategy (font-display swap)
+
+DELIVERABLE
+Return the full working Replit project:
+- Vite + React app
+- Components in isolated folders
+- CSS Modules per section
+- React Router for 6 project pages
+- IntersectionObserver reveal for project slabs
+- Approach network visualization implemented (canvas or SVG)
+- Clean, readable code with comments
+- Placeholder content/images where needed
+
+IMPORTANT CONSTRAINTS
+- No generic template look
+- No card UI
+- No heavy animations
+- Keep it calm, editorial, intelligent
+- Keep each section isolated so editing one doesn’t break others

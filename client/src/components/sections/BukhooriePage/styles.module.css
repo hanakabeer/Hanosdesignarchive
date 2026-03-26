@@ -1,0 +1,998 @@
+/* ══════════════════════════════════════════════════════════════
+   BukhooriePage — case study styles
+   Palette:
+     --bk-dark   #141414   night black
+     --bk-light  #F7F3EA   sand / majlis wall tone
+     --bk-gold   #C89B3C   warm brass / oud / incense gold
+   Feel: sensory · atmospheric · ritual · heritage
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --bk-dark: #141414;
+    --bk-darker: #0E0E0E;
+    --bk-light: #F7F3EA;
+    --bk-light2: #EDE9DF;
+    --bk-gold: #C89B3C;
+    --bk-gold2: #D9AF5A;
+    --bk-ink: #141414;
+    --bk-dim: rgba(255, 255, 255, 0.44);
+    --bk-margin: clamp(2.5rem, 4vw, 4rem);
+}
+
+/* ── Page wrapper ───────────────────────────────────────────── */
+.page {
+    font-family: var(--font-body);
+    color: var(--bk-ink);
+}
+
+/* ── Shared inner layout ────────────────────────────────────── */
+.sectionInner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--bk-margin);
+}
+
+/* ── Section tag ────────────────────────────────────────────── */
+.sectionTag {
+    display: block;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--bk-gold);
+    margin-bottom: 2rem;
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────── */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 4rem;
+    font-size: 0.8rem;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--bk-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.backLink:hover {
+    color: #fff;
+}
+
+.sep {
+    color: rgba(255, 255, 255, 0.16);
+}
+
+.curr {
+    color: rgba(255, 255, 255, 0.38);
+}
+
+/* ── Shared caption ─────────────────────────────────────────── */
+.cap {
+    font-size: 0.72rem;
+    color: #999;
+    line-height: 1.4;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 1 — EXPERIENCE (dark)
+   ══════════════════════════════════════════════════════════════ */
+.experience {
+    background: var(--bk-dark);
+    padding: 8rem 0 0;
+    position: relative;
+}
+
+.expInner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--bk-margin);
+}
+
+/* title */
+.titleBlock {
+    margin-bottom: 2.5rem;
+}
+
+.heroTitle {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 11vw, 10rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.87;
+    color: #fff;
+    margin-bottom: 1.1rem;
+}
+
+.accentLine {
+    width: 4.5rem;
+    height: 3px;
+    background: var(--bk-gold);
+    margin-bottom: 1.1rem;
+    border-radius: 1px;
+}
+
+.heroSub {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bk-gold);
+}
+
+/* hero image with atmosphere glow */
+.heroImageWrap {
+    position: relative;
+    width: 100%;
+    max-height: 74vh;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+}
+
+.heroImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* warm filter to evoke candlelight */
+    filter: brightness(0.85) sepia(0.18) saturate(1.1);
+}
+
+/* subtle warm ambient glow overlay */
+.heroGlow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 60%,
+            rgba(200, 155, 60, 0.15) 0%,
+            transparent 70%);
+    pointer-events: none;
+}
+
+/* text */
+.expText {
+    padding: 2.8rem 0 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    max-width: 680px;
+}
+
+.expBody {
+    font-size: 1rem;
+    line-height: 1.78;
+    color: var(--bk-dim);
+    margin-bottom: 1.5rem;
+}
+
+.expTag {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--bk-gold);
+    letter-spacing: -0.02em;
+    padding-left: 1rem;
+    border-left: 2px solid var(--bk-gold);
+}
+
+/* meta row */
+.metaRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2rem 0;
+}
+
+.metaItem {
+    padding-right: 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.metaItem:last-child {
+    border-right: none;
+}
+
+.metaLabel {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.26);
+    margin-bottom: 0.35rem;
+}
+
+.metaValue {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.58);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .metaRow {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 2 — CONTEXT (light)
+   ══════════════════════════════════════════════════════════════ */
+.context {
+    background: var(--bk-light);
+    padding: 7rem 0;
+}
+
+.contextLead {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.25;
+    color: var(--bk-ink);
+    max-width: 720px;
+    margin-bottom: 1.2rem;
+}
+
+.contextSub {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #777;
+    max-width: 620px;
+    margin-bottom: 3rem;
+}
+
+/* reference images — 2 images side by side */
+.contextImages {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 3.5rem;
+}
+
+@media (max-width: 768px) {
+    .contextImages {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contextImgBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contextImg {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.08);
+    filter: sepia(0.1) saturate(0.9);
+}
+
+/* two columns */
+.contextCols {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    .contextCols {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contextCard {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.06);
+}
+
+.contextCardLabel {
+    display: block;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bk-gold);
+    margin-bottom: 0.8rem;
+}
+
+.contextCardDesc {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #555;
+}
+
+/* divider */
+.contextDivider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.dividerLine {
+    width: 1px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.dividerIcon {
+    font-size: 1.4rem;
+    color: var(--bk-gold);
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* key insight */
+.contextInsight {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--bk-ink);
+    line-height: 1.25;
+    max-width: 700px;
+    border-top: 2px solid var(--bk-gold);
+    padding-top: 1.5rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 3 — DESIGN CONCEPT (dark)
+   ══════════════════════════════════════════════════════════════ */
+.concept {
+    background: var(--bk-darker);
+    padding: 7rem 0;
+}
+
+/* flow */
+.conceptFlow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 4rem;
+}
+
+.conceptStep {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 2px solid var(--bk-gold);
+    border-radius: 10px 10px 0 0;
+    padding: 1rem 1.6rem;
+}
+
+.conceptStepLabel {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.conceptArrow {
+    font-size: 1.2rem;
+    color: var(--bk-gold);
+    opacity: 0.6;
+}
+
+/* three direction cards */
+.directionGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 900px) {
+    .directionGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.directionCard {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* image at top of each direction card */
+.directionImgWrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+}
+
+.directionImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75) sepia(0.2) saturate(1.1);
+    transition: filter 0.35s, transform 0.35s;
+}
+
+.directionCard:hover .directionImg {
+    filter: brightness(0.9) sepia(0.08) saturate(1);
+    transform: scale(1.03);
+}
+
+.directionIcon {
+    display: block;
+    font-size: 1.4rem;
+    color: var(--bk-gold);
+    margin: 1.4rem 2rem 0.6rem;
+    line-height: 1;
+}
+
+.directionTitle {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin: 0 2rem 0.7rem;
+}
+
+.directionDesc {
+    font-size: 0.87rem;
+    color: var(--bk-dim);
+    line-height: 1.65;
+    margin: 0 2rem 2rem;
+}
+
+/* key line */
+.conceptKeyLine {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: #fff;
+    line-height: 1;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--bk-gold);
+}
+
+/* Bukhoor + Mashrabiya reference images in section 3 (dark bg) */
+.conceptRefImages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 3.5rem;
+}
+
+@media (max-width: 700px) {
+    .conceptRefImages {
+        grid-template-columns: 1fr;
+    }
+}
+
+.conceptRefImgBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.conceptRefImg {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    border-radius: 14px;
+    filter: brightness(0.78) sepia(0.2) saturate(1.05);
+    transition: filter 0.35s;
+}
+
+.conceptRefImgBox:hover .conceptRefImg {
+    filter: brightness(0.92) sepia(0.08) saturate(1);
+}
+
+.conceptRefCap {
+    font-size: 0.7rem;
+    color: var(--bk-dim);
+    line-height: 1.4;
+    padding: 0 0.2rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 4 — PRODUCT DESIGN (light)
+   ══════════════════════════════════════════════════════════════ */
+.product {
+    background: var(--bk-light);
+    padding: 7rem 0;
+}
+
+.productLayout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .productLayout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+.productImgWrap {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+}
+
+.productImg {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    filter: sepia(0.08) saturate(0.95);
+}
+
+/* vertical diagram */
+.systemDiagram {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 2rem;
+    border-left: 2px solid rgba(0, 0, 0, 0.08);
+    padding-left: 1.5rem;
+}
+
+.diagramRow {
+    display: grid;
+    grid-template-columns: auto auto 1fr 3fr;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.diagramRow:last-child {
+    border-bottom: none;
+}
+
+.diagramDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+}
+
+.diagramDotAccent {
+    background: var(--bk-gold);
+    box-shadow: 0 0 8px rgba(200, 155, 60, 0.4);
+}
+
+.diagramLine {
+    width: 1.5rem;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.diagramLabel {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bk-gold);
+    white-space: nowrap;
+}
+
+.diagramDetail {
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.productBody {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.productKeyLine {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--bk-ink);
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--bk-gold);
+    background: var(--bk-light2);
+    border-radius: 0 10px 10px 0;
+    line-height: 1.5;
+}
+
+.productRight {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 5 — MATERIAL & LIGHT (dark)
+   ══════════════════════════════════════════════════════════════ */
+.material {
+    background: var(--bk-dark);
+    padding: 7rem 0;
+}
+
+/* 2/3 + 1/3 photo layout */
+.lightGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    .lightGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.lightImgMain {
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.lightImgCol {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.lightImgSmall {
+    border-radius: 14px;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.lightImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 14px;
+    /* warm, amber-tinted render feel */
+    filter: brightness(0.82) sepia(0.2) saturate(1.1);
+    transition: filter 0.4s;
+}
+
+.lightImgMain:hover .lightImg,
+.lightImgSmall:hover .lightImg {
+    filter: brightness(0.95) sepia(0.08) saturate(1);
+}
+
+.lightCap {
+    font-size: 0.71rem;
+    color: var(--bk-dim);
+    line-height: 1.4;
+}
+
+/* material callout */
+.materialCallout {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    background: rgba(200, 155, 60, 0.08);
+    border: 1px solid rgba(200, 155, 60, 0.18);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 2rem;
+}
+
+.materialTag {
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bk-gold);
+    white-space: nowrap;
+    padding-top: 0.1rem;
+}
+
+.materialReason {
+    font-size: 0.9rem;
+    color: var(--bk-dim);
+    line-height: 1.6;
+}
+
+.materialInsight {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #fff;
+    line-height: 1.25;
+    max-width: 760px;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--bk-gold);
+}
+
+/* .outcome now defined below with dark bg override */
+/* .outcome {
+    background: var(--bk-light);
+    padding: 7rem 0;
+} */
+
+/* images */
+.outcomeImages {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    .outcomeImages {
+        grid-template-columns: 1fr;
+    }
+}
+
+.outcomeMain,
+.outcomeSide {
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.outcomeImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px;
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.09);
+    filter: sepia(0.06) saturate(0.95);
+}
+
+.outcomeLine {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--bk-ink);
+    line-height: 1.25;
+    max-width: 800px;
+    margin-bottom: 3rem;
+}
+
+/* reflection */
+.reflection {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    background: var(--bk-light2);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.reflectionBar {
+    flex-shrink: 0;
+    width: 3px;
+    align-self: stretch;
+    background: var(--bk-gold);
+    border-radius: 99px;
+    min-height: 3rem;
+}
+
+.reflectionText {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #444;
+    margin-bottom: 1.2rem;
+}
+
+.closingLine {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--bk-gold);
+    letter-spacing: -0.01em;
+}
+
+/* back nav */
+.backNavLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #999;
+    text-decoration: none;
+    transition: color 0.2s, gap 0.2s;
+}
+
+.backNavLink:hover {
+    color: var(--bk-gold);
+    gap: 0.2rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ADDITIONAL SECTIONS — new styles
+   ══════════════════════════════════════════════════════════════ */
+
+/* shared section headings for new sections */
+.sectionTitle {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 3rem;
+    max-width: 720px;
+}
+
+/* dark-bg section tag (used on light sections) */
+.sectionTagDark {
+    display: block;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--bk-gold);
+    margin-bottom: 2rem;
+}
+
+/* ══ Ornate Islamic Designs section (light bg) ══ */
+.islamicDesigns {
+    background: var(--bk-light);
+    padding: 7rem 0;
+}
+
+.islamicTitle {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1.1;
+    color: var(--bk-ink);
+    margin-bottom: 3rem;
+}
+
+.islamicGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+}
+
+@media (max-width: 900px) {
+    .islamicGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 580px) {
+    .islamicGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.islamicImgBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.islamicImg {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    border-radius: 14px;
+    filter: sepia(0.12) saturate(0.9);
+    transition: filter 0.35s;
+}
+
+.islamicImgBox:hover .islamicImg {
+    filter: sepia(0) saturate(1);
+}
+
+.islamicCap {
+    font-size: 0.72rem;
+    color: #888;
+    line-height: 1.4;
+    padding: 0 0.2rem;
+}
+
+/* ══ Outcome section — dark, video only ══ */
+.outcome {
+    background: var(--bk-darker);
+    padding: 7rem 0;
+}
+
+.outcomeVideoWrap {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    background: #000;
+}
+
+.outcomeVideo {
+    width: 100%;
+    display: block;
+    max-height: 80vh;
+    object-fit: cover;
+}
+
+/* fix outcomeLine and reflection for dark bg */
+.outcomeLine {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.25;
+    max-width: 800px;
+    margin-bottom: 3rem;
+}
+
+/* ══ Recognition section (light) ══ */
+.recognition {
+    background: var(--bk-light);
+    padding: 7rem 0;
+}
+
+.recognitionGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 680px) {
+    .recognitionGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.recognitionImgBox {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.recognitionImg {
+    width: 100%;
+    display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 16px;
+    filter: sepia(0.08) saturate(0.95);
+    transition: filter 0.35s;
+}
+
+.recognitionImgBox:hover .recognitionImg {
+    filter: sepia(0) saturate(1.05);
+}

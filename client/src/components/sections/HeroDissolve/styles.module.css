@@ -1,0 +1,40 @@
+/* ══════════════════════════════════════════════════════════════
+   HeroDissolveScene — styles
+   ══════════════════════════════════════════════════════════════ */
+
+.scrollTrap {
+  position: relative;
+  width: 100%;
+  /* height set inline via JS */
+}
+
+/* Sticky panel stays #EFEFEF at all times — eliminates body-bg bleed */
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #EFEFEF;
+}
+
+.heroLayer {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+  z-index: 2;
+}
+
+.ashOverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Real project section — normal document flow, fully interactive */
+.projectSection {
+  background: #EFEFEF;
+}

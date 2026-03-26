@@ -1,0 +1,1065 @@
+/* ══════════════════════════════════════════════════════════════
+   PencilSharpenerPage — case study styles
+   Palette:
+     --ps-dark    #161412   warm near-black (graphite)
+     --ps-light   #F5F2ED   warm parchment
+     --ps-blue    #00aeef   sky-blue accent
+     --ps-stone   #8C8479   warm stone (secondary)
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --ps-dark: #161412;
+    --ps-darker: #0F0D0B;
+    --ps-light: #ffffff;
+    --ps-light2: #EAE6DF;
+    --ps-blue: #00aeef;
+    --ps-blue2: #33c0f5;
+    --ps-stone: #8C8479;
+    --ps-ink: #1A1713;
+    --ps-dim: rgba(255, 255, 255, 0.48);
+    --ps-margin: clamp(2.5rem, 4vw, 4rem);
+}
+
+/* ── Page wrapper ───────────────────────────────────────────── */
+.page {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    color: var(--ps-ink);
+}
+
+/* ── Shared inner layout ────────────────────────────────────── */
+.sectionInner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--ps-margin);
+}
+
+/* ── Section header row ─────────────────────────────────────── */
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.sectionNum {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    color: var(--ps-blue);
+    background: rgba(0, 174, 239, 0.1);
+    border: 1px solid rgba(0, 174, 239, 0.25);
+    padding: 0.22rem 0.55rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.sectionTag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ps-blue);
+}
+
+.sectionTagLight {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ps-blue2);
+}
+
+/* ── Headings ───────────────────────────────────────────────── */
+.sectionHeading {
+    font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.18;
+    color: var(--ps-ink);
+    margin-bottom: 1.5rem;
+}
+
+.sectionHeadingLight {
+    font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.18;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+/* ── Body text ──────────────────────────────────────────────── */
+.bodyText {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: #555;
+    margin-bottom: 1.4rem;
+}
+
+.bodyTextLight {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: var(--ps-dim);
+    margin-bottom: 1.4rem;
+    max-width: 700px;
+}
+
+/* ── Image caption ──────────────────────────────────────────── */
+.imgCaption {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--ps-stone);
+    margin-top: 0.55rem;
+    line-height: 1.4;
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────── */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+    font-size: 0.8rem;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--ps-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.backLink:hover {
+    color: #fff;
+}
+
+.sep {
+    color: rgba(255, 255, 255, 0.16);
+}
+
+.curr {
+    color: rgba(255, 255, 255, 0.38);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 1 — HERO (dark)
+   ══════════════════════════════════════════════════════════════ */
+.hero {
+    background: var(--ps-dark);
+    padding: 8rem 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.heroInner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--ps-margin);
+    position: relative;
+    z-index: 1;
+}
+
+.eyebrow {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ps-blue);
+    border: 1px solid rgba(0, 174, 239, 0.3);
+    background: rgba(0, 174, 239, 0.07);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+
+.heroLayout {
+    display: block;
+}
+
+.titleBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.heroTitle {
+    font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.87;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.accentLine {
+    width: 4rem;
+    height: 3px;
+    background: var(--ps-blue);
+    margin-bottom: 1rem;
+    border-radius: 1px;
+}
+
+.heroSub {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ps-stone);
+    margin-bottom: 2.5rem;
+    display: block;
+}
+
+.heroText {
+    padding-top: 1.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.heroHook {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ps-dim);
+}
+
+.heroImgWrap {
+    width: 100%;
+    max-height: 72vh;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    margin: 2rem 0 0;
+}
+
+.heroImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.heroHook {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ps-dim);
+    max-width: 680px;
+    padding: 2rem 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 0;
+}
+
+.metaRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2rem 0;
+    margin-top: 1rem;
+}
+
+.metaItem {
+    padding-right: 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.metaItem:last-child {
+    border-right: none;
+}
+
+.metaLabel {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.22);
+    margin-bottom: 0.35rem;
+}
+
+.metaValue {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .metaRow {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 2 — OBJECT + USE CONTEXT (light)
+   product picture side-by-side with text, no component cards
+   ══════════════════════════════════════════════════════════════ */
+.context {
+    background: var(--ps-light);
+    padding: 7rem 0;
+}
+
+.contextGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .contextGrid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+.contextText {
+    display: flex;
+    flex-direction: column;
+}
+
+.contextImgWrap {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.contextImg {
+    width: 100%;
+    display: block;
+    border-radius: 14px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 3 — ERGONOMICS (dark)
+   ══════════════════════════════════════════════════════════════ */
+.ergonomics {
+    background: var(--ps-darker);
+    padding: 7rem 0;
+}
+
+.ergoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 900px) {
+    .ergoGrid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+.ergoIntro {
+    display: flex;
+    flex-direction: column;
+}
+
+.findingsLabel {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ps-stone);
+    margin-bottom: 1.2rem;
+}
+
+.findingsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.findingRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.9rem 1rem;
+    border-radius: 9px;
+}
+
+/* friction = blue accent, unclear = neutral — both work on dark */
+.friction {
+    background: rgba(0, 174, 239, 0.07);
+    border: 1px solid rgba(0, 174, 239, 0.2);
+}
+
+.unclear {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.findingIndicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ps-blue);
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+}
+
+.unclear .findingIndicator {
+    background: var(--ps-stone);
+}
+
+.findingContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.findingLabel {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ps-ink);
+}
+
+.findingLabelLight {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.findingDetail {
+    font-size: 0.74rem;
+    color: var(--ps-stone);
+    line-height: 1.4;
+}
+
+/* flowchart — no card box, just the image */
+.ergoFlowWrap {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.ergoFlowImg {
+    width: 100%;
+    display: block;
+    border-radius: 6px;
+}
+
+/* caption variants */
+.imgCaption {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--ps-stone);
+    margin-top: 0.55rem;
+    line-height: 1.4;
+}
+
+.imgCaptionLight {
+    display: block;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.35);
+    margin-top: 0.55rem;
+    line-height: 1.4;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 4 — TEARDOWN (light)
+   flow steps LEFT + sectview RIGHT; disassembled below no bg
+   ══════════════════════════════════════════════════════════════ */
+.teardown {
+    background: var(--ps-light);
+    padding: 7rem 0;
+}
+
+/* two-column: flow steps + mechanical diagram */
+.teardownGrid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4rem;
+    align-items: start;
+    margin: 2.5rem 0 3rem;
+}
+
+@media (max-width: 900px) {
+    .teardownGrid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+/* mechanism flow — full width stacked list */
+.mechanismFlow {
+    display: flex;
+    flex-direction: column;
+    max-width: 620px;
+    margin-bottom: 1.5rem;
+}
+
+.flowStep {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+}
+
+.flowLine {
+    width: 2px;
+    background: linear-gradient(to bottom, var(--ps-blue), rgba(0, 174, 239, 0.08));
+    border-radius: 1px;
+    flex-shrink: 0;
+    min-height: 3.5rem;
+}
+
+.flowStep:last-child .flowLine {
+    background: rgba(0, 174, 239, 0.1);
+}
+
+.flowCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.9rem 0 0.9rem 0.2rem;
+    flex: 1;
+}
+
+.flowNum {
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: var(--ps-blue);
+    background: rgba(0, 174, 239, 0.09);
+    border: 1px solid rgba(0, 174, 239, 0.22);
+    padding: 0.18rem 0.45rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 0.05rem;
+}
+
+.flowInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.flowTitle {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--ps-ink);
+}
+
+.flowDesc {
+    font-size: 0.76rem;
+    color: var(--ps-stone);
+    line-height: 1.4;
+}
+
+/* 2-col split: steps left + diagram right */
+.teardownSplitGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin: 2rem 0 0;
+}
+
+@media (max-width: 900px) {
+    .teardownSplitGrid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+/* mechanical diagram column */
+.mechDiagramCol {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 6rem;
+}
+
+.mechDiagramColImg {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+}
+
+/* teardown images stacked full-width, no card */
+.teardownImgBlock {
+    display: flex;
+    flex-direction: column;
+    margin: 2.5rem 0 0;
+}
+
+.teardownImgFull {
+    width: 100%;
+    display: block;
+    mix-blend-mode: multiply;
+}
+
+/* insight quote */
+.insight {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.8rem 2rem;
+    margin: 2rem 0 0;
+}
+
+.insight p {
+    font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+}
+
+.insightBar {
+    flex-shrink: 0;
+    width: 3px;
+    align-self: stretch;
+    background: var(--ps-blue);
+    border-radius: 99px;
+    min-height: 2.5rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 5 — CAD RECONSTRUCTION (dark)
+   three-column: parts / assembled / animation
+   ══════════════════════════════════════════════════════════════ */
+.cad {
+    background: var(--ps-dark);
+    padding: 7rem 0;
+}
+
+/* CAD full-width block (modelled parts — as big as disassembled) */
+.cadFullBlock {
+    display: flex;
+    flex-direction: column;
+    margin: 2.5rem 0 0;
+}
+
+.cadFullImg {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+/* 2-col pair: assembled + animation */
+.cadPair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 700px) {
+    .cadPair {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cadPairItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.cadPairImgBox {
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadPairImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cadPairVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cadTriple {
+    display: none;
+    /* kept for safety, replaced by cadFullBlock + cadPair */
+}
+
+.cadTripleItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.cadTripleImgBox {
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadTripleImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cadTripleVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cadTripleLabel {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ps-blue2);
+    margin-top: 0.9rem;
+    margin-bottom: 0.2rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 6 — TECHNICAL DOCUMENTATION (light)
+   SVGs displayed without any card/box background
+   ══════════════════════════════════════════════════════════════ */
+.techDoc {
+    background: var(--ps-light);
+    padding: 7rem 0;
+}
+
+/* full-width section view */
+.techDocFull {
+    display: flex;
+    flex-direction: column;
+    margin: 2.5rem 0 2rem;
+}
+
+/* two-column: exploded + ortho */
+.techDocPair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .techDocPair {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.techDocItem {
+    display: flex;
+    flex-direction: column;
+}
+
+/* SVGs directly on the page background — no wrapper box */
+.techDocSvg {
+    width: 100%;
+    display: block;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 7 — MATERIALS (dark)
+   ══════════════════════════════════════════════════════════════ */
+.materials {
+    background: var(--ps-darker);
+    padding: 7rem 0;
+}
+
+.materialsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 2rem 0 3rem;
+}
+
+@media (max-width: 600px) {
+    .materialsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.materialCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem 1.4rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.materialCard:hover {
+    border-color: rgba(0, 174, 239, 0.22);
+    background: rgba(0, 174, 239, 0.04);
+}
+
+.materialSwatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.materialInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.materialName {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.materialRole {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ps-blue);
+}
+
+.materialDetail {
+    font-size: 0.74rem;
+    color: var(--ps-stone);
+    line-height: 1.45;
+}
+
+/* insights row */
+.insightsRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 900px) {
+    .insightsRow {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .insightsRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+.insightCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.1rem;
+    background: rgba(0, 174, 239, 0.05);
+    border: 1px solid rgba(0, 174, 239, 0.14);
+    border-radius: 10px;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.insightCard:hover {
+    background: rgba(0, 174, 239, 0.09);
+    border-color: rgba(0, 174, 239, 0.25);
+}
+
+.insightIcon {
+    font-size: 0.9rem;
+    color: var(--ps-blue);
+}
+
+.insightLabel {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.insightDetail {
+    font-size: 0.73rem;
+    color: var(--ps-stone);
+    line-height: 1.45;
+}
+
+/* back nav */
+.backNavLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ps-stone);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.04em;
+}
+
+.backNavLink:hover {
+    color: #fff;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 7 — FMEA TABLE (light)
+   ══════════════════════════════════════════════════════════════ */
+.fmea {
+    background: var(--ps-darker);
+    padding: 7rem 0 6rem;
+}
+
+.fmeaHeading {
+    font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 0.65rem;
+}
+
+.fmeaSubtitle {
+    font-size: 0.82rem;
+    color: var(--ps-stone);
+    margin-bottom: 3rem;
+    font-weight: 400;
+}
+
+/* table wrapper */
+.fmeaTableWrap {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fmeaTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    min-width: 860px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* header cells */
+.fmTh {
+    padding: 0.75rem 0.85rem;
+    text-align: left;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ps-blue2);
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    white-space: nowrap;
+}
+
+.fmTh:last-child {
+    border-right: none;
+}
+
+/* S, O, D accent columns */
+.fmThAccent {
+    background: rgba(0, 174, 239, 0.12);
+    color: var(--ps-blue);
+    text-align: center;
+    width: 36px;
+    min-width: 36px;
+}
+
+/* RPN highlighted */
+.fmThRpn {
+    background: rgba(0, 174, 239, 0.2);
+    color: var(--ps-blue);
+    text-align: center;
+    font-weight: 900;
+    width: 52px;
+    min-width: 52px;
+}
+
+/* data rows */
+.fmRow {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.15s;
+}
+
+.fmRow:last-child {
+    border-bottom: none;
+}
+
+.fmRow:hover {
+    background: rgba(0, 174, 239, 0.05);
+}
+
+/* data cells */
+.fmTd {
+    padding: 0.85rem 0.85rem;
+    vertical-align: top;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.78rem;
+    line-height: 1.45;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.fmTd:last-child {
+    border-right: none;
+}
+
+/* Item / Function cell — bold */
+.fmTdItem {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+    min-width: 120px;
+}
+
+/* S, O, D cells */
+.fmTdAccent {
+    text-align: center;
+    font-weight: 700;
+    color: var(--ps-blue);
+    background: rgba(0, 174, 239, 0.07);
+    font-size: 0.82rem;
+}
+
+/* RPN cell */
+.fmTdRpn {
+    text-align: center;
+    font-weight: 900;
+    font-size: 0.88rem;
+    color: var(--ps-blue);
+    background: rgba(0, 174, 239, 0.11);
+}

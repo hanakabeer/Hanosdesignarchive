@@ -1,0 +1,52 @@
+change a “Playground” section  to a drag-to-navigate 3D file stack 
+
+Tech:
+- Next.js + React (App Router) + TypeScript
+- TailwindCSS
+- Framer Motion for drag + inertia + smooth spring
+No WebGL.
+
+Goal UI:
+- Clean white/off-white background.
+- Center: a 3D-looking diagonal “stack” of rectangular cards (like floating file covers).
+- The cards appear in perspective with depth: cards behind are smaller, dimmer, slightly blurred, and pushed back in Z.
+- Active/center card is most visible and readable.
+- Right side: filter pills (All, Graphic, 3D, Code, Video) with subtle counts.
+- Below the stack: a small metadata line for the active item (Title • Year • Tags) + a button “Open”.
+
+Critical interaction rules:
+1) Page scroll must remain normal. Do NOT preventDefault on wheel. Do NOT lock scroll.
+2) Navigation is ONLY via click/hold + drag (mouse + touch). Dragging left/right moves through the stack.
+3) On release, snap to the nearest card with a spring. Add light inertia based on drag velocity.
+4) Hover (desktop): active card lifts slightly + shows subtle grain/glow. Non-active cards stay calm.
+
+3D look (CSS perspective approach):
+- Use a wrapper with `perspective: 1200px`.
+- Each card uses `transform: translate3d(x, 0, z) rotateY(angle) scale(s)`.
+- Compute transforms from the card’s relative position:
+  t = (index - activeIndex) + dragOffset
+  x = t * 120
+  z = -abs(t) * 140
+  rotateY = clamp(t * -10deg, -35deg, 35deg)
+  scale = 1 - min(abs(t) * 0.08, 0.25)
+  opacity = 1 - min(abs(t) * 0.18, 0.75)
+  blur = min(abs(t) * 1.5px, 6px)
+- Keep cards diagonally aligned (slight y shift: y = abs(t) * 10).
+
+Data:
+Create `playgroundItems` array with 10 items:
+{ id, title, year, tags: string[], coverColor: string (hex), href }
+No external images; generate covers as gradient blocks with title text.
+
+
+Implementation details:
+- Use Framer Motion `useMotionValue` for dragX, and map dragX to `dragOffset = dragX / 260`.
+- Maintain `activeIndex` in state.
+- On drag end: compute shift = round(dragOffset), update activeIndex = clamp(activeIndex - shift).
+- Animate dragX back to 0 with spring (stiffness ~ 250, damping ~ 30).
+- Support touch with `drag="x"` and `dragConstraints={{ left: 0, right: 0 }}` (we’re using it only to read velocity/delta).
+- Filter change re-slices items, resets activeIndex to 0, and animates stack in (stagger fade).
+
+Accessibility:
+- Provide “Next/Prev” tiny buttons for keyboard users (optional, subtle).
+- Make “Open” button focusable.

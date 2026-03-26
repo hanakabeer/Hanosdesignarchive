@@ -1,0 +1,2506 @@
+/* ══════════════════════════════════════════════════════════════
+   MycrochetProject — case study styles
+   Palette:
+     --mc-dark   #202422   deep moss charcoal
+     --mc-light  #F4F3EE   natural paper
+     --mc-sage   #8FAF8E   sage green (accent only)
+   Feel: material · organic · lab · craft
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --mc-dark: #202422;
+    --mc-darker: #1A1D1A;
+    --mc-light: #F4F3EE;
+    --mc-light2: #ECEAE3;
+    --mc-sage: #8FAF8E;
+    --mc-sage2: #A8C4A7;
+    --mc-ink: #202422;
+    --mc-dim: rgba(255, 255, 255, 0.46);
+    --mc-margin: clamp(2.5rem, 4vw, 4rem);
+}
+
+/* ── Page wrapper ───────────────────────────────────────────── */
+.page {
+    font-family: var(--font-body);
+    color: var(--mc-ink);
+}
+
+/* ── Shared inner layout ────────────────────────────────────── */
+.sectionInner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--mc-margin);
+}
+
+/* ── Section tag ────────────────────────────────────────────── */
+.sectionTag {
+    display: block;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    margin-bottom: 2rem;
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────── */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 4rem;
+    font-size: 0.8rem;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--mc-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.backLink:hover {
+    color: #fff;
+}
+
+.sep {
+    color: rgba(255, 255, 255, 0.18);
+}
+
+.curr {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 1 — THE IDEA (dark)
+   ══════════════════════════════════════════════════════════════ */
+.idea {
+    background: var(--mc-dark);
+    padding: 8rem 0 0;
+}
+
+.ideaInner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--mc-margin);
+}
+
+.titleBlock {
+    margin-bottom: 2.5rem;
+}
+
+.heroTitle {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 11vw, 10rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.87;
+    color: #fff;
+    margin-bottom: 1.1rem;
+}
+
+.accentLine {
+    width: 4.5rem;
+    height: 3px;
+    background: var(--mc-sage);
+    margin-bottom: 1.1rem;
+    border-radius: 1px;
+}
+
+.heroSub {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+}
+
+/* hero image */
+.heroImageWrap {
+    width: 100%;
+    max-height: 74vh;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+}
+
+.heroImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.9) saturate(0.9);
+}
+
+/* text */
+.ideaText {
+    padding: 2.8rem 0 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    max-width: 660px;
+}
+
+.ideaBody {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--mc-dim);
+    margin-bottom: 1.5rem;
+}
+
+.ideaTag {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--mc-sage);
+    letter-spacing: -0.02em;
+    padding-left: 1rem;
+    border-left: 2px solid var(--mc-sage);
+}
+
+/* meta */
+.metaRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2rem 0;
+}
+
+.metaItem {
+    padding-right: 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.metaItem:last-child {
+    border-right: none;
+}
+
+.metaLabel {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.26);
+    margin-bottom: 0.35rem;
+}
+
+.metaValue {
+    display: block;
+    font-size: 0.87rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .metaRow {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 2 — THE GAP (light)
+   ══════════════════════════════════════════════════════════════ */
+.gap {
+    background: var(--mc-light);
+    padding: 7rem 0;
+}
+
+.gapColumns {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .gapColumns {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* individual material card */
+.gapCard {
+    background: #fff;
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.06);
+}
+
+.gapCardHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.gapMaterial {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--mc-ink);
+    letter-spacing: -0.03em;
+}
+
+.gapDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mc-sage);
+    flex-shrink: 0;
+}
+
+.gapList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.gapPro {
+    font-size: 0.88rem;
+    color: #3a7a3a;
+    font-weight: 600;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.gapPro::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--mc-sage);
+    font-weight: 700;
+}
+
+.gapCon {
+    font-size: 0.88rem;
+    color: #888;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.gapCon::before {
+    content: '−';
+    position: absolute;
+    left: 0;
+    color: #ccc;
+    font-weight: 700;
+}
+
+.gapImage {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.gapImg {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0.3);
+}
+
+/* center insight */
+.gapCenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+}
+
+.gapPlusIcon {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--mc-sage);
+    line-height: 1;
+    opacity: 0.6;
+}
+
+.gapInsight {
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.55;
+    color: var(--mc-ink);
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--mc-light2);
+    border-radius: 14px;
+    border-top: 2px solid var(--mc-sage);
+}
+
+.gapArrow {
+    color: var(--mc-sage);
+    opacity: 0.6;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 3 — THE PRINCIPLE (dark)
+   ══════════════════════════════════════════════════════════════ */
+.principle {
+    background: var(--mc-darker);
+    padding: 7rem 0;
+}
+
+/* ── Full-bleed process image ─────────────────────────────── */
+.processImgWrap {
+    /* deliberately breaks out of sectionInner padding */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+}
+
+.processImg {
+    width: 100%;
+    display: block;
+    object-fit: contain;
+    max-height: 55vh;
+    /* maintain image colours but slightly dim */
+    filter: brightness(0.92) saturate(0.85);
+}
+
+/* ── 5-column step card grid ──────────────────────────────── */
+/*
+   Layout:  [card] [arrow] [card] [arrow] [card] [arrow] [card] [arrow] [card]
+   The 5 cards share equal width → each maps to 1/5 of the content width,
+   which visually lines up with the 5 stages in the image above.
+   Use grid-template-columns with 5 card columns + 4 arrow gaps.
+*/
+.processDiagram {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: start;
+    gap: 0.5rem;
+    margin: 2.2rem 0 3.5rem;
+}
+
+.processCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.45rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-top: 2px solid var(--mc-sage);
+    border-radius: 0 0 12px 12px;
+    padding: 1.1rem 0.75rem 1.1rem;
+}
+
+.processCardIcon {
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--mc-sage);
+    margin-bottom: 0.2rem;
+}
+
+.processCardLabel {
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.3;
+}
+
+.processCardSub {
+    font-size: 0.6rem;
+    color: var(--mc-dim);
+    letter-spacing: 0.05em;
+}
+
+.processCardArrow {
+    color: var(--mc-sage);
+    opacity: 0.55;
+    align-self: center;
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile: horizontal scroll card strip */
+@media (max-width: 768px) {
+    .processImgWrap {
+        overflow: hidden;
+    }
+
+    .processImg {
+        max-height: 38vw;
+        object-fit: cover;
+    }
+
+    .processDiagram {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.4rem;
+        padding-bottom: 0.5rem;
+        scrollbar-width: none;
+        margin: 1.5rem 0 2.5rem;
+    }
+
+    .processDiagram::-webkit-scrollbar {
+        display: none;
+    }
+
+    .processCard {
+        flex-shrink: 0;
+        min-width: 120px;
+    }
+
+    .processCardArrow {
+        flex-shrink: 0;
+    }
+}
+
+
+/* principle bottom */
+.principleBottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .principleBottom {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.principleBody {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--mc-dim);
+}
+
+.principleAha {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.25;
+    color: #fff;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--mc-sage);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 4 — IDEATION (light)
+   ══════════════════════════════════════════════════════════════ */
+.process {
+    background: var(--mc-light);
+    padding: 7rem 0;
+}
+
+/* two-column direction cards */
+.ideationGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+@media (max-width: 800px) {
+    .ideationGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ideationCard {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+}
+
+.ideationCardTop {
+    padding: 1.6rem 1.6rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.ideationDir {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+}
+
+.ideationTitle {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--mc-ink);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.ideationImgWrap {
+    width: 100%;
+    overflow: hidden;
+    margin: 1.2rem 0 0;
+    background: var(--mc-light2);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    max-height: 300px;
+}
+
+.ideationImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    max-height: 300px;
+}
+
+.ideationBody {
+    padding: 1.2rem 1.6rem 1.8rem;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+    flex: 1;
+}
+
+/* Key Takeaway block */
+.ideationTakeaway {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    background: var(--mc-light2);
+    border-radius: 16px;
+    padding: 1.8rem 2rem;
+    border: 1px solid rgba(143, 175, 142, 0.2);
+}
+
+.ideationTakeawayBar {
+    flex-shrink: 0;
+    width: 3px;
+    align-self: stretch;
+    min-height: 3rem;
+    background: var(--mc-sage);
+    border-radius: 99px;
+}
+
+.ideationTakeawayLabel {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    margin-bottom: 0.6rem;
+}
+
+.ideationTakeawayText {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--mc-ink);
+    margin: 0;
+    font-weight: 500;
+}
+
+
+.stepsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+}
+
+@media (max-width: 900px) {
+    .stepsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.stepCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.stepImgWrap {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.07);
+}
+
+.stepImg {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.stepCard:hover .stepImg {
+    transform: scale(1.04);
+}
+
+.stepNum {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--mc-sage);
+    opacity: 0.8;
+}
+
+.stepLabel {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--mc-ink);
+    line-height: 1.4;
+}
+
+.processKeyLine {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    color: var(--mc-ink);
+    line-height: 1.25;
+    max-width: 760px;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--mc-sage);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 5 — MATERIAL EXPLORATION (dark)
+   ══════════════════════════════════════════════════════════════ */
+.proto {
+    background: var(--mc-dark);
+    padding: 7rem 0;
+}
+
+/* ── Experiment matrix ────────────────────────────────────── */
+.matrixWrap {
+    margin: 2rem 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* header: jute type groups */
+.matrixHeader {
+    display: grid;
+    grid-template-columns: 190px 1fr 1fr;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.matrixHeaderEmpty {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.matrixJuteGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.9rem 0.5rem 0;
+}
+
+.matrixJuteGroup:first-of-type {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.matrixJuteLabel {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 0.6rem;
+}
+
+.matrixSubHeaders {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.matrixSubLabel {
+    text-align: center;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.28);
+    padding: 0.5rem 0 0.7rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* recipe rows */
+.matrixRow {
+    display: grid;
+    grid-template-columns: 190px 1fr 1fr 1fr 1fr;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    align-items: center;
+}
+
+.matrixRow:first-of-type {
+    border-top: none;
+}
+
+.matrixRecipe {
+    display: flex;
+    gap: 0.65rem;
+    align-items: stretch;
+    padding: 1.4rem 1rem 1.4rem 0.75rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    min-height: 100%;
+}
+
+.matrixAccent {
+    flex-shrink: 0;
+    width: 2.5px;
+    border-radius: 99px;
+    background: var(--mc-sage);
+    align-self: stretch;
+    min-height: 3rem;
+    opacity: 0.75;
+}
+
+.matrixRecipeName {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 0 0 0.5rem;
+}
+
+.matrixIngredients {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.18rem;
+}
+
+.matrixIng {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.4;
+}
+
+.matrixIngHighlight {
+    font-size: 0.72rem;
+    color: var(--mc-sage);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* image cells */
+.matrixCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0.6rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.matrixCell:last-child {
+    border-right: none;
+}
+
+.matrixRow .matrixCell:nth-child(4),
+.matrixRow .matrixCell:nth-child(5) {
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.matrixImgWrap {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1.5px solid rgba(143, 175, 142, 0.35);
+    max-width: 120px;
+    transition: border-color 0.3s;
+}
+
+.matrixImgWrap:hover {
+    border-color: var(--mc-sage);
+}
+
+.matrixImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+}
+
+.matrixImgWrap:hover .matrixImg {
+    transform: scale(1.07);
+}
+
+/* selected / advanced-to-bake cell */
+.matrixCellSelected {
+    background: rgba(143, 175, 142, 0.07);
+    position: relative;
+}
+
+.matrixImgWrapSelected {
+    border-color: var(--mc-sage) !important;
+    border-width: 2.5px !important;
+    box-shadow: 0 0 0 3px rgba(143, 175, 142, 0.18);
+}
+
+.matrixSelectedBadge {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    text-align: center;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BAKE TEST — two-column layout (image grid + info panel)
+   ══════════════════════════════════════════════════════════════ */
+.bakeSection {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.bakeSectionTag {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    margin-bottom: 0.5rem;
+}
+
+.bakeSectionSub {
+    font-size: 0.82rem;
+    color: var(--mc-dim);
+    margin: 0 0 2.5rem;
+    line-height: 1.6;
+}
+
+/* ── Unified 4-column grid ────────────────────────────────
+   Columns: [row-label] [img 1] [img 2] [info / conditions]
+   Rows auto-size from content — both image and text cells
+   share the same row, so heights always align exactly.
+   ────────────────────────────────────────────────────────── */
+.bakeLayout {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr 1fr 1.4fr;
+    gap: 1rem 1.5rem;
+    align-items: center;
+}
+
+@media (max-width: 860px) {
+    .bakeLayout {
+        grid-template-columns: 2.5rem 1fr 1fr;
+    }
+
+    /* hide info column on narrow screens */
+    .bakeLayout>.bakeInfoDay,
+    .bakeLayout>.bakeConditions {
+        display: none;
+    }
+}
+
+/* .bakeGridHeaderEmpty — spacer cell, no styles needed */
+
+.bakeGridColLabel {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.35;
+    text-align: center;
+    align-self: end;
+    padding-bottom: 0.4rem;
+}
+
+.bakeGridRowLabel {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    text-align: center;
+    align-self: center;
+}
+
+/* circular image */
+.bakeImgWrap {
+    width: 100%;
+    max-width: 140px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1.5px solid rgba(143, 175, 142, 0.35);
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 0.3s;
+}
+
+.bakeImgWrap:hover {
+    border-color: var(--mc-sage);
+}
+
+/* final (baked) row image — slightly stronger border */
+.bakeImgWrapFinal {
+    border-color: var(--mc-sage);
+    border-width: 2px;
+    box-shadow: 0 0 0 3px rgba(143, 175, 142, 0.12);
+}
+
+.bakeImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.bakeImgWrap:hover .bakeImg {
+    transform: scale(1.06);
+}
+
+/* individual day block — sits in the same grid row as the two images */
+.bakeInfoDay {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    align-self: center;
+    padding-left: 1rem;
+}
+
+.bakeInfoDayLabel {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--mc-sage);
+}
+
+.bakeInfoDayText {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+}
+
+/* oven conditions box */
+.bakeConditions {
+    background: rgba(143, 175, 142, 0.05);
+    border: 1px solid rgba(143, 175, 142, 0.18);
+    border-radius: 12px;
+    padding: 1.3rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.bakeCondRow {
+    display: grid;
+    grid-template-columns: 110px 1fr 1fr;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bakeCondKey {
+    font-size: 0.76rem;
+    color: rgba(255, 255, 255, 0.38);
+}
+
+.bakeCondVal {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--mc-sage);
+}
+
+.bakeCondNote {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(143, 175, 142, 0.6);
+    margin: 0.2rem 0 0;
+}
+
+
+
+.matrixInsights {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.matrixInsightsLabel {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    margin-bottom: 1.2rem;
+    opacity: 0.8;
+}
+
+.matrixInsightCols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.matrixInsightItem {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+}
+
+.matrixInsightBar {
+    flex-shrink: 0;
+    width: 2px;
+    align-self: stretch;
+    min-height: 2rem;
+    background: var(--mc-sage);
+    border-radius: 99px;
+    opacity: 0.55;
+}
+
+.matrixInsightText {
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--mc-dim);
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .matrixHeader {
+        display: none;
+    }
+
+    .matrixRow {
+        grid-template-columns: 160px 1fr 1fr;
+    }
+
+    .matrixInsightCols {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .matrixRow {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .matrixRecipe {
+        grid-column: 1 / -1;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 6 — ITERATION DECISION MAP (light)
+   ══════════════════════════════════════════════════════════════ */
+.iterMap {
+    background: var(--mc-light);
+    padding: 7rem 0;
+}
+
+.iterBlock {
+    margin-bottom: 4rem;
+}
+
+.iterBlockTitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.8vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--mc-ink);
+    line-height: 1.2;
+    margin: 0 0 2rem;
+}
+
+/* ── A: Concept split ──────────────────────────────────────── */
+.iterConceptGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 780px) {
+    .iterConceptGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.iterConceptCard {
+    border-radius: 18px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    border: 1.5px solid transparent;
+}
+
+.iterConceptChosen {
+    background: #fff;
+    border-color: var(--mc-sage);
+    box-shadow: 0 4px 24px rgba(143, 175, 142, 0.12);
+}
+
+.iterConceptRejected {
+    background: var(--mc-light2);
+    border-color: rgba(0, 0, 0, 0.07);
+}
+
+.iterConceptCardHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.iterVersionTag {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    background: var(--mc-ink);
+    border-radius: 4px;
+    padding: 0.2rem 0.55rem;
+}
+
+.iterChosenBadge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--mc-sage);
+    background: rgba(143, 175, 142, 0.12);
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+}
+
+.iterRejectedBadge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #b04040;
+    background: rgba(176, 64, 64, 0.08);
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+}
+
+.iterConceptCardTitle {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--mc-ink);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.iterMotionDiagram {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    background: var(--mc-light2);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.iterDiagramCore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.iterDiagramLabel {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.iterDiagramBox {
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--mc-sage);
+}
+
+.iterDiagramBoxFixed {
+    color: rgba(0, 0, 0, 0.25);
+}
+
+.iterDiagramArrows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.iterDiagramArrow {
+    font-size: 1.5rem;
+    color: var(--mc-sage);
+    line-height: 1;
+}
+
+.iterDiagramArrowRej {
+    color: #b04040;
+    opacity: 0.6;
+}
+
+.iterDiagramMovingLabel {
+    font-size: 0.6rem;
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.iterNodeRows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.iterNodeRow {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.iterNodeKey {
+    flex-shrink: 0;
+    min-width: 100px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.38);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 0.05rem;
+}
+
+.iterNodeVal {
+    color: var(--mc-ink);
+}
+
+.iterImgRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.iterConceptImg {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    filter: grayscale(0.15);
+}
+
+.iterSchematic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.iterSchematicBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    border: 2px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.iterSchematicFixed {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+    padding: 0.35rem 0.75rem;
+    width: 100%;
+    text-align: center;
+}
+
+.iterSchematicMover {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b04040;
+    opacity: 0.75;
+    border: 1.5px dashed #b04040;
+    border-radius: 6px;
+    padding: 0.35rem 0.75rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.iterSchematicArrow {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.iterSchematicNote {
+    font-size: 0.6rem;
+    color: rgba(0, 0, 0, 0.3);
+    font-style: italic;
+    letter-spacing: 0.04em;
+}
+
+/* ── B: Motorised hero ──────────────────────────────────────── */
+.iterHeroWrap {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--mc-ink);
+}
+
+.iterHeroImg {
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    display: block;
+    opacity: 0.6;
+    filter: grayscale(0.2) brightness(0.75);
+}
+
+.iterHeroOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2.5rem 2.8rem;
+    background: linear-gradient(to top, rgba(20, 22, 20, 0.92) 0%, rgba(20, 22, 20, 0.3) 60%, transparent 100%);
+}
+
+.iterHeroVersion {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    margin-bottom: 0.6rem;
+    display: block;
+}
+
+.iterHeroTitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin: 0 0 1.2rem;
+    line-height: 1.15;
+}
+
+.iterHeroSub {
+    color: var(--mc-sage);
+    font-size: 0.7em;
+    font-weight: 600;
+}
+
+.iterHeroTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.iterHeroTag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    backdrop-filter: blur(4px);
+}
+
+.iterHeroTagIssue {
+    color: #f0a070;
+    border-color: rgba(240, 160, 112, 0.3);
+    background: rgba(240, 160, 112, 0.08);
+}
+
+.iterHeroLearning {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--mc-sage);
+    margin: 0;
+    letter-spacing: 0.04em;
+}
+
+/* ── C: CAD-only ────────────────────────────────────────────── */
+.iterCadWrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    border: 2px dashed rgba(0, 0, 0, 0.13);
+    border-radius: 18px;
+    padding: 2rem;
+    background: var(--mc-light2);
+}
+
+@media (max-width: 780px) {
+    .iterCadWrap {
+        grid-template-columns: 1fr;
+    }
+}
+
+.iterCadImgArea {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.iterCadBadge {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.45);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px dashed rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 0.2rem 0.55rem;
+    backdrop-filter: blur(4px);
+    z-index: 1;
+}
+
+.iterCadImg {
+    width: 100%;
+    display: block;
+    object-fit: contain;
+    border-radius: 10px;
+    filter: grayscale(0.1);
+}
+
+.iterCadText {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.iterCadTitle {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--mc-ink);
+    margin: 0.5rem 0 0;
+    line-height: 1.25;
+}
+
+.iterCadSubLabel {
+    font-size: 0.75em;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.35);
+    font-style: italic;
+}
+
+/* ── D: Form refinement ─────────────────────────────────────── */
+.iterFormWrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: center;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 780px) {
+    .iterFormWrap {
+        grid-template-columns: 1fr;
+    }
+}
+
+.iterFormImg {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+}
+
+.iterFormText {
+    padding: 2rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.iterFormTitle {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--mc-ink);
+    margin: 0.5rem 0 0;
+    line-height: 1.25;
+}
+
+.iterFormLearning {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+    padding-left: 1rem;
+    border-left: 2.5px solid var(--mc-sage);
+}
+
+/* ── E: Pivot box ────────────────────────────────────────────── */
+.iterPivotBox {
+    background: var(--mc-ink);
+    border-radius: 20px;
+    padding: 2.5rem 2.8rem;
+    margin-bottom: 4rem;
+    border: 1.5px solid var(--mc-sage);
+    box-shadow: 0 8px 40px rgba(143, 175, 142, 0.12);
+}
+
+.iterPivotHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.iterPivotIcon {
+    font-size: 2rem;
+    color: var(--mc-sage);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.iterPivotEyebrow {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    margin-bottom: 0.3rem;
+}
+
+.iterPivotTitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.iterPivotBody {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--mc-dim);
+    max-width: 680px;
+    margin: 0 0 2rem;
+}
+
+.iterPivotBottom {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+@media (max-width: 780px) {
+    .iterPivotBottom {
+        grid-template-columns: 1fr;
+    }
+}
+
+.iterArchDiagram {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.iterArchDiagramLabel {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.iterArchFlow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.iterArchNode {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(143, 175, 142, 0.22);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    min-width: 130px;
+}
+
+.iterArchNodeLabel {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.iterArchNodeSub {
+    font-size: 0.62rem;
+    color: rgba(255, 255, 255, 0.38);
+}
+
+.iterArchArrow {
+    font-size: 1.1rem;
+    color: var(--mc-sage);
+    opacity: 0.6;
+}
+
+.iterArchFinal {
+    margin-top: 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(143, 175, 142, 0.2);
+}
+
+.iterArchFinalImg {
+    width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    display: block;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.iterPivotBenefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    min-width: 220px;
+}
+
+.iterPivotBenefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.55;
+}
+
+.iterPivotBullet {
+    color: var(--mc-sage);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* ── Micro-iterations strip ─────────────────────────────────── */
+.iterMicroStrip {
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    padding-top: 2.5rem;
+    margin-top: 1rem;
+}
+
+.iterMicroTitle {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    margin-bottom: 1.5rem;
+}
+
+.iterMicroGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 800px) {
+    .iterMicroGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.iterMicroCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem 0.6rem 0.8rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.iterMicroSvg {
+    width: 60px;
+    height: 42px;
+    color: var(--mc-ink);
+    opacity: 0.55;
+}
+
+.iterMicroLabel {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mc-ink);
+    opacity: 0.7;
+}
+
+.iterMicroVerdict {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 0.15rem 0.45rem;
+}
+
+.iterVerdict_slip {
+    color: #c07a20;
+    background: rgba(192, 122, 32, 0.1);
+}
+
+.iterVerdict_jam {
+    color: #b04040;
+    background: rgba(176, 64, 64, 0.1);
+}
+
+.iterVerdict_smooth {
+    color: #3a7a3a;
+    background: rgba(58, 122, 58, 0.1);
+}
+
+.iterVerdict_misalign {
+    color: #b04040;
+    background: rgba(176, 64, 64, 0.1);
+}
+
+.iterVerdict_stable {
+    color: #3a7a3a;
+    background: rgba(58, 122, 58, 0.1);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FINAL SYSTEM — scroll-driven crossfade (dark)
+   ══════════════════════════════════════════════════════════════ */
+
+/* Outer track: tall enough to give 5 images worth of scroll */
+.finalSystem {
+    background: var(--mc-darker);
+    height: 600vh;
+    /* 5 images × ~120vh each */
+    position: relative;
+}
+
+/* Sticky viewport-height panel — stays pinned while track scrolls */
+.finalSystemPanel {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Two-col layout inside the sticky panel */
+.finalSystemInner {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--mc-margin);
+    display: grid;
+    grid-template-columns: 1fr 2.2fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (max-width: 860px) {
+    .finalSystemInner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ── LEFT: text (no sticky needed — panel itself is sticky) */
+.finalSystemSticky {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.finalSystemTitle {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+    color: #fff;
+    margin: 0;
+}
+
+.finalSystemSub {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--mc-dim);
+    max-width: 260px;
+    margin: 0;
+}
+
+/* ── RIGHT: image crossfade stack */
+.finalSystemImgStack {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/2;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Each image sits absolutely on top of the others */
+.finalSystemImgFrame {
+    position: absolute;
+    inset: 0;
+    will-change: opacity;
+}
+
+.finalSystemImg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* index counter badge */
+.finalSystemImgIndex {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.2rem;
+    font-family: var(--font-display);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.28);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 8 — TECHNICAL DRAWING (dark)
+   ══════════════════════════════════════════════════════════════ */
+.techDrawing {
+    background: var(--mc-darker);
+    padding: 7rem 0 0;
+}
+
+.techDrawingTitle {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: #fff;
+    margin: 0.4rem 0 0.8rem;
+    line-height: 1.05;
+}
+
+.techDrawingSub {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--mc-dim);
+    max-width: 520px;
+    margin: 0 0 3rem;
+}
+
+/* Full-bleed SVG frame */
+.techDrawingFrame {
+    width: 100%;
+    background: #0e100e;
+    border-top: 1px solid rgba(143, 175, 142, 0.12);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+}
+
+.techDrawingImg {
+    width: 100%;
+    max-width: 1400px;
+    display: block;
+    transition: transform 0.8s ease;
+    filter: brightness(0.9) contrast(1.05);
+}
+
+.techDrawingFrame:hover .techDrawingImg {
+    transform: scale(1.01);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 9 — SIMULATION (light)
+   ══════════════════════════════════════════════════════════════ */
+.simulation {
+    background: var(--mc-light);
+    padding: 7rem 0;
+}
+
+.simTitle {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: var(--mc-ink);
+    margin: 0.4rem 0 0.8rem;
+    line-height: 1.05;
+}
+
+.simSub {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--mc-dim2, #666);
+    max-width: 520px;
+    margin: 0 0 3rem;
+}
+
+/* 2-column video grid */
+.simGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 720px) {
+    .simGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.simCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--mc-ink);
+    border: 1px solid rgba(143, 175, 142, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+.simVideo {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    background: #000;
+}
+
+.simLabel {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    padding: 0.75rem 1.2rem 1rem;
+}
+
+/* 3×2 photo grid */
+.protoGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1rem;
+    margin-bottom: 3.5rem;
+}
+
+@media (max-width: 900px) {
+    .protoGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.protoImgBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.protoImg {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    filter: brightness(0.78) saturate(0.8);
+    transition: filter 0.4s;
+}
+
+.protoImgBox:hover .protoImg {
+    filter: brightness(0.95) saturate(1);
+}
+
+.protoCap {
+    font-size: 0.72rem;
+    color: var(--mc-dim);
+    line-height: 1.4;
+    padding: 0 0.2rem;
+}
+
+/* learnings */
+.learnings {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.learningRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.3rem;
+    background: rgba(143, 175, 142, 0.08);
+    border: 1px solid rgba(143, 175, 142, 0.15);
+    border-radius: 10px;
+}
+
+.learningDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mc-sage);
+    flex-shrink: 0;
+    margin-top: 0.35rem;
+}
+
+.learningFinding {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--mc-sage2);
+}
+
+.learningDetail {
+    font-size: 0.88rem;
+    color: var(--mc-dim);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EXPERIMENT MATRIX — Material Exploration
+   Layout: header (jute types) + 3 recipe rows (label | 4 imgs)
+           + key insights strip below
+   ══════════════════════════════════════════════════════════════ */
+
+/* outer wrapper — full column width */
+.matrixWrap {
+    margin: 2rem 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* ── Header: jute type groups ─────────────────────────────── */
+.matrixHeader {
+    display: grid;
+    /* col 0 = recipe label col, cols 1-2 = Polished Jute, cols 3-4 = Rough Jute */
+    grid-template-columns: 190px 1fr 1fr;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.matrixHeaderEmpty {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.matrixJuteGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.9rem 0.5rem 0;
+}
+
+/* only the first jute group gets a right divider */
+.matrixJuteGroup:first-of-type {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.matrixJuteLabel {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 0.6rem;
+}
+
+/* sub-header row: Test 1 | Test 2 */
+.matrixSubHeaders {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.matrixSubLabel {
+    text-align: center;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.28);
+    padding: 0.5rem 0 0.7rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Recipe rows ──────────────────────────────────────────── */
+.matrixRow {
+    display: grid;
+    grid-template-columns: 190px 1fr 1fr 1fr 1fr;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    align-items: center;
+}
+
+.matrixRow:first-of-type {
+    border-top: none;
+}
+
+/* left: recipe name + ingredients */
+.matrixRecipe {
+    display: flex;
+    gap: 0.65rem;
+    align-items: stretch;
+    padding: 1.4rem 1rem 1.4rem 0.75rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    min-height: 100%;
+}
+
+/* orange left accent bar */
+.matrixAccent {
+    flex-shrink: 0;
+    width: 2.5px;
+    border-radius: 99px;
+    background: var(--mc-sage);
+    align-self: stretch;
+    min-height: 3rem;
+    opacity: 0.75;
+}
+
+.matrixRecipeName {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 0 0 0.5rem;
+}
+
+.matrixIngredients {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.18rem;
+}
+
+.matrixIng {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.4;
+}
+
+.matrixIngHighlight {
+    font-size: 0.72rem;
+    color: var(--mc-sage);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* each image cell */
+.matrixCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0.6rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.matrixCell:last-child {
+    border-right: none;
+}
+
+/* alternating subtle bg on Rough Jute pair */
+.matrixRow .matrixCell:nth-child(4),
+.matrixRow .matrixCell:nth-child(5) {
+    background: rgba(255, 255, 255, 0.015);
+}
+
+/* circular image */
+.matrixImgWrap {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1.5px solid rgba(143, 175, 142, 0.35);
+    max-width: 120px;
+    transition: border-color 0.3s;
+}
+
+.matrixImgWrap:hover {
+    border-color: var(--mc-sage);
+}
+
+.matrixImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+}
+
+.matrixImgWrap:hover .matrixImg {
+    transform: scale(1.07);
+}
+
+/* ── Key Insights strip below matrix ─────────────────────── */
+.matrixInsights {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.matrixInsightsLabel {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mc-sage);
+    margin-bottom: 1.2rem;
+    opacity: 0.8;
+}
+
+.matrixInsightCols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.matrixInsightItem {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+}
+
+.matrixInsightBar {
+    flex-shrink: 0;
+    width: 2px;
+    align-self: stretch;
+    min-height: 2rem;
+    background: var(--mc-sage);
+    border-radius: 99px;
+    opacity: 0.55;
+}
+
+.matrixInsightText {
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--mc-dim);
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .matrixHeader {
+        display: none;
+    }
+
+    .matrixRow {
+        grid-template-columns: 160px 1fr 1fr;
+        flex-wrap: wrap;
+    }
+
+    .matrixInsightCols {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .matrixRow {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .matrixRecipe {
+        grid-column: 1 / -1;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE 6 — APPLICATIONS (light)
+   ══════════════════════════════════════════════════════════════ */
+
+
+.applications {
+    background: var(--mc-light);
+    padding: 7rem 0;
+}
+
+/* application tiles */
+.appGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 900px) {
+    .appGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.appCard {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.06);
+}
+
+.appImgWrap {
+    overflow: hidden;
+}
+
+.appImg {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.appCard:hover .appImg {
+    transform: scale(1.04);
+}
+
+.appText {
+    padding: 1.5rem;
+}
+
+.appTitle {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--mc-ink);
+    margin-bottom: 0.6rem;
+}
+
+.appDesc {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* reflection */
+.reflection {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    background: var(--mc-light2);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.reflectionBar {
+    flex-shrink: 0;
+    width: 3px;
+    align-self: stretch;
+    background: var(--mc-sage);
+    border-radius: 99px;
+    min-height: 3rem;
+}
+
+.reflectionText {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #444;
+    margin-bottom: 1.2rem;
+}
+
+.closingLine {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--mc-sage);
+    letter-spacing: -0.01em;
+}
+
+/* back nav */
+.backNavLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #999;
+    text-decoration: none;
+    transition: color 0.2s, gap 0.2s;
+}
+
+.backNavLink:hover {
+    color: var(--mc-sage);
+    gap: 0.2rem;
+}

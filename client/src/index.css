@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* HANO Design System Colors */
+  --bg-dark: #0f1320;
+  --bg-light: #f6f6f4;
+  --ink: #101319;
+  --muted: rgba(255, 255, 255, 0.6);
+  --accent-soft: #7aa6c2;
+  --border-dim: rgba(255, 255, 255, 0.08);
+
+  /* Typography */
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-dark);
+    color: var(--bg-light);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Global utility for text selection */
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+/* 
+  HIDE DEFAULT CURSOR 
+  Aggressive override to ensure only the custom cursor is visible
+*/
+html,
+body,
+*,
+*::before,
+*::after,
+a,
+button,
+input,
+textarea,
+[role="button"] {
+  cursor: none !important;
+}

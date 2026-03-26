@@ -1,0 +1,25 @@
+node_modules
+dist
+.DS_Store
+server/public
+vite.config.ts.*
+*.tar.gz
+
+# Environment secrets
+.env
+
+# Replit-specific local state
+.local/
+.replit
+
+# Editor
+.vscode/
+.trae/
+
+# Large video files
+*.mp4
+*.mov
+*.webm
+
+# Large image sequences — serve from CDN in production
+client/public/images/systematic/
