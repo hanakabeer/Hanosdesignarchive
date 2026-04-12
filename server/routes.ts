@@ -47,67 +47,76 @@ export async function registerRoutes(
 }
 
 async function seedDatabase() {
-  const existing = await storage.getProjects();
-  if (existing.length > 0) return;
-
-  const seedProjects = [
-    {
-      title: "Mumo",
-      category: "Adaptive Menstrual Care",
-      year: "2024",
-      route: "/work/1",
-      role: "Individual Project | Functional POC",
-      overview: "An Adaptive Menstrual Care solution designed for accessibility and comfort.",
-      imageUrl: "/images/hero images/Mumo.png"
-    },
-    {
-      title: "Cascader",
-      category: "Rotomolding Machine",
-      year: "2023",
-      route: "/work/2",
-      role: "Group Project | Modular Fabrication System",
-      overview: "A modular fabrication system exploring large-scale rotomolding techniques.",
-      imageUrl: "/images/hero images/rotomoldin.png"
-    },
-    {
-      title: "Mycrochet",
-      category: "Robotic Biocomposite Fabrication System",
-      year: "2023",
-      route: "/work/3",
-      role: "Group Project | Robotic End-Effector POC",
-      overview: "Exploring robotic-assisted biocomposite fabrication through custom end-effector design.",
-      imageUrl: "/images/hero images/Mycrochet.png"
-    },
-    {
-      title: "Versa Grip",
-      category: "Adaptive Grip Exploration",
-      year: "2023",
-      route: "/work/4",
-      role: "Competition Project | Exploratory Assistive Design Study",
-      overview: "An assistive design study on adaptive grip mechanisms for individuals with limited dexterity.",
-      imageUrl: "/images/hero images/versagrip.png"
-    },
-    {
-      title: "Pencil Sharpener",
-      category: "Reverse Engineering Study",
-      year: "2022",
-      route: "/work/5",
-      role: "Individual Project | CAD & Mechanical Teardown",
-      overview: "A reverse-engineering study of a manual helical pencil sharpener, from physical teardown to digital reconstruction.",
-      imageUrl: "/images/hero images/sharpner.png"
-    },
-    {
-      title: "Bukhoorie",
-      category: "A Ritual Lighting Experience",
-      year: "2022",
-      route: "/work/6",
-      role: "Individual Project | Functional POC",
-      overview: "A specialized project exploring traditional materials and adaptive functional design.",
-      imageUrl: "/images/hero images/kartell.png"
+  try {
+    const existing = await storage.getProjects();
+    if (existing.length > 0) {
+      console.log(`Database already has ${existing.length} projects. Skipping seed.`);
+      return;
     }
-  ];
 
-  for (const p of seedProjects) {
-    await storage.createProject(p);
+    console.log("Seeding database with default projects...");
+    const seedProjects = [
+      {
+        title: "Mumo",
+        category: "Adaptive Menstrual Care",
+        year: "2024",
+        route: "/work/1",
+        role: "Individual Project | Functional POC",
+        overview: "An Adaptive Menstrual Care solution designed for accessibility and comfort.",
+        imageUrl: "/images/hero images/Mumo.png"
+      },
+      {
+        title: "Cascader",
+        category: "Rotomolding Machine",
+        year: "2023",
+        route: "/work/2",
+        role: "Group Project | Modular Fabrication System",
+        overview: "A modular fabrication system exploring large-scale rotomolding techniques.",
+        imageUrl: "/images/hero images/rotomoldin.png"
+      },
+      {
+        title: "Mycrochet",
+        category: "Robotic Biocomposite Fabrication System",
+        year: "2023",
+        route: "/work/3",
+        role: "Group Project | Robotic End-Effector POC",
+        overview: "Exploring robotic-assisted biocomposite fabrication through custom end-effector design.",
+        imageUrl: "/images/hero images/Mycrochet.png"
+      },
+      {
+        title: "Versa Grip",
+        category: "Adaptive Grip Exploration",
+        year: "2023",
+        route: "/work/4",
+        role: "Competition Project | Exploratory Assistive Design Study",
+        overview: "An assistive design study on adaptive grip mechanisms for individuals with limited dexterity.",
+        imageUrl: "/images/hero images/versagrip.png"
+      },
+      {
+        title: "Pencil Sharpener",
+        category: "Reverse Engineering Study",
+        year: "2022",
+        route: "/work/5",
+        role: "Individual Project | CAD & Mechanical Teardown",
+        overview: "A reverse-engineering study of a manual helical pencil sharpener, from physical teardown to digital reconstruction.",
+        imageUrl: "/images/hero images/sharpner.png"
+      },
+      {
+        title: "Bukhoorie",
+        category: "A Ritual Lighting Experience",
+        year: "2022",
+        route: "/work/6",
+        role: "Individual Project | Functional POC",
+        overview: "A specialized project exploring traditional materials and adaptive functional design.",
+        imageUrl: "/images/hero images/kartell.png"
+      }
+    ];
+
+    for (const p of seedProjects) {
+      await storage.createProject(p);
+    }
+    console.log("Database seeding completed successfully.");
+  } catch (error) {
+    console.error("Error during database seeding:", error);
   }
 }

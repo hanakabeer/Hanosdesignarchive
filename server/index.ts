@@ -61,20 +61,25 @@ app.use((req, res, next) => {
 
 export { app };
 
+// Registration helper for production/Vercel
+const initApp = async () => {
+  try {
+    await registerRoutes(httpServer, app);
+    log("Routes registered successfully");
+  } catch (err) {
+    console.error("Failed to register routes:", err);
+  }
+};
+
 if (process.env.NODE_ENV !== "production") {
   (async () => {
-    await registerRoutes(httpServer, app);
-
+    await initApp();
+    
     app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
       const status = err.status || err.statusCode || 500;
       const message = err.message || "Internal Server Error";
-
       console.error("Internal Server Error:", err);
-
-      if (res.headersSent) {
-        return next(err);
-      }
-
+      if (res.headersSent) return next(err);
       return res.status(status).json({ message });
     });
 
@@ -87,7 +92,6 @@ if (process.env.NODE_ENV !== "production") {
     });
   })();
 } else {
-  // In production (Vercel), we just register routes.
-  // The serverless function will handle the request.
-  registerRoutes(httpServer, app);
+  // In production (Vercel), we initialize routes immediately
+  initApp();
 }
