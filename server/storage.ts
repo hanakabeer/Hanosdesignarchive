@@ -1,4 +1,4 @@
-import { projects, type Project, type InsertProject } from "@shared/schema";
+import { projects, type Project, type InsertProject } from "../shared/schema.js";
 import { eq } from "drizzle-orm";
 
 export interface IStorage {
@@ -9,18 +9,18 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async getProjects(): Promise<Project[]> {
-    const { db } = await import("./db");
+    const { db } = await import("./db.js");
     return await db.select().from(projects);
   }
 
   async getProject(id: number): Promise<Project | undefined> {
-    const { db } = await import("./db");
+    const { db } = await import("./db.js");
     const [project] = await db.select().from(projects).where(eq(projects.id, id));
     return project;
   }
 
   async createProject(insertProject: InsertProject): Promise<Project> {
-    const { db } = await import("./db");
+    const { db } = await import("./db.js");
     const [project] = await db
       .insert(projects)
       .values(insertProject)

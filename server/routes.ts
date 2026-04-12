@@ -1,8 +1,8 @@
 import type { Express } from "express";
 import type { Server } from "http";
-import { storage } from "./storage";
-import { api } from "@shared/routes";
-import type { Project } from "@shared/schema";
+import { storage } from "./storage.js";
+import { api } from "../shared/routes.js";
+import type { Project } from "../shared/schema.js";
 
 function normalizeProject(project: Project): Project {
   if (project.id === 5 || project.route === "/work/5" || project.title === "Pencil Sharpener") {

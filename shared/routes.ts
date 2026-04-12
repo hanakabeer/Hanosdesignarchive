@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { insertProjectSchema, projects } from './schema';
+import { insertProjectSchema, projects } from './schema.js';
 
 export const errorSchemas = {
   notFound: z.object({
