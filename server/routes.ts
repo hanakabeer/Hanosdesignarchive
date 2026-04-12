@@ -28,8 +28,19 @@ export async function registerRoutes(
 ): Promise<Server> {
 
   app.get(api.projects.list.path, async (req, res) => {
-    const projects = await storage.getProjects();
-    res.json(projects.map(normalizeProject));
+    try {
+      const projects = await storage.getProjects();
+      if (projects.length === 0) {
+        console.log("No projects found, seeding database...");
+        await seedDatabase();
+        const seededProjects = await storage.getProjects();
+        return res.json(seededProjects.map(normalizeProject));
+      }
+      res.json(projects.map(normalizeProject));
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
   });
 
   app.get(api.projects.get.path, async (req, res) => {
