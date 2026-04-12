@@ -1,83 +1,83 @@
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "wouter";
+import { useState, useEffect } from "react";
 import type { Project } from "@shared/schema";
 import { Navbar } from "@/components/sections/Navbar";
 import { ProjectNav } from "@/components/sections/ProjectNav";
+import { ProjectHero } from "@/components/sections/ProjectHero";
+import { ProjectSideNav } from "@/components/sections/ProjectSideNav";
 import styles from "./styles.module.css";
 
 const fadeUp = {
-    hidden: { opacity: 0, y: 32 },
+    hidden: { opacity: 0, y: 24 },
     visible: (i = 0) => ({
         opacity: 1,
         y: 0,
-        transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 },
+        transition: { 
+            duration: 0.7, 
+            ease: [0.22, 1, 0.36, 1], 
+            delay: i * 0.08 
+        },
     }),
 };
 
 interface Props { project: Project; }
 
 export function MumoProjectPage({ project }: Props) {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
     return (
         <div className={styles.page}>
             <Navbar />
-
-            {/* ── HERO ───────────────────────────────────────────────────── */}
-            <section className={styles.hero}>
-                <div className={styles.heroInner}>
-                    <motion.div
-                        className={styles.heroBreadcrumb}
-                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}
-                    >
-                        <Link href="/">
-                            <a className={styles.backLink}><ArrowLeft size={14} /> Archive</a>
-                        </Link>
-                        <span className={styles.breadcrumbSep}>/</span>
-                        <span className={styles.breadcrumbCurrent}>Mumo</span>
-                    </motion.div>
-
-                    <motion.div className={styles.heroContent} variants={fadeUp} initial="hidden" animate="visible">
-                        <div className={styles.heroMeta}>
-                            <span className={styles.heroTag}>Adaptive Menstrual Care</span>
-                            <span className={styles.heroTag}>Individual Project</span>
-                            <span className={styles.heroTag}>Functional POC</span>
-                        </div>
-                        <h1 className={styles.heroTitle}>Mumo.</h1>
-                        <p className={styles.heroSub}>
-                            A comforting object designed to regulate menstrual discomfort through sleep support —
-                            before symptoms begin.
-                        </p>
-                    </motion.div>
-
-                    {/* Hero image */}
-                    <motion.div
-                        className={styles.heroImage}
-                        initial={{ opacity: 0, scale: 0.97 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                    >
-                        <img src="/images/PROJECTS/MUMO/MUMOHEROPAGE.png" alt="Mumo device" className={styles.heroImg} />
-                    </motion.div>
-
-                    {/* Specs row */}
-                    <motion.div className={styles.specsRow} variants={fadeUp} custom={3} initial="hidden" animate="visible">
-                        {[
-                            { label: "Role", value: project.role },
-                            { label: "Category", value: project.category },
-                            { label: "Year", value: project.year },
-                            { label: "Type", value: "Functional Prototype" },
-                        ].map((s) => (
-                            <div key={s.label} className={styles.specItem}>
-                                <span className={styles.specLabel}>{s.label}</span>
-                                <span className={styles.specValue}>{s.value}</span>
-                            </div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
+            <ProjectSideNav
+                accentColor="#E93D82"
+                isImmersive={false}
+                sections={[
+                    { id: "context", label: "Context" },
+                    { id: "cycle", label: "The Cycle" },
+                    { id: "approach", label: "Approach" },
+                    { id: "ideate", label: "Ideate" },
+                    { id: "prototype", label: "Prototype" },
+                    { id: "final", label: "Final Design" },
+                    { id: "evaluation", label: "Evaluation" },
+                ]}
+            />
+            {/* ── HERO (universal two-column component) ───────────────── */}
+            <ProjectHero
+                title="Mumo."
+                breadcrumbLabel="Mumo"
+                subtitle="Adaptive Menstrual Care Device"
+                description="A comforting object designed to regulate menstrual discomfort through sleep support before symptoms begin."
+                tags={["Adaptive Care", "Sleep Support"]}
+                meta={[
+                    { label: "Year", value: project.year },
+                    { label: "Type", value: "Functional Prototype" },
+                    { label: "Role", value: project.role },
+                    { label: "Category", value: project.category },
+                    { label: "Duration", value: "12 weeks" },
+                    { label: "Outcome", value: "Exhibition at Design Week" },
+                ]}
+                panel={{
+                    heading: "Project Data",
+                    items: [
+                        { label: "Year", value: "2025" },
+                        { label: "Type", value: "Wellness Product" },
+                        { label: "Team", value: "Solo" },
+                        { label: "Context", value: "Academic" },
+                    ],
+                }}
+                imageSrc="/images/PROJECTS/MUMO/MUMOHEROPAGE.png"
+                imageAlt="Mumo adaptive menstrual care device"
+                accentColor="#E93D82"
+            />
 
             {/* ── CONTEXT ────────────────────────────────────────────────── */}
-            <section className={styles.contextSection}>
+            <section id="context" className={styles.contextSection} data-theme="dark" data-mumo-snap="true">
                 <div className={styles.sectionInner}>
                     <motion.div
                         className={styles.sectionLabel}
@@ -96,7 +96,7 @@ export function MumoProjectPage({ project }: Props) {
                         variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}
                     >
                         Menstrual discomfort is rarely addressed until symptoms are already present. Yet sleep
-                        and hormonal cycles are deeply intertwined — poor sleep amplifies PMS symptoms, and PMS
+                        and hormonal cycles are deeply intertwined , poor sleep amplifies PMS symptoms, and PMS
                         disrupts sleep quality. Intervening at this systemic level, before discomfort begins,
                         opens a new design space.
                     </motion.p>
@@ -123,7 +123,7 @@ export function MumoProjectPage({ project }: Props) {
             </section>
 
             {/* ── FEEDBACK LOOP ───────────────────────────────────────────── */}
-            <section className={styles.feedbackLoopSection}>
+            <section id="cycle" className={styles.feedbackLoopSection} data-theme="light" data-mumo-snap="true">
                 <div className={styles.feedbackLoopInner}>
                     <motion.div
                         className={styles.feedbackLoopLabel}
@@ -135,30 +135,37 @@ export function MumoProjectPage({ project }: Props) {
                         className={styles.feedbackLoopHeading}
                         variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}
                     >
-                        A self-reinforcing loop between sleep and menstrual health.
+                        A self-reinforcing loop
                     </motion.h2>
-                    <motion.p
-                        className={styles.feedbackLoopBody}
-                        variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                    >
-                        Poor sleep worsens PMS symptoms, and intensified symptoms further disturb sleep quality —
-                        creating a cycle that conventional care rarely addresses at the root.
-                    </motion.p>
-                    <motion.div
-                        className={styles.feedbackLoopImageWrap}
-                        variants={fadeUp} custom={3} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                    >
-                        <img
-                            src="/images/PROJECTS/MUMO/FEEDBACK LOOP.png"
-                            alt="Mumo feedback loop diagram"
-                            className={styles.feedbackLoopImg}
-                        />
-                    </motion.div>
+                    <div className={styles.feedbackLoopColumns}>
+                        <motion.div
+                            className={styles.feedbackLoopImageWrap}
+                            variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                        >
+                            <img
+                                src="/images/PROJECTS/MUMO/FEEDBACK LOOP.png"
+                                alt="Mumo feedback loop diagram"
+                                className={styles.feedbackLoopImg}
+                            />
+                        </motion.div>
+                        <motion.div
+                            className={styles.feedbackLoopQuoteBlock}
+                            variants={fadeUp} custom={3} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                        >
+                            <p className={styles.feedbackLoopQuote}>
+                                "The body doesn't wait for symptoms to arrive , it begins preparing days before. So should our care."
+                            </p>
+                            <p className={styles.feedbackLoopBody}>
+                                Poor sleep worsens PMS symptoms, and intensified symptoms further disturb sleep quality ,
+                                creating a cycle that conventional care rarely addresses at the root.
+                            </p>
+                        </motion.div>
+                    </div>
                 </div>
             </section>
 
             {/* ── APPROACH ───────────────────────────────────────────────── */}
-            <section className={styles.approachSection}>
+            <section id="approach" className={styles.approachSection} data-theme="dark" data-mumo-snap="true">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionLabel} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                         Approach
@@ -167,6 +174,7 @@ export function MumoProjectPage({ project }: Props) {
                         How might we design for menstrual regulation <em>before</em> discomfort begins?
                     </motion.h2>
 
+                    <div className={styles.approachFlowchartDesktop} aria-hidden="true">
                     <svg width="1119" height="416" viewBox="0 0 1119 416" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M225.442 45.3999L388.442 46.408" stroke="#E93D82" />
                         <path d="M517.442 44.3999L747.442 47.413" stroke="#E93D82" />
@@ -321,6 +329,13 @@ export function MumoProjectPage({ project }: Props) {
                             </filter>
                         </defs>
                     </svg>
+                    </div>
+
+                    <img
+                        src="/images/PROJECTS/MUMO/FLOWCHART.png"
+                        alt="Mumo approach flowchart"
+                        className={styles.approachFlowchartMobile}
+                    />
 
 
                     <motion.div
@@ -338,7 +353,7 @@ export function MumoProjectPage({ project }: Props) {
             </section>
 
             {/* ── IDEATE ─────────────────────────────────────────────────── */}
-            <section className={styles.ideateSection}>
+            <section id="ideate" className={styles.ideateSection} data-theme="light" data-mumo-snap="true">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionLabel} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                         Ideate
@@ -347,9 +362,9 @@ export function MumoProjectPage({ project }: Props) {
                         Form & Interaction
                     </motion.h2>
                     <motion.p className={styles.sectionBody} variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Sketches investigated how the body naturally seeks relief — through holding, pressing,
+                        Sketches investigated how the body naturally seeks relief through holding, pressing,
                         and resting against objects. The form was designed to invite the user to pause, hold,
-                        and care for themselves. Not a device — a companion.
+                        and care for themselves. Not a device but rather a companion.
                     </motion.p>
 
                     <div>
@@ -360,7 +375,7 @@ export function MumoProjectPage({ project }: Props) {
             </section>
 
             {/* ── PROTOTYPE ──────────────────────────────────────────────── */}
-            <section className={styles.prototypeSection}>
+            <section id="prototype" className={styles.prototypeSection} data-theme="dark" data-mumo-snap="true">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionLabel} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                         Prototype
@@ -369,20 +384,20 @@ export function MumoProjectPage({ project }: Props) {
                         Iteration & Testing
                     </motion.h2>
                     <motion.p className={`${styles.sectionBody} ${styles.lightText}`} variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        From foam models to 1:1 scale functional prototypes. Each iteration tested grip
+                        From rough models to 1:1 scale functional prototypes. Each iteration tested grip
                         comfort, speaker placement for audio cues, and the integration of the aromatherapy
                         diffusion system.
                     </motion.p>
 
                     <div>
-                        <img src="/images/PROJECTS/MUMO/Prototyping (3).png" alt="MUMO ideation sketches" />
+                        <img src="/images/PROJECTS/MUMO/Prototyping (3).png" alt="MUMO ideation sketches" className={styles.prototypeImg} />
 
                     </div>
                 </div>
             </section>
 
             {/* ── FINAL DESIGN ───────────────────────────────────────────── */}
-            <section className={styles.finalSection}>
+            <section id="final" className={styles.finalSection} data-theme="light" data-mumo-snap="true">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionLabel} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                         Final Design
@@ -409,27 +424,33 @@ export function MumoProjectPage({ project }: Props) {
                         />
                     </motion.div>
 
-                    {/* 3-column image grid */}
-                    <div className={styles.finalGrid3}>
-                        {[
-                            { src: "/images/PROJECTS/MUMO/FINAL1.JPG", alt: "Mumo final design — view 1" },
-                            { src: "/images/PROJECTS/MUMO/FINAL2.JPG", alt: "Mumo final design — view 2" },
-                            { src: "/images/PROJECTS/MUMO/FINAL3.JPG", alt: "Mumo final design — view 3" },
-                        ].map((img, i) => (
-                            <motion.div
-                                key={img.src}
-                                className={styles.finalGridItem}
-                                variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                            >
-                                <img src={img.src} alt={img.alt} className={styles.finalGridImg} />
-                            </motion.div>
-                        ))}
-                    </div>
+                    {/* Technical drawings — separated into its own sub-section */}
+                    <motion.div
+                        className={styles.techDrawingsStrip}
+                        variants={fadeUp} custom={3} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                    >
+                        <div className={styles.techDrawingsDivider}>
+                            <span className={styles.techDrawingsDividerLabel}>Technical Drawings</span>
+                        </div>
+                        <div className={styles.techDrawingsSections}>
+                            <div className={styles.techDrawingSubSection}>
+                                <div className={styles.techDrawingsGrid}>
+                                    <img
+                                        src="/images/PROJECTS/MUMO/technical drawing.png"
+                                        alt="Mumo technical drawing"
+                                        className={styles.techDrawingImg}
+                                    />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </motion.div>
+
                 </div>
             </section>
 
             {/* ── EVALUATION ─────────────────────────────────────────────── */}
-            <section className={styles.evalSection}>
+            <section id="evaluation" className={styles.evalSection} data-theme="dark" data-mumo-snap="true">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionLabel} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                         Evaluation
@@ -438,53 +459,44 @@ export function MumoProjectPage({ project }: Props) {
                         User Interaction at Design Week
                     </motion.h2>
                     <motion.p className={`${styles.sectionBody} ${styles.lightText}`} variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Mumo was exhibited at Design Week to observe spontaneous visitor interaction — without
+                        Mumo was exhibited at Design Week to observe  visitor interaction without
                         instruction, context, or guidance. Findings revealed a powerful alignment between
                         intended and natural use.
                     </motion.p>
 
-                    <div className={styles.feedbackLoopImageWrap} style={{ marginBottom: '3rem' }}>
-                        <img src="/images/PROJECTS/MUMO/EXHIBITION 1.jpg" alt="Mumo exhibition at Design Week" className={styles.feedbackLoopImg} />
+                    <div className={styles.evalLayout}>
+                        <motion.div
+                            className={styles.evalImageWrap}
+                            variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                        >
+                            <img src="/images/PROJECTS/MUMO/EXHIBITION 1.jpg" alt="Mumo exhibition at Design Week" className={styles.evalImg} />
+                        </motion.div>
+                        <div className={styles.evalCards}>
+                            {[
+                                {
+                                    quote: "Visitors treated it as something to care for and not a technical object.",
+                                    detail: "Multiple visitors attempted to touch it and pick up the massager despite a 'do not touch' sign.",
+                                },
+                                {
+                                    quote: "“Could the scent become overwhelming with longer use?”",
+                                    detail: "The Design Week exhibition highlighted scent regulation as an important area for future refinement, particularly in controlling intensity and prolonged exposure.",
+                                },
+                                {
+                                    quote: "It felt like something already familiar.",
+                                    detail: "The organic form drew on primal associations with comfort objects - stones, shells, held warmth.",
+                                },
+                            ].map((card, i) => (
+                                <motion.div
+                                    key={i}
+                                    className={styles.evalCard}
+                                    variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                                >
+                                    <p className={styles.evalQuote}>"{card.quote}"</p>
+                                    <p className={styles.evalDetail}>{card.detail}</p>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
-
-
-                    <div className={styles.evalCards}>
-                        {[
-                            {
-                                quote: "Visitors treated it as something to care for — not a technical object.",
-                                detail: "Multiple visitors attempted to pick it up despite a 'do not touch' sign.",
-                            },
-                            {
-                                quote: "Nobody asked what it does. They asked how it feels.",
-                                detail: "The form language successfully communicated tactile interaction before any cognitive processing.",
-                            },
-                            {
-                                quote: "It felt like something already familiar.",
-                                detail: "The organic form drew on primal associations with comfort objects — stones, shells, held warmth.",
-                            },
-                        ].map((card, i) => (
-                            <motion.div
-                                key={i}
-                                className={styles.evalCard}
-                                variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                            >
-                                <p className={styles.evalQuote}>"{card.quote}"</p>
-                                <p className={styles.evalDetail}>{card.detail}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ── NEXT PROJECT NAV ───────────────────────────────────────── */}
-            <section className={styles.nextSection}>
-                <div className={styles.sectionInner}>
-                    <Link href="/">
-                        <a className={styles.nextLink}>
-                            <span className={styles.nextLabel}>Back to Archive</span>
-                            <ArrowLeft size={20} className={styles.nextArrow} />
-                        </a>
-                    </Link>
                 </div>
             </section>
 

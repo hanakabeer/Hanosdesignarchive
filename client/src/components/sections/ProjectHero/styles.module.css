@@ -1,0 +1,420 @@
+/* ══════════════════════════════════════════════════════════════
+   ProjectHero — editorial composition hero
+   
+   Desktop layout:
+     [ LEFT text col 42% ] [ RIGHT composition area 58% ]
+                            [ image fills tall area ]
+                            [ info panel floats at image bottom-right ]
+
+   The whole thing sits within 100vh so the first screen feels
+   rich and complete — immersive and immediately informative.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper ─────────────────────────────────────────── */
+.hero {
+    background: var(--hero-bg, #F5F5F0);
+    min-height: 100vh;
+    padding-top: var(--nav-height, 64px);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+}
+
+/* ── Two-column editorial grid ───────────────────────────────── */
+.heroInner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    gap: 0;
+    min-height: calc(100vh - var(--nav-height, 64px));
+    align-items: stretch;
+}
+
+/* ── Left column ─────────────────────────────────────────────── */
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3.5rem 3rem 3.5rem 0;
+    /* Subtle right border that acts as a vertical divider */
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 2;
+}
+
+/* 1. Breadcrumb */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    margin-bottom: 2.2rem;
+    font-family: var(--font-body);
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: rgba(0, 0, 0, 0.28);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+}
+
+.backLink:hover {
+    color: var(--accent, #E93D82);
+}
+
+.breadcrumbSep {
+    color: rgba(0, 0, 0, 0.13);
+    font-size: 0.65rem;
+}
+
+.breadcrumbCurrent {
+    color: rgba(0, 0, 0, 0.38);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+}
+
+/* 2. Tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.6rem;
+}
+
+.tag {
+    font-family: var(--font-body);
+    font-size: 0.63rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent, #E93D82);
+    background: color-mix(in srgb, var(--accent, #E93D82) 9%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent, #E93D82) 20%, transparent);
+    padding: 0.26rem 0.7rem;
+    border-radius: 99px;
+}
+
+/* 3. Title */
+.title {
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 5.5vw, 6.2rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    color: var(--hero-ink, #12121F);
+    margin: 0 0 1.4rem;
+}
+
+/* 4. Subtitle */
+.subtitle {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+    opacity: 0.92;
+}
+
+/* 4b. Description */
+.description {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--hero-body, rgba(18, 18, 31, 0.52));
+    max-width: 400px;
+    margin-bottom: 2.8rem;
+}
+
+/* 5. Scroll cue */
+.scrollCue {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    transition: color 0.2s, gap 0.25s;
+}
+
+.scrollCue:hover {
+    color: var(--accent, #E93D82);
+    gap: 1rem;
+}
+
+.scrollLine {
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    flex-shrink: 0;
+    transition: width 0.25s;
+}
+
+.scrollCue:hover .scrollLine {
+    width: 40px;
+}
+
+/* ── Right column — image + panel composition ────────────────── */
+.right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: visible;
+    padding-left: 3rem;
+}
+
+/* Hero image — tall, starts early, flows to bottom of viewport */
+.imageWrap {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.04);
+    /* Negative top margin pulls it up to overlap the column division */
+    margin-top: 3rem;
+    /* Let it bleed full height */
+    min-height: calc(100vh - var(--nav-height, 64px) - 3rem);
+    max-height: calc(100vh - var(--nav-height, 64px) - 2rem);
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+/* Small editorial index mark in image corner */
+.imageIndex {
+    position: absolute;
+    bottom: 1.1rem;
+    left: 1.25rem;
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+}
+
+/* ── Floating info panel ──────────────────────────────────────── */
+.infoPanel {
+    position: absolute;
+    /* Anchor to bottom-right of the image area */
+    bottom: 0;
+    right: -1.5rem;
+    width: 220px;
+    background: rgba(245, 245, 240, 0.94);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+    z-index: 10;
+    /* Subtle elevation shadow */
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.infoPanelLabel {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.infoPanelItems {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.infoPanelItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.18rem;
+    padding-bottom: 0.72rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.infoPanelItem:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.infoPanelItemLabel {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.infoPanelItemValue {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--hero-ink, rgba(18, 18, 31, 0.82));
+    line-height: 1.4;
+}
+
+/* ── Dark background variant ─────────────────────────────────── */
+.hero[data-theme="dark"] {
+    background: var(--hero-bg-dark, #18182B);
+}
+
+.hero[data-theme="dark"] .title {
+    color: #fff;
+}
+
+.hero[data-theme="dark"] .description {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.hero[data-theme="dark"] .backLink {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.hero[data-theme="dark"] .breadcrumbSep {
+    color: rgba(255, 255, 255, 0.12);
+}
+
+.hero[data-theme="dark"] .breadcrumbCurrent {
+    color: rgba(255, 255, 255, 0.38);
+}
+
+.hero[data-theme="dark"] .left {
+    border-right-color: rgba(255, 255, 255, 0.07);
+}
+
+.hero[data-theme="dark"] .scrollCue {
+    color: rgba(255, 255, 255, 0.24);
+}
+
+.hero[data-theme="dark"] .infoPanel {
+    background: var(--hero-panel-bg-dark, rgba(26, 26, 44, 0.9));
+    border-color: var(--hero-panel-border-dark, rgba(255, 255, 255, 0.08));
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22);
+}
+
+.hero[data-theme="dark"] .infoPanelItemLabel {
+    color: rgba(255, 255, 255, 0.28);
+}
+
+.hero[data-theme="dark"] .infoPanelItemValue {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hero[data-theme="dark"] .infoPanelItem {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.hero[data-theme="dark"] .imageIndex {
+    opacity: 0.55;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+    .heroInner {
+        grid-template-columns: 45% 1fr;
+        padding: 0 2rem;
+    }
+
+    .infoPanel {
+        right: -0.75rem;
+        width: 196px;
+    }
+}
+
+@media (max-width: 900px) {
+    .hero {
+        min-height: auto;
+    }
+
+    .heroInner {
+        grid-template-columns: 1fr;
+        gap: 0;
+        min-height: auto;
+        padding: 0 1.5rem;
+    }
+
+    .left {
+        padding: 2.5rem 0 2rem 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        justify-content: flex-start;
+    }
+
+    .right {
+        padding-left: 0;
+        padding-top: 0;
+    }
+
+    .imageWrap {
+        margin-top: 2rem;
+        min-height: 60vw;
+        max-height: 70vw;
+        border-radius: 12px;
+    }
+
+    .imageIndex {
+        display: none;
+    }
+
+    .infoPanel {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        width: 100%;
+        border-radius: 12px;
+        margin-top: 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .infoPanelItems {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+    }
+
+    .infoPanelItem {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .heroInner {
+        padding: 0 1.25rem;
+    }
+
+    .title {
+        font-size: clamp(2.6rem, 11vw, 3.8rem);
+    }
+
+    .left {
+        padding-top: 2rem;
+    }
+
+    .infoPanelItems {
+        grid-template-columns: 1fr 1fr;
+    }
+}

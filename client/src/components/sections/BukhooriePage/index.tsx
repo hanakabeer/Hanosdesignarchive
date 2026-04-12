@@ -1,9 +1,10 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "wouter";
 import type { Project } from "@shared/schema";
 import { Navbar } from "@/components/sections/Navbar";
 import { ProjectNav } from "@/components/sections/ProjectNav";
+import { ProjectHero } from "@/components/sections/ProjectHero";
+import { ProjectSideNav } from "@/components/sections/ProjectSideNav";
 import styles from "./styles.module.css";
 
 const fadeUp = {
@@ -16,79 +17,115 @@ const fadeUp = {
 
 interface Props { project: Project; }
 
+const bukhoorieFeatureSlides = [
+    {
+        title: "Lamp Base",
+        subtitle: "Ornate Islamic Designs",
+        bullets: [
+            "The base of the lamp incorporates intricate Islamic geometric patterns, inspired by traditional Emirati architecture. These symmetrical motifs symbolize harmony and spirituality.",
+            "Injection-molded patterned base allows light to pass through, adding an extra layer of visual interest.",
+        ],
+        src: "/images/PROJECTS/Kartell/SCROLLTELLING/LAMP%20BASE.png",
+        alt: "Lamp base feature board with ornate Islamic designs callouts",
+    },
+    {
+        title: "Bukhoor Dispenser",
+        subtitle: "Traditional incense",
+        bullets: [
+            "A ceramic bukhoor chamber is housed within the base to retain heat while keeping the exterior safe to touch.",
+            "A stainless steel plate distributes heat evenly at a controlled 110°C, while the electric heating element provides safe, flameless fragrance diffusion.",
+        ],
+        src: "/images/PROJECTS/Kartell/SCROLLTELLING/BUKHOORLAMP.png",
+        alt: "Bukhoor dispenser feature board with traditional incense callouts",
+    },
+    {
+        title: "Refractive Shade",
+        subtitle: "Simulating Desert Dunes",
+        bullets: [
+            "The shade is crafted from polycarbonate, chosen for its optical transparency and durability.",
+            "The wavy dune-like effect is achieved through injection molding, ensuring light refraction mimics desert mirages.",
+        ],
+        src: "/images/PROJECTS/Kartell/SCROLLTELLING/REFRACTIVE%20SHADE.png",
+        alt: "Refractive shade feature board with desert dune callouts",
+    },
+];
+
 export function BukhooriePage({ project }: Props) {
+    const [activeFeature, setActiveFeature] = useState(0);
+    const featureRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+    useEffect(() => {
+        const elements = featureRefs.current.filter(Boolean) as HTMLDivElement[];
+        if (!elements.length) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const index = Number(entry.target.getAttribute("data-feature-index"));
+                    if (!Number.isNaN(index)) {
+                        setActiveFeature(index);
+                    }
+                });
+            },
+            {
+                root: null,
+                threshold: 0.55,
+                rootMargin: "-12% 0px -12% 0px",
+            },
+        );
+
+        elements.forEach((element) => observer.observe(element));
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <div className={styles.page}>
             <Navbar />
+            <ProjectSideNav
+                accentColor="#C72A09"
+                sections={[
+                    { id: "context", label: "Context" },
+                    { id: "ideation", label: "Ideation" },
+                    { id: "concept", label: "Concept" },
+                    { id: "product", label: "Features" },
+                    { id: "outcome", label: "Conclusion" },
+                    { id: "recognition", label: "Recognition" },
+                ]}
+            />
 
-            {/* ═══════════════════════════════════════════════════════
-          PAGE 1 — EXPERIENCE  (dark)
-      ═══════════════════════════════════════════════════════ */}
-            <section className={styles.experience}>
-                <div className={styles.expInner}>
-
-                    {/* breadcrumb */}
-                    <motion.div className={styles.breadcrumb}
-                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                        <Link href="/"><a className={styles.backLink}><ArrowLeft size={13} /> Archive</a></Link>
-                        <span className={styles.sep}>/</span>
-                        <span className={styles.curr}>Bukhoorie</span>
-                    </motion.div>
-
-                    {/* title block */}
-                    <motion.div className={styles.titleBlock} variants={fadeUp} initial="hidden" animate="visible">
-                        <h1 className={styles.heroTitle}>Bukhoorie</h1>
-                        <div className={styles.accentLine} />
-                        <p className={styles.heroSub}>A Ritual Lighting Experience</p>
-                    </motion.div>
-
-                    {/* full hero image */}
-                    <motion.div
-                        className={styles.heroImageWrap}
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                    >
-                        <img
-                            src="/images/hero images/Kartell.png"
-                            alt="Bukhoorie lamp with smoke — ritual lighting"
-                            className={styles.heroImg}
-                        />
-                        {/* atmosphere overlay */}
-                        <div className={styles.heroGlow} />
-                    </motion.div>
-
-                    {/* text + bottom line */}
-                    <motion.div className={styles.expText} variants={fadeUp} custom={3} initial="hidden" animate="visible">
-                        <p className={styles.expBody}>
-                            Lighting in Emirati homes is not only illumination — it accompanies rituals of
-                            hospitality, gathering, and scent. Bukhoorie reimagines a contemporary lamp as a
-                            vessel for welcoming guests through light and fragrance.
-                        </p>
-                        <p className={styles.expTag}>Light becomes atmosphere.</p>
-                    </motion.div>
-
-                    {/* meta */}
-                    <motion.div className={styles.metaRow} variants={fadeUp} custom={4} initial="hidden" animate="visible">
-                        {[
-                            { label: "Type", value: project.role },
-                            { label: "Category", value: project.category },
-                            { label: "Year", value: project.year },
-                            { label: "Material", value: "Polycarbonate · Ceramic · Steel" },
-                        ].map(m => (
-                            <div key={m.label} className={styles.metaItem}>
-                                <span className={styles.metaLabel}>{m.label}</span>
-                                <span className={styles.metaValue}>{m.value}</span>
-                            </div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
+            {/* PAGE 1 — HERO (universal two-column component) */}
+            <ProjectHero
+                title="Bukhoorie"
+                breadcrumbLabel="Bukhoorie"
+                subtitle="A Ritual Lighting Experience"
+                description="Lighting in Emirati homes is not only illumination — it accompanies rituals of hospitality, gathering, and scent. Bukhoorie reimagines a contemporary lamp as a vessel for welcoming guests through light and fragrance."
+                tags={["Ritual Object", "Ambient Lighting"]}
+                meta={[
+                    { label: "Year", value: project.year },
+                    { label: "Type", value: project.role },
+                    { label: "Category", value: project.category },
+                    { label: "Material", value: "Polycarbonate · Ceramic · Steel" },
+                ]}
+                panel={{
+                    heading: "Project Data",
+                    items: [
+                        { label: "Year", value: "2025" },
+                        { label: "Type", value: "Ritual Lighting Object" },
+                        { label: "Team", value: "Duo" },
+                        { label: "Context", value: "Competiton" },
+                    ],
+                }}
+                imageSrc="/images/hero images/kartell.png"
+                imageAlt="Bukhoorie lamp with smoke — ritual lighting"
+                accentColor="#C72A09"
+                theme="light"
+            />
 
             {/* ═══════════════════════════════════════════════════════
           PAGE 2 — CONTEXT  (light)
       ═══════════════════════════════════════════════════════ */}
-            <section className={styles.context}>
+            <section id="context" className={`${styles.context} ${styles.contextDark}`} data-theme="dark">
                 <div className={styles.sectionInner}>
 
                     <motion.span className={styles.sectionTag}
@@ -101,65 +138,94 @@ export function BukhooriePage({ project }: Props) {
                         How can we reimagine Kartell’s iconic Bourgie lamp to honor the rich Emirati tradition?
                     </motion.p>
 
+                   
+                    <motion.div
+                        className={styles.contextVenn}
+                        variants={fadeUp}
+                        custom={3}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                    >
+                        <img
+                            src="/images/PROJECTS/Kartell/venn.png"
+                            alt="Venn diagram showing the relationship between the Bourgie lamp and Emirati hospitality ritual"
+                            className={styles.contextVennImage}
+                        />
+                    </motion.div>
+
+                    <div className={styles.contextTraitsRow}>
+                        <motion.div
+                            className={`${styles.contextTraitsBlock} ${styles.contextTraitsLeft}`}
+                            variants={fadeUp}
+                            custom={4}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                        >
+                            <span className={styles.contextCardLabel}>Existing Lamp</span>
+                            <ul className={styles.contextTraitList}>
+                                <li>transparent polycarbonate</li>
+                                <li>baroque ornament</li>
+                                <li>decorative luxury object</li>
+                            </ul>
+                        </motion.div>
+
+                        <motion.div
+                            className={`${styles.contextTraitsBlock} ${styles.contextTraitsRight}`}
+                            variants={fadeUp}
+                            custom={5}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                        >
+                            <span className={styles.contextCardLabel}>Emirati Ritual</span>
+                            <ul className={styles.contextTraitList}>
+                                <li>bukhoor as welcome</li>
+                                <li>scent before speech</li>
+                                <li>hospitality through atmosphere</li>
+                            </ul>
+                        </motion.div>
+                    </div>
+
+                   
+                </div>
+            </section>
+
+            <section id="ideation" className={styles.ideation} data-theme="light">
+                <div className={styles.sectionInner}>
+                    <motion.span className={styles.sectionTag}
+                        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                        Ideation
+                    </motion.span>
+
+                    <motion.h2 className={styles.contextLead}
+                        variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                        Form and pattern exploration
+                    </motion.h2>
+
                     <motion.p className={styles.contextSub}
                         variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        The project explores how a global design icon can respectfully integrate local
-                        rituals and architectural language.
+                        Early sketches explored how Bukhoorie could translate ritual, ornament, and atmospheric
+                        presence into a contemporary object while staying rooted in Emirati cultural references.
                     </motion.p>
 
-                    {/* reference images: Kartell lamp + Emirati hospitality only */}
-                    <div className={styles.contextImages}>
-                        {[
-                            { src: "/images/PROJECTS/Kartell/Burgie.png" },
-                            { src: "/images/PROJECTS/Kartell/emirati-hospitality-by-carmen-update-image-1-e1742554805266-1024x577.webp" },
-                        ].map((img, i) => (
-                            <motion.div key={i} className={styles.contextImgBox}
-                                variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                                <img src={img.src} alt={img.cap} className={styles.contextImg} />
-                                <span className={styles.cap}>{img.cap}</span>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    {/* two columns */}
-                    <div className={styles.contextCols}>
-                        <motion.div className={styles.contextCard}
-                            variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                            <span className={styles.contextCardLabel}>Existing Lamp</span>
-                            <p className={styles.contextCardDesc}>
-                                The Kartell Bourgie — a visual luxury object. Transparent polycarbonate,
-                                baroque ornament, pure decoration.
-                            </p>
-                        </motion.div>
-
-                        <motion.div className={styles.contextDivider}
-                            variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                            <div className={styles.dividerLine} />
-                            <span className={styles.dividerIcon}>＋</span>
-                            <div className={styles.dividerLine} />
-                        </motion.div>
-
-                        <motion.div className={styles.contextCard}
-                            variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                            <span className={styles.contextCardLabel}>Emirati Ritual</span>
-                            <p className={styles.contextCardDesc}>
-                                Bukhoor — olfactory and social experience. Fragrance communicates
-                                welcome, purity, and presence before words do.
-                            </p>
-                        </motion.div>
-                    </div>
-
-                    <motion.p className={styles.contextInsight}
-                        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Hospitality is communicated through scent as much as through space.
-                    </motion.p>
+                    <motion.div
+                        variants={fadeUp} custom={3} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                    >
+                        <img
+                            src="/images/PROJECTS/Kartell/Sketch.png"
+                            alt="Bukhoorie ideation sketches"
+                            className={styles.ideationImage}
+                        />
+                    </motion.div>
                 </div>
             </section>
 
             {/* ═══════════════════════════════════════════════════════
           PAGE 3 — DESIGN CONCEPT  (dark)
       ═══════════════════════════════════════════════════════ */}
-            <section className={styles.concept}>
+            <section id="concept" className={styles.concept} data-theme="dark">
                 <div className={styles.sectionInner}>
 
                     <motion.span className={styles.sectionTag}
@@ -176,14 +242,14 @@ export function BukhooriePage({ project }: Props) {
                             {
                                 icon: "◇",
                                 title: "Desert Mirage",
-                                desc: "Refracted polycarbonate layers produce shifting, heat-shimmer shadow patterns across surfaces.",
-                                img: "/images/hero images/Kartell.png",
+                                desc: "Layered refractive shades cast shifting light patterns across the ground, echoing the visual shimmer of the desert mirage and reflecting the region’s deep-rooted connection to landscape.",
+                                img: "/images/PROJECTS/Kartell/Desert Mirage.webp",
                                 imgAlt: "Desert mirage light refraction",
                             },
                             {
                                 icon: "⊞",
                                 title: "Mashrabiya Privacy",
-                                desc: "The ornate shade reinterprets mashrabiya geometry — filtering and patterning light while shielding the interior flame.",
+                                desc: "The shade reinterprets mashrabiya geometry, filtering light while referencing the architectural language of privacy, modesty, and controlled visibility.",
                                 img: "/images/PROJECTS/Kartell/Mashrabiya+History.webp",
                                 imgAlt: "Mashrabiya geometric pattern",
                             },
@@ -191,7 +257,7 @@ export function BukhooriePage({ project }: Props) {
                             {
                                 icon: "⊛",
                                 title: "Bukhoor Diffusion",
-                                desc: "Integrated ceramic chamber allows fragrant incense to rise through the lamp’s body — scent follows light.",
+                                desc: "An integrated bukhoor chamber allows fragrance to rise through the lamp’s body, transforming light into a sensory ritual of welcome, warmth, and presence.",
                                 img: "/images/PROJECTS/Kartell/Bukhoor.jpg",
                                 imgAlt: "Bukhoor incense ritual",
                             },
@@ -215,134 +281,82 @@ export function BukhooriePage({ project }: Props) {
                 </div>
             </section>
 
-            {/* ═══════════════════════════════════════════════════════
-          PAGE 4 — PRODUCT DESIGN  (light)
-      ═══════════════════════════════════════════════════════ */}
-            <section className={styles.product}>
-                <div className={styles.sectionInner}>
-
-                    <motion.span className={styles.sectionTag}
-                        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Integrated Bukhoor Burner
-                    </motion.span>
-
-                    <div className={styles.productLayout}>
-                        {/* image */}
-                        <motion.div className={styles.productImgWrap}
-                            variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                            <img src="/images/hero images/Kartell.png" alt="Bukhoorie lamp components" className={styles.productImg} />
-                        </motion.div>
-
-                        {/* diagram + text */}
-                        <div className={styles.productRight}>
-                            {/* vertical system diagram */}
-                            <motion.div className={styles.systemDiagram}
-                                variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                                {[
-                                    { layer: "LIGHT", detail: "Polycarbonate shade — patterned diffusion", accent: true },
-                                    { layer: "SMOKE", detail: "Fragrance channel — passive convection rise", accent: false },
-                                    { layer: "CHAMBER", detail: "Ceramic cup + steel heating plate", accent: false },
-                                ].map((row, i) => (
-                                    <div key={row.layer} className={styles.diagramRow}>
-                                        <div className={styles.diagramDot + (row.accent ? ` ${styles.diagramDotAccent}` : "")} />
-                                        <div className={styles.diagramLine} />
-                                        <div className={styles.diagramLabel}>{row.layer}</div>
-                                        <div className={styles.diagramDetail}>{row.detail}</div>
-                                    </div>
+            <section id="product" className={styles.featuresSection} data-theme="dark">
+                <div className={styles.featuresDesktop}>
+                    <div className={styles.featuresScroller}>
+                        <div className={styles.featuresSticky}>
+                            <div className={styles.featuresMeta}>
+                                <span className={styles.sectionTag}>Features</span>
+                                <span className={styles.featuresCounter}>{`0${activeFeature + 1} / 03`}</span>
+                            </div>
+                            <div className={styles.featuresMedia}>
+                                {bukhoorieFeatureSlides.map((slide, index) => (
+                                    <img
+                                        key={slide.src}
+                                        src={slide.src}
+                                        alt={slide.alt}
+                                        className={`${styles.featureImage} ${index === activeFeature ? styles.featureImageActive : ""}`}
+                                    />
                                 ))}
-                            </motion.div>
-
-                            <motion.p className={styles.productBody}
-                                variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                                The lamp contains a ceramic chamber and stainless steel heating plate to
-                                safely burn incense without open flame — embedding ritual into form.
-                            </motion.p>
-
-                            <motion.p className={styles.productKeyLine}
-                                variants={fadeUp} custom={3} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                                Light and fragrance operate together to create a shared sensory environment.
-                            </motion.p>
+                            </div>
+                            <div className={styles.featuresTextLayer}>
+                                {bukhoorieFeatureSlides.map((slide, index) => (
+                                    <article
+                                        key={slide.title}
+                                        className={`${styles.featureTextCard} ${index === activeFeature ? styles.featureTextCardActive : ""}`}
+                                        aria-hidden={index !== activeFeature}
+                                    >
+                                        <h3 className={styles.featureTitle}>{slide.title}</h3>
+                                        <p className={styles.featureSubtitle}>{slide.subtitle}</p>
+                                        <ul className={styles.featureBulletList}>
+                                            {slide.bullets.map((bullet) => (
+                                                <li key={bullet}>{bullet}</li>
+                                            ))}
+                                        </ul>
+                                    </article>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
 
-            {/* ═══════════════════════════════════════════════════════
-          PAGE 5 — REFRACTIVE SHADE  (dark)
-      ═══════════════════════════════════════════════════════ */}
-            <section className={styles.material}>
-                <div className={styles.sectionInner}>
-                    <motion.span className={styles.sectionTag}
-                        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Refractive Shade
-                    </motion.span>
-
-                    <motion.h2 className={styles.sectionTitle}
-                        variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Simulating Desert Dunes
-                    </motion.h2>
-
-                    <div className={styles.lightGrid}>
-                        <motion.div className={styles.lightImgMain}
-                            variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                            <img src="/images/hero images/Kartell.png" alt="Refractive shade light projection" className={styles.lightImg} />
-                            <span className={styles.lightCap}>Light projection — layered refractive shade</span>
-                        </motion.div>
-                        <div className={styles.lightImgCol}>
-                            {[
-                                "Shadow patterns — surface texture",
-                                "Close-up — polycarbonate optical depth",
-                            ].map((cap, i) => (
-                                <motion.div key={i} className={styles.lightImgSmall}
-                                    variants={fadeUp} custom={i + 1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                                    <img src="/images/PROJECTS/Kartell/reflect.png" alt={cap} className={styles.lightImg} />
-                                    <span className={styles.lightCap}>{cap}</span>
-                                </motion.div>
+                        <div className={styles.featureMarkers} aria-hidden="true">
+                            {bukhoorieFeatureSlides.map((slide, index) => (
+                                <div
+                                    key={slide.title}
+                                    ref={(node) => {
+                                        featureRefs.current[index] = node;
+                                    }}
+                                    data-feature-index={index}
+                                    className={styles.featureMarker}
+                                />
                             ))}
                         </div>
                     </div>
-
-                    <motion.div className={styles.materialCallout}
-                        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        <span className={styles.materialTag}>Polycarbonate</span>
-                        <p className={styles.materialReason}>Chosen for optical transparency and heat resistance — the material participates in the ritual.</p>
-                    </motion.div>
-
-                    <motion.p className={styles.materialInsight}
-                        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        The layered refractive shade produces shifting patterns resembling desert sand movement.
-                    </motion.p>
                 </div>
-            </section>
 
-            {/* ═══════════════════════════════════════════════════════
-          PAGE 6 — ORNATE ISLAMIC DESIGNS  (light)
-      ═══════════════════════════════════════════════════════ */}
-            <section className={styles.islamicDesigns}>
-                <div className={styles.sectionInner}>
-                    <motion.span className={styles.sectionTagDark}
-                        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Ornate Symmetric Islamic Designs
-                    </motion.span>
-
-                    <motion.h2 className={styles.islamicTitle}
-                        variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Geometric Heritage<br />Encoded in Light
-                    </motion.h2>
-
-                    {/* placeholder images for Islamic pattern explorations */}
-                    <div className={styles.islamicGrid}>
-                        {[
-                            { src: "/images/PROJECTS/Kartell/Mashrabiya+History.webp", cap: "Mashrabiya lattice — privacy and pattern" },
-                            { src: "/images/hero images/Kartell.png", cap: "Bourgie reinterpreted — ornate shade geometry" },
-                            { src: "/images/PROJECTS/Kartell/Bukhoor.jpg", cap: "Ritual context — scent and symmetry" },
-                        ].map((img, i) => (
-                            <motion.div key={i} className={styles.islamicImgBox}
-                                variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                                <img src={img.src} alt={img.cap} className={styles.islamicImg} />
-                                <span className={styles.islamicCap}>{img.cap}</span>
-                            </motion.div>
-                        ))}
+                <div className={styles.featuresMobile}>
+                    <div className={styles.sectionInner}>
+                        <span className={styles.sectionTag}>Features</span>
+                        <div className={styles.featureMobileList}>
+                            {bukhoorieFeatureSlides.map((slide, index) => (
+                                <article key={slide.title} className={styles.featureMobileCard}>
+                                    <img
+                                        src={slide.src}
+                                        alt={slide.alt}
+                                        className={styles.featureMobileImage}
+                                    />
+                                    <div className={styles.featureMobileCopy}>
+                                        <span className={styles.featuresCounter}>{`0${index + 1} / 03`}</span>
+                                        <h3 className={styles.featureTitle}>{slide.title}</h3>
+                                        <p className={styles.featureSubtitle}>{slide.subtitle}</p>
+                                        <ul className={styles.featureBulletList}>
+                                            {slide.bullets.map((bullet) => (
+                                                <li key={bullet}>{bullet}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -350,7 +364,7 @@ export function BukhooriePage({ project }: Props) {
             {/* ═══════════════════════════════════════════════════════
           PAGE 7 — OUTCOME  (dark)
       ═══════════════════════════════════════════════════════ */}
-            <section className={styles.outcome}>
+            <section id="outcome" className={styles.outcome} data-theme="dark">
                 <div className={styles.sectionInner}>
                     <motion.span className={styles.sectionTag}
                         variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -362,7 +376,7 @@ export function BukhooriePage({ project }: Props) {
                         variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                         <video
                             className={styles.outcomeVideo}
-                            src="/images/PROJECTS/Kartell/bukhoorie.mp4"
+                            src="/images/PROJECTS/Kartell/kartell.MOV"
                             autoPlay
                             muted
                             loop
@@ -370,20 +384,15 @@ export function BukhooriePage({ project }: Props) {
                         />
                     </motion.div>
 
-                    <motion.p className={styles.outcomeLine}
-                        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Bukhoorie transforms a decorative object into a cultural interaction — combining
-                        light, scent, and pattern to create a welcoming atmosphere.
-                    </motion.p>
-
                     <motion.div className={styles.reflection}
                         variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                         <div className={styles.reflectionBar} />
                         <div>
-                            <p className={styles.reflectionText}>
+                            <p className={styles.outcomeLine}>
                                 The project demonstrates how contemporary design can carry tradition forward by
                                 translating rituals into everyday objects.
                             </p>
+                        
                             <p className={styles.closingLine}>
                                 Design as a bridge between heritage and modern living.
                             </p>
@@ -392,33 +401,39 @@ export function BukhooriePage({ project }: Props) {
                 </div>
             </section>
 
-            {/* ═══════════════════════════════════════════════════════
-          PAGE 8 — RECOGNITION  (light)
-      ═══════════════════════════════════════════════════════ */}
-            <section className={styles.recognition}>
+            <section id="recognition" className={styles.recognitionSection}>
                 <div className={styles.sectionInner}>
-                    <motion.span className={styles.sectionTagDark}
-                        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        Recognition
-                    </motion.span>
+                    <div className={styles.recognitionBlock}>
+                        <motion.span className={styles.sectionTagDark}
+                            variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                            Recognition
+                        </motion.span>
+                        <motion.p
+                            className={styles.recognitionNote}
+                            variants={fadeUp}
+                            custom={0}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                        >
+                            Presented at Design Week 2025, where the project was recognized in the presence of Lorenza Luti.
+                        </motion.p>
 
-                    <div className={styles.recognitionGrid}>
-                        <motion.div className={styles.recognitionImgBox}
-                            variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                            <img src="/images/PROJECTS/Kartell/recognitoin1.jpeg" alt="Recognition image 1" className={styles.recognitionImg} />
-                        </motion.div>
-                        <motion.div className={styles.recognitionImgBox}
-                            variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                            <img src="/images/PROJECTS/Kartell/recognitoin2.jpeg" alt="Recognition image 2" className={styles.recognitionImg} />
-                        </motion.div>
+                        <div className={styles.recognitionGrid}>
+                            <motion.div className={styles.recognitionImgBox}
+                                variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                                <img src="/images/PROJECTS/Kartell/recognitoin1.jpeg" alt="Recognition image 1" className={styles.recognitionImg} />
+                            </motion.div>
+                            <motion.div className={styles.recognitionImgBox}
+                                variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                                <img src="/images/PROJECTS/Kartell/recognitoin2.jpeg" alt="Recognition image 2" className={styles.recognitionImg} />
+                            </motion.div>
+                        </div>
                     </div>
-
-                    <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                        style={{ marginTop: "3rem" }}>
-                        <Link href="/"><a className={styles.backNavLink}><ArrowLeft size={14} /> Back to Archive</a></Link>
-                    </motion.div>
                 </div>
             </section>
+
+            <ProjectNav currentId={6} />
         </div>
     );
 }

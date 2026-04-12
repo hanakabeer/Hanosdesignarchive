@@ -21,16 +21,15 @@ export function ProjectGrid({ projects, isLoading }: ProjectGridProps) {
     );
   }
 
-  const titleColors = [
-    "#F2A7A7",
-    "#436D66",
-    "#C5B358",
-    "#A0A0A0",
-    "#8B4513",
-    "#2F4F4F",
-  ];
-
   const numbers = ["01", "02", "03", "04", "05", "06"];
+  const catalogueSubtitles = [
+    "Adaptive Menstrual Care Object",
+    "Small-Scale Rotomolding System",
+    "Robotic Biocomposite Fabrication System",
+    "Adaptive Grip Exploration",
+    "Reverse Engineering Study",
+    "Ritual Lighting Object",
+  ];
 
   return (
     <section id="work" className={styles.wrapper}>
@@ -54,26 +53,24 @@ export function ProjectGrid({ projects, isLoading }: ProjectGridProps) {
               }}
               onClick={() => {
                 setCursorType('default');
-                setLocation(`/work/${project.id}`);
+                setLocation(project.route);
               }}
               onMouseEnter={() => setCursorType('project')}
               onMouseLeave={() => setCursorType('default')}
             >
               <div className={styles.imageContainer}>
                 <img
-                  src={project.imageUrl}
+                  src={project.id === 5 ? "/images/hero images/sharpner.png" : project.imageUrl}
                   alt={project.title}
                   className={styles.image}
                 />
               </div>
               <div className={styles.content}>
-                <h3 className={styles.title} style={{ color: titleColors[index % titleColors.length] }}>
-                  <span className={styles.number}>{numbers[index % numbers.length]}</span> {project.title}{index < 3 ? '.' : ''}
-                </h3>
-                <div className={styles.details}>
-                  <p className={styles.category}>{project.category}</p>
-                  <p className={styles.role}>{project.role}</p>
-                </div>
+                <p className={styles.number}>CAT. {numbers[index % numbers.length]}</p>
+                <h3 className={styles.title}>{project.title}</h3>
+                <p className={styles.subtitle}>
+                  {catalogueSubtitles[index] ?? project.category}
+                </p>
               </div>
             </motion.div>
           ))}

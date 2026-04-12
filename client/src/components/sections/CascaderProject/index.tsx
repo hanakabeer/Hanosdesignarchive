@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Link } from "wouter";
 import type { Project } from "@shared/schema";
 import { Navbar } from "@/components/sections/Navbar";
 import { ProjectNav } from "@/components/sections/ProjectNav";
+import { ProjectHero } from "@/components/sections/ProjectHero";
+import { ProjectSideNav } from "@/components/sections/ProjectSideNav";
 import styles from "./styles.module.css";
 
 const sectionVariants = {
@@ -24,78 +24,52 @@ export function CascaderProjectPage({ project }: Props) {
     return (
         <div className={styles.page}>
             <Navbar />
-
-            {/* ═══════════════════════════════════════════════════════
-          PAGE 1 — INTRODUCTION  (light)
-            ═══════════════════════════════════════════════════════ */}
-            <section className={styles.intro}>
-                <div className={styles.introInner}>
-
-                    <motion.div
-                        className={styles.breadcrumb}
-                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}
-                    >
-                        <Link href="/"><a className={styles.backLink}><ArrowLeft size={13} /> Archive</a></Link>
-                        <span className={styles.sep}>/</span>
-                        <span className={styles.curr}>CASCAder</span>
-                    </motion.div>
-
-                    <motion.div className={styles.titleBlock} variants={fadeUp} initial="hidden" animate="visible">
-                        <h1 className={styles.heroTitle}>CASCAder</h1>
-                        <div className={styles.accentLine} />
-                        <p className={styles.heroSub}>Small-Scale Rotational Casting System</p>
-                        <p className={styles.heroClaim}>
-                            Designing a fabrication tool to study hollow object manufacturing.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        className={styles.heroImageWrap}
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-                    >
-                        <img
-                            src="/images/hero images/rotomoldin.png"
-                            alt="Cascader rotational molding machine"
-                            className={styles.heroImg}
-                            loading="eager"
-                            decoding="async"
-                        />
-                    </motion.div>
-
-                    <motion.p
-                        className={styles.introParagraph}
-                        variants={fadeUp} custom={3} initial="hidden" animate="visible"
-                    >
-                        CASCAder is a compact rotational casting system developed to explore hollow polyhedral
-                        structures and modular assemblies. The project investigates how rotation stability,
-                        structural rigidity, and material constraints influence casting quality.
-                    </motion.p>
-
-                    <motion.div
-                        className={styles.metaRow}
-                        variants={fadeUp} custom={4} initial="hidden" animate="visible"
-                    >
-                        {[
-                            { label: "Type", value: "Group Project" },
-                            { label: "Process", value: "Rotational Casting" },
-                            { label: "System", value: "Modular Fabrication" },
-                            { label: "Year", value: project.year },
-                        ].map(m => (
-                            <div key={m.label} className={styles.metaItem}>
-                                <span className={styles.metaLabel}>{m.label}</span>
-                                <span className={styles.metaValue}>{m.value}</span>
-                            </div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
+            <ProjectSideNav
+                accentColor="#F05A28"
+                sections={[
+                    { id: "context", label: "Mechanism" },
+                    { id: "materials", label: "Materials" },
+                    { id: "iteration", label: "Iteration" },
+                    { id: "polyhedral", label: "Casting" },
+                    { id: "assemblies", label: "Assemblies" },
+                    { id: "simulation", label: "Simulation" },
+                    { id: "drawings", label: "Drawings" },
+                    { id: "outcome", label: "Outcome" },
+                ]}
+            />
+            {/* PAGE 1 — HERO (universal two-column component) */}
+            <ProjectHero
+                title="Cascader"
+                breadcrumbLabel="Cascader"
+                subtitle="Small-Scale Rotational Casting System"
+                description="A compact fabrication tool developed to create hollow polyhedral structures exploring how rotation stability, structural rigidity, and material constraints influence casting quality."
+                tags={["Fabrication System", "Rotational Molding"]}
+                meta={[
+                    { label: "Year", value: project.year },
+                    { label: "Type", value: "Group Project" },
+                    { label: "Process", value: "Rotational Casting" },
+                    { label: "System", value: "Modular Fabrication" },
+                    { label: "Duration", value: "10 weeks" },
+                    { label: "Outcome", value: "Working Machine + Cast Parts" },
+                ]}
+                panel={{
+                    heading: "Project Data",
+                    items: [
+                        { label: "Year", value: "2024" },
+                        { label: "Type", value: "Fabrication Machine" },
+                        { label: "Team", value: "Team of 4" },
+                        { label: "Context", value: "Academic" },
+                    ],
+                }}
+                imageSrc="/images/hero images/rotomoldin.png"
+                imageAlt="Cascader rotational molding machine"
+                accentColor="#F05A28"
+            />
 
             {/* ═══════════════════════════════════════════════════════
           PAGE 2 — CONTEXT  (dark)
             ═══════════════════════════════════════════════════════ */}
-            <section className={styles.mechanism}>
+            <section id="context" className={styles.mechanism} data-theme="dark">
                 <motion.div
                     className={styles.sectionInner}
                     variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}
@@ -137,7 +111,7 @@ export function CascaderProjectPage({ project }: Props) {
             {/* ═══════════════════════════════════════════════════════
           PAGE 3 — SCRAP CONSTRAINT STRATEGY  (light)
             ═══════════════════════════════════════════════════════ */}
-            <section className={styles.scrap}>
+            <section id="materials" className={styles.scrap} data-theme="light">
                 <motion.div
                     className={styles.sectionInner}
                     variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
@@ -150,32 +124,6 @@ export function CascaderProjectPage({ project }: Props) {
                         The machine was built entirely from available scrap stock. Material selection was driven
                         by availability, then tested for rigidity, moisture resistance, and machinability.
                     </motion.p>
-                    <motion.div className={styles.scrapLogicRow} variants={item}>
-                        <div className={styles.scrapBlock}>
-                            <div className={styles.scrapBlockAccent} />
-                            <div>
-                                <p className={styles.scrapBlockTitle}>100% Scrap Build</p>
-                                <p className={styles.scrapBlockBody}>No new materials purchased. All components sourced from workshop offcuts.</p>
-                            </div>
-                        </div>
-                        <div className={styles.scrapBlock}>
-                            <div className={styles.scrapBlockAccent} />
-                            <div>
-                                <p className={styles.scrapBlockTitle}>Selection Criteria</p>
-                                <p className={styles.scrapBlockBody}>Rigidity · Moisture resistance · Machinability · Availability</p>
-                            </div>
-                        </div>
-                        <div className={styles.scrapBlock}>
-                            <div className={styles.scrapBlockAccent} />
-                            <div>
-                                <p className={styles.scrapBlockTitle}>Learning</p>
-                                <p className={styles.scrapBlockBody}>
-                                    Scrap variability required structural reinforcement and bracket refinement to maintain rotational stability.
-                                </p>
-                            </div>
-                        </div>
-                    </motion.div>
-                    {/* 5 tiles — one row */}
                     <motion.div className={styles.scrapGrid} variants={item}>
                         {[
                             { src: "/images/PROJECTS/Cascader/materials/Brown Laminated MDF.png", name: "Brown Laminated MDF", thick: "18mm", prop: "Scratch resistant" },
@@ -204,7 +152,7 @@ export function CascaderProjectPage({ project }: Props) {
             {/* ═══════════════════════════════════════════════════════
           PAGE 4 — MACHINE ITERATION  (dark)
             ═══════════════════════════════════════════════════════ */}
-            <section className={styles.iteration}>
+            <section id="iteration" className={styles.iteration} data-theme="dark">
                 <motion.div
                     className={styles.sectionInner}
                     variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.05 }}
@@ -214,7 +162,7 @@ export function CascaderProjectPage({ project }: Props) {
                     {/* ── A — Base Evolution ── */}
                     <motion.div className={styles.iterSection} variants={item}>
                         <p className={styles.iterLabel}>A — Base Evolution</p>
-                        <div className={styles.frameOptions}>
+                        <div className={`${styles.frameOptions} ${styles.frameOptions2}`}>
                             <div className={styles.frameOption}>
                                 <div className={styles.frameOptionImgWrap}>
                                     <img
@@ -226,7 +174,7 @@ export function CascaderProjectPage({ project }: Props) {
                                 </div>
                                 <span className={styles.frameOptionBadgeReject}>REJECTED</span>
                                 <p className={styles.frameOptionName}>'I' – Shaped Base</p>
-                                <p className={styles.frameOptionReason}>Low stability — lacks lateral support, unstable at 6–10 RPM</p>
+                                <p className={styles.frameOptionReason}>Low stability . lacks lateral support . unstable at 6–10 RPM</p>
                             </div>
                             <div className={`${styles.frameOption} ${styles.frameOptionSelected}`}>
                                 <div className={styles.frameOptionImgWrap}>
@@ -244,15 +192,64 @@ export function CascaderProjectPage({ project }: Props) {
                         </div>
                     </motion.div>
 
-                    {/* ── B — Bracket Evolution ── */}
+                    {/* ── B — Frame Decision (was C) ── */}
                     <motion.div className={styles.iterSection} variants={item}>
-                        <p className={styles.iterLabel}>B — Bracket Evolution</p>
-                        <div className={`${styles.frameOptions} ${styles.frameOptions5}`}>
+                        <p className={styles.iterLabel}>B — Frame Decision</p>
+                        <div className={styles.frameOptions}>
+                            {/* Option 1 — Rejected */}
+                            <div className={styles.frameOption}>
+                                <div className={styles.frameOptionImgWrap}>
+                                    <img
+                                        src="/images/PROJECTS/Cascader/prototyping/White laminated mdf .png"
+                                        alt="Laminated MDF frame"
+                                        className={styles.frameOptionImg}
+                                        loading="lazy" decoding="async"
+                                    />
+                                </div>
+                                <span className={styles.frameOptionBadgeReject}>REJECTED</span>
+                                <p className={styles.frameOptionName}>White Laminated MDF</p>
+                                <p className={styles.frameOptionReason}>Clean surface finish · Accurate CNC fabrication · Requires 3D-printed bearing support</p>
+                            </div>
+
+                            {/* Option 2 — Rejected */}
+                            <div className={styles.frameOption}>
+                                <div className={styles.frameOptionImgWrap}>
+                                    <img
+                                        src="/images/PROJECTS/Cascader/prototyping/Plywood 1.png"
+                                        alt="Jointed Plywood Frame"
+                                        className={styles.frameOptionImg}
+                                        loading="lazy" decoding="async"
+                                    />
+                                </div>
+                                <span className={styles.frameOptionBadgeReject}>REJECTED</span>
+                                <p className={styles.frameOptionName}>Jointed Plywood Frame</p>
+                                <p className={styles.frameOptionReason}>Lightweight construction · Modular jointed build · CNC-cut with 3D-printed components . Time consuming</p>
+                            </div>
+
+                            {/* Option 3 — Selected */}
+                            <div className={`${styles.frameOption} ${styles.frameOptionSelected}`}>
+                                <div className={styles.frameOptionImgWrap}>
+                                    <img
+                                        src="/images/PROJECTS/Cascader/prototyping/Plywood 2.png"
+                                        alt="Layered Plywood Frame"
+                                        className={styles.frameOptionImg}
+                                        loading="lazy" decoding="async"
+                                    />
+                                </div>
+                                <span className={styles.frameOptionBadgeSelect}>SELECTED</span>
+                                <p className={styles.frameOptionName}>Cut Plywood Frame</p>
+                                <p className={styles.frameOptionReason}>Chosen for its stronger overall structure, more integrated assembly, and better physical stress performance, despite requiring 3D-printed bearing support.</p>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* ── C — Bracket Evolution (was B) ── */}
+                    <motion.div className={styles.iterSection} variants={item}>
+                        <p className={styles.iterLabel}>C — Bracket Evolution</p>
+                        <div className={styles.frameOptions}>
                             {[
-                                { n: 1, badge: "frameOptionBadgeReject" as const, status: "REJECTED", reason: "X-axis only — fails on Y and Z axes" },
-                                { n: 2, badge: "frameOptionBadgeReject" as const, status: "REJECTED", reason: "X + Z stable, Y-axis still fails" },
-                                { n: 3, badge: "frameOptionBadgeReject" as const, status: "PARTIAL", reason: "All axes stable but over-engineered" },
-                                { n: 4, badge: "frameOptionBadgeReject" as const, status: "GOOD", reason: "Stable — refined geometry, minor fit issues" },
+                                { n: 1, badge: "frameOptionBadgeReject" as const, status: "REJECTED", reason: "X-axis only . fails on Y and Z axes" },
+                                { n: 4, badge: "frameOptionBadgeReject" as const, status: "GOOD", reason: "Stable - refined geometry . minor fit issues" },
                                 { n: 5, badge: "frameOptionBadgeSelect" as const, status: "SELECTED", reason: "Full 3-axis stability · Clean bearing fit · Final build" },
                             ].map(({ n, badge, status, reason }) => (
                                 <div key={n} className={`${styles.frameOption} ${status === "SELECTED" ? styles.frameOptionSelected : ""}`}>
@@ -272,59 +269,34 @@ export function CascaderProjectPage({ project }: Props) {
                         </div>
                     </motion.div>
 
-                    {/* ── C — Frame Decision ── */}
+                    {/* ── D — Mechanism Decision ── */}
                     <motion.div className={styles.iterSection} variants={item}>
-                        <p className={styles.iterLabel}>C — Frame Decision</p>
+                        <p className={styles.iterLabel}>D — Mechanism Decision</p>
                         <div className={styles.frameOptions}>
-                            {/* Option 1 — Rejected */}
-                            <div className={styles.frameOption}>
+                            {/* Option 1 — Selected */}
+                            <div className={`${styles.frameOption} ${styles.frameOptionSelected}`}>
                                 <div className={styles.frameOptionImgWrap}>
-                                    <img
-                                        src="/images/PROJECTS/Cascader/materials/Brown Laminated MDF.png"
-                                        alt="Brown Laminated MDF"
-                                        className={styles.frameOptionImg}
-                                        loading="lazy" decoding="async"
-                                    />
+                                    <img src="/images/PROJECTS/Cascader/prototyping/chain.png" alt="Chain mechanism" className={styles.frameOptionImg} />
                                 </div>
-                                <span className={styles.frameOptionBadgeReject}>REJECTED</span>
-                                <p className={styles.frameOptionName}>Brown Laminated MDF</p>
-                                <p className={styles.frameOptionReason}>Too heavy — adds unwanted frame mass</p>
+                                <span className={styles.frameOptionBadgeSelect}>SELECTED</span>
+                                <p className={styles.frameOptionName}>Chain Drive</p>
+                                <p className={styles.frameOptionReason}>Chosen for high durability, precise movement, and consistency, despite higher cost and maintenance.</p>
                             </div>
 
                             {/* Option 2 — Rejected */}
                             <div className={styles.frameOption}>
                                 <div className={styles.frameOptionImgWrap}>
-                                    <img
-                                        src="/images/PROJECTS/Cascader/prototyping/Plywood 1.png"
-                                        alt="Plywood"
-                                        className={styles.frameOptionImg}
-                                        loading="lazy" decoding="async"
-                                    />
+                                    <img src="/images/PROJECTS/Cascader/prototyping/Elastic.png" alt="Elastic mechanism" className={styles.frameOptionImg} />
                                 </div>
                                 <span className={styles.frameOptionBadgeReject}>REJECTED</span>
-                                <p className={styles.frameOptionName}>Plywood</p>
-                                <p className={styles.frameOptionReason}>Surface too rough for bearing interface</p>
-                            </div>
-
-                            {/* Option 3 — Selected */}
-                            <div className={`${styles.frameOption} ${styles.frameOptionSelected}`}>
-                                <div className={styles.frameOptionImgWrap}>
-                                    <img
-                                        src="/images/PROJECTS/Cascader/prototyping/White laminated mdf .png"
-                                        alt="White Laminated MDF"
-                                        className={styles.frameOptionImg}
-                                        loading="lazy" decoding="async"
-                                    />
-                                </div>
-                                <span className={styles.frameOptionBadgeSelect}>SELECTED</span>
-                                <p className={styles.frameOptionName}>White Laminated MDF</p>
-                                <p className={styles.frameOptionReason}>CNC precision joints · Smooth surface · Bearing-ready</p>
+                                <p className={styles.frameOptionName}>Elastic Drive</p>
+                                <p className={styles.frameOptionReason}>Rejected due to low precision, proneness to stretching/slippage, and temperature sensitivity.</p>
                             </div>
                         </div>
                     </motion.div>
 
                     <motion.p className={styles.boldLine} variants={item}>
-                        Multi-directional support significantly improved rotational stability.
+                        Each structural iteration aimed to eliminate a specific failure mode .
                     </motion.p>
                 </motion.div>
             </section>
@@ -332,91 +304,114 @@ export function CascaderProjectPage({ project }: Props) {
             {/* ═══════════════════════════════════════════════════════
           PAGE 5 — POLYHEDRAL CASTING SYSTEM  (light)
             ═══════════════════════════════════════════════════════ */}
-            <section className={styles.polyhedral}>
+            <section id="polyhedral" className={styles.polyhedral} data-theme="light">
                 <motion.div
                     className={styles.sectionInner}
                     variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.08 }}
                 >
-                    <motion.div className={styles.sectionTag} variants={item} style={{ color: "var(--c-orange)" }}>MODULAR APPLICATION</motion.div>
+                    <motion.div className={styles.sectionTag} variants={item} style={{ color: "var(--c-orange)" }}>MODULAR STRUCTURES</motion.div>
                     <motion.h2 className={styles.polyTitle} variants={item}>
                         Modular Polyhedral Exploration
                     </motion.h2>
 
-                    {/* Top row — geometry diagram + 3D printed modules */}
-                    <motion.div className={styles.polyTopRow} variants={item}>
-                        <div className={styles.polyPlaceholder}>
-                            <img
-                                src="/images/PROJECTS/Cascader/polyhedra_maindiagram.png"
-                                alt="Polyhedral geometry diagram"
-                                className={styles.polyImg}
-                                style={{ aspectRatio: "4/3", objectFit: "cover" }}
-                                loading="lazy" decoding="async"
-                            />
-                            <span className={styles.polyImgCap}>Polyhedral geometry — modular form study</span>
-                        </div>
-                        <div className={styles.polyPlaceholder}>
-                            <img
-                                src="/images/PROJECTS/Cascader/3d printed polyhedra.png"
-                                alt="3D printed polyhedral modules"
-                                className={styles.polyImg}
-                                style={{ aspectRatio: "4/3", objectFit: "cover" }}
-                                loading="lazy" decoding="async"
-                            />
-                            <span className={styles.polyImgCap}>3D printed polyhedral modules</span>
-                        </div>
-                    </motion.div>
+                    <motion.div className={styles.processBoard} variants={item}>
 
-                    {/* Mid row — Grasshopper + magnet + construction */}
-                    <motion.div className={styles.polyMidRow} variants={item}>
-                        <div className={styles.polyMidCard}>
-                            <img
-                                src="/images/PROJECTS/Cascader/magnetplacement_grasshopper.png"
-                                alt="Magnet placement Grasshopper script"
-                                className={styles.polyMidImg}
-                                loading="lazy" decoding="async"
-                            />
-                            <span className={styles.polyImgCap}>Magnet placement — Grasshopper script</span>
-                        </div>
-                        <div className={styles.polyMidCard}>
-                            <img
-                                src="/images/PROJECTS/Cascader/magnetplacementpolyhedra.png"
-                                alt="Magnet placement on physical polyhedra"
-                                className={styles.polyMidImg}
-                                loading="lazy" decoding="async"
-                            />
-                            <span className={styles.polyImgCap}>Magnet placement — physical prototypes</span>
-                        </div>
-                        <div className={styles.polyMidCard}>
-                            <img
-                                src="/images/PROJECTS/Cascader/construction_polyhedra.png"
-                                alt="Polyhedral construction process"
-                                className={styles.polyMidImg}
-                                loading="lazy" decoding="async"
-                            />
-                            <span className={styles.polyImgCap}>Assembly construction</span>
-                        </div>
-                    </motion.div>
+                        {/* ── A — Polyhedral Geometry ── */}
+                        <section className={styles.boardSection} aria-labelledby="polyhedral-geometry-title">
+                            <div className={styles.boardHeader}>
+                                <p className={styles.boardEyebrow}>A</p>
+                                <h3 id="polyhedral-geometry-title" className={styles.boardTitle}>Polyhedral geometry</h3>
+                                <p className={styles.boardDesc}>
+                                    Annotated volumetric studies mapping face relationships, net development,
+                                    and modular connection logic across polyhedral form families.
+                                </p>
+                            </div>
 
-                    {/* Casting process */}
-                    <motion.div className={styles.castingRow} variants={item}>
-                        <div className={styles.castingPhotos}>
-                            <div className={styles.castingPhoto}>
-                                <img src="/images/PROJECTS/Cascader/silicon_mould.png" alt="Silicone mold" className={styles.castingImg} loading="lazy" decoding="async" />
-                                <span className={styles.castingCap}>Silicone mold making</span>
+                            <div className={styles.geometryGrid}>
+                                <figure className={styles.editorialFigure}>
+                                    <img
+                                        src="/images/PROJECTS/Cascader/polyhedra.png"
+                                        alt="Annotated polyhedral geometry diagram"
+                                        className={`${styles.editorialImage} ${styles.geometryImage}`}
+                                        loading="lazy" decoding="async"
+                                    />
+                                </figure>
+
+                                <figure className={styles.editorialFigure}>
+                                    <img
+                                        src="/images/PROJECTS/Cascader/hana.png"
+                                        alt="Polyhedral construction and net development diagram"
+                                        className={`${styles.editorialImage} ${styles.geometryImage}`}
+                                        loading="lazy" decoding="async"
+                                    />
+                                </figure>
                             </div>
-                            <div className={styles.castingPhoto}>
-                                <img src="/images/PROJECTS/Cascader/jesmonite triala.png" alt="Jesmonite casting trial" className={styles.castingImg} loading="lazy" decoding="async" />
-                                <span className={styles.castingCap}>Jesmonite casting trial</span>
+                        </section>
+
+                        {/* ── B — Magnet Placement ── */}
+                        <section className={styles.boardSection} aria-labelledby="magnet-placement-title">
+                            <div className={styles.boardHeader}>
+                                <p className={styles.boardEyebrow}>B</p>
+                                <h3 id="magnet-placement-title" className={styles.boardTitle}>Magnet placement</h3>
+                                <p className={styles.boardDesc}>
+                                    Grasshopper-driven studies mapping magnet orientation, polarity logic, and
+                                    face-to-face alignment across all polyhedra variants validated through physical prototypes.
+                                </p>
                             </div>
-                        </div>
-                        <div className={styles.castingBullets}>
-                            <p className={styles.polyStackLabel}>PROCESS</p>
-                            <p className={styles.castingBodyText}>
-                                The mould was designed to be reusable across multiple casting cycles. Jesmonite
-                                was selected for its low shrinkage and compatibility with fine surface detail. Rotation
-                                speed was calibrated to avoid pooling in complex polyhedral geometries.
-                            </p>
-                        </div>
+
+                            {/* Two-column: left = 1 tall image, right = 2 stacked images */}
+                            <div className={styles.magnetTwoCol}>
+                                <figure className={styles.editorialFigure}>
+                                    <img
+                                        src="/images/PROJECTS/Cascader/_Magnet placement (1).png"
+                                        alt="Physical magnet placement prototypes"
+                                        className={`${styles.editorialImage} ${styles.magnetTallImage}`}
+                                        loading="lazy" decoding="async"
+                                    />
+                                </figure>
+
+                                <figure className={styles.editorialFigure}>
+                                    <img
+                                        src="/images/PROJECTS/Cascader/magnetplacementpolyhedra.png"
+                                        alt="Grasshopper magnet placement study"
+                                        className={`${styles.editorialImage} ${styles.magnetStackImage}`}
+                                        loading="lazy" decoding="async"
+                                    />
+                                </figure>
+                            </div>
+                        </section>
+
+                        {/* ── C — Casting / Mold Trials ── */}
+                        <section className={styles.boardSection} aria-labelledby="casting-trials-title">
+                            <div className={styles.boardHeader}>
+                                <p className={styles.boardEyebrow}>C</p>
+                                <h3 id="casting-trials-title" className={styles.boardTitle}>Casting / mold trials</h3>
+                                <p className={styles.boardDesc}>
+                                    Reusable silicone mold configured for repeat casting. Jesmonite selected for
+                                    low shrinkage rotation speed calibrated to avoid pooling in complex polyhedral geometries.
+                                </p>
+                            </div>
+
+                            <div className={styles.castingBoard}>
+                                <figure className={`${styles.editorialFigure} ${styles.moldFigure}`}>
+                                    <img
+                                        src="/images/PROJECTS/Cascader/silicon_mould.png"
+                                        alt="Silicone mold used for reusable casting trials"
+                                        className={`${styles.editorialImage} ${styles.moldImage}`}
+                                        loading="lazy" decoding="async"
+                                    />
+                                </figure>
+
+                                <figure className={`${styles.editorialFigure} ${styles.trialFigure}`}>
+                                    <img
+                                        src="/images/PROJECTS/Cascader/jesmonite triala.png"
+                                        alt="Jesmonite casting trial"
+                                        className={`${styles.editorialImage} ${styles.trialImage}`}
+                                        loading="lazy" decoding="async"
+                                    />
+                                </figure>
+                            </div>
+                        </section>
                     </motion.div>
                 </motion.div>
             </section>
@@ -424,7 +419,7 @@ export function CascaderProjectPage({ project }: Props) {
             {/* ═══════════════════════════════════════════════════════
           PAGE 6 — STACKED ASSEMBLIES  (dark)
             ═══════════════════════════════════════════════════════ */}
-            <section className={styles.stackedSection}>
+            <section id="assemblies" className={styles.stackedSection} data-theme="dark">
                 <motion.div
                     className={styles.sectionInner}
                     variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.08 }}
@@ -434,32 +429,41 @@ export function CascaderProjectPage({ project }: Props) {
                         Stacked Modular Assemblies
                     </motion.h2>
                     <motion.p className={styles.darkBody} variants={item}>
-                        The polyhedral modules connect magnetically and can be stacked into a range of
-                        product typologies — demonstrating the system's flexibility beyond the casting process itself.
+
                     </motion.p>
 
-                    <motion.div className={styles.polyStackGrid} variants={item}>
-                        {[
-                            { src: "/images/PROJECTS/Cascader/Stacked_lamp.png", cap: "Lamp" },
-                            { src: "/images/PROJECTS/Cascader/Stacked_shelf.png", cap: "Shelf" },
-                            { src: "/images/PROJECTS/Cascader/stacked_sidetable.png", cap: "Side table" },
-                            { src: "/images/PROJECTS/Cascader/stacked_table.png", cap: "Table" },
-                        ].map(p => (
-                            <div key={p.cap} className={styles.polyStackItem}>
-                                <img src={p.src} alt={p.cap} className={styles.polyStackImg} loading="lazy" decoding="async" />
-                                <span className={styles.castingCap}>{p.cap}</span>
+                    <motion.div className={styles.assembliesRow} variants={item}>
+                        {/* Side Table */}
+                        <div className={styles.assemblyCol}>
+                            <div className={styles.assemblyDiagram}>
+                                <img src="/images/PROJECTS/Cascader/2.png" alt="Side table diagram" className={styles.assemblyDiagramImg} />
                             </div>
-                        ))}
+                            <div className={styles.assemblyRender}>
+                                <img src="/images/PROJECTS/Cascader/render1.png" alt="Side table render" className={styles.assemblyRenderImg} />
+                            </div>
+                        </div>
+
+                        {/* Floor Lamp */}
+                        <div className={styles.assemblyCol}>
+                            <div className={styles.assemblyDiagram}>
+                                <img src="/images/PROJECTS/Cascader/3.png" alt="Floor lamp diagram" className={styles.assemblyDiagramImg} />
+                            </div>
+                            <div className={styles.assemblyRender}>
+                                <img src="/images/PROJECTS/Cascader/render2.png" alt="Floor lamp render" className={styles.assemblyRenderImg} />
+                            </div>
+                        </div>
                     </motion.div>
                 </motion.div>
             </section>
 
+
+
             {/* ═══════════════════════════════════════════════════════
           PAGE 7 — DIGITAL SIMULATION  (light)
             ═══════════════════════════════════════════════════════ */}
-            <section className={styles.simulation}>
+            <section id="simulation" className={styles.simulation} data-theme="light">
                 <motion.div
-                    className={styles.sectionInner}
+                    className={`${styles.sectionInner} ${styles.simInner}`}
                     variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.08 }}
                 >
                     <motion.div className={styles.sectionTag} variants={item} style={{ color: "var(--c-orange)" }}>SIMULATION</motion.div>
@@ -480,7 +484,7 @@ export function CascaderProjectPage({ project }: Props) {
                             loop
                             playsInline
                         />
-                        <p className={styles.simCaption}>Two-axis rotation simulation — motion stability study</p>
+                        <p className={styles.simCaption}>Motorized two-axis rotation simulation </p>
                     </motion.div>
                 </motion.div>
             </section>
@@ -488,7 +492,7 @@ export function CascaderProjectPage({ project }: Props) {
             {/* ═══════════════════════════════════════════════════════
           PAGE 8 — TECHNICAL DOCUMENTATION  (dark)
             ═══════════════════════════════════════════════════════ */}
-            <section className={styles.techDraw}>
+            <section id="drawings" className={styles.techDraw} data-theme="dark">
                 <motion.div
                     className={styles.sectionInner}
                     variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.08 }}
@@ -502,58 +506,57 @@ export function CascaderProjectPage({ project }: Props) {
                         each component was manufacturable within the constraints of available tooling and scrap material.
                     </motion.p>
 
-                    <div>
+                    <motion.div className={styles.techDrawImgWrap} variants={item}>
                         <img
                             src="/images/PROJECTS/Cascader/Phase 3.svg"
                             alt="Mould technical documentation"
                             className={styles.techDrawImg}
-                            loading="lazy" decoding="async"
+                            loading="lazy"
+                            decoding="async"
                         />
-
-                    </div>
+                    </motion.div>
                 </motion.div>
             </section>
 
             {/* ═══════════════════════════════════════════════════════
           PAGE 9 — BUILD & OUTCOME  (light)
             ═══════════════════════════════════════════════════════ */}
-            <section className={styles.outcome}>
+            <section id="outcome" className={styles.outcome} data-theme="light">
                 <motion.div
                     className={styles.sectionInner}
                     variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.08 }}
                 >
                     <motion.div className={styles.sectionTag} variants={item} style={{ color: "var(--c-orange)" }}>OUTCOME</motion.div>
 
-                    {/* 3-photo grid */}
-                    <motion.div className={styles.outcomeGrid} variants={item}>
-                        {[
-                            { src: "/images/hero images/rotomoldin.png", cap: "Machine assembly" },
-                            { src: "/images/PROJECTS/Cascader/Copy of MOULD (1).png", cap: "Mould detail" },
-                            { src: "/images/PROJECTS/Cascader/jesmonite triala.png", cap: "Cast parts produced" },
-                        ].map(ph => (
-                            <div key={ph.cap} className={styles.outcomePhoto}>
-                                <img src={ph.src} alt={ph.cap} className={styles.outcomeImg} loading="lazy" decoding="async" />
-                                <span className={styles.outcomeCap}>{ph.cap}</span>
-                            </div>
-                        ))}
+
+
+                    {/* Final Video */}
+                    <motion.div className={styles.outcomeVideoWrap} variants={item}>
+                        <video
+                            className={styles.outcomeVideo}
+                            src="/images/PROJECTS/Cascader/rotomolding.mov"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                        />
+                        <p className={styles.outcomeCap}>Final Machine Operation — 2-Axis Rotation</p>
                     </motion.div>
 
                     <motion.p className={styles.outcomeLine} variants={item}>
-                        The machine successfully produced hollow modular components through controlled two-axis rotation.
+                       
                     </motion.p>
 
                     <motion.div className={styles.reflection} variants={item}>
                         <div className={styles.reflectionAccent} />
                         <blockquote className={styles.reflectionText}>
-                            CASCAder evolved into both a fabrication tool and a modular casting study.
-                            The project demonstrates how manufacturing constraints, structural logic,
-                            and geometry must be designed together — not in sequence, but simultaneously.
+                            <span className={styles.reflectionHighlight}>
+                                Cascader evolved into both a fabrication tool and a modular casting study, showing that geometry, structure, and manufacturing must be designed together.
+                            </span>{" "}
+                            Future iterations would improve stability, precision, and casting consistency, while motorizing the system for smoother operation.
                         </blockquote>
                     </motion.div>
 
-                    <motion.div className={styles.backNav} variants={item}>
-                        <Link href="/"><a className={styles.backNavLink}><ArrowLeft size={16} /> Back to Archive</a></Link>
-                    </motion.div>
                 </motion.div>
             </section>
 

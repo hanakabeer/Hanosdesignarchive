@@ -1,20 +1,23 @@
 import { motion } from "framer-motion";
 import { GrainShader } from "./GrainShader";
+import { useCursorStore } from "@/hooks/use-cursor-store";
 import styles from "./styles.module.css";
 
 export function Hero() {
+  const setCursorVisible = useCursorStore((state) => state.setCursorVisible);
+
   return (
-    <section className={styles.hero}>
+    <section
+      className={styles.hero}
+      onMouseEnter={() => setCursorVisible(false)}
+      onMouseLeave={() => setCursorVisible(true)}
+    >
       <div className={styles.background}>
         <GrainShader textureUrl="/images/hero-bg.png" revealUrl="/images/hero inverted.png" />
         <div className={styles.vignette} />
       </div>
 
       <div className={styles.content}>
-        <div className={styles.tags}>
-          <span className={styles.tag}>Industrial Designer</span>
-          <span className={styles.tag}>UI/UX Designer</span>
-        </div>
         <motion.h1 
           className={styles.headline}
           initial={{ opacity: 0, y: 30 }}
@@ -23,6 +26,11 @@ export function Hero() {
         >
           HANO’S DESIGN ARCHIVE
         </motion.h1>
+
+        <div className={styles.tags}>
+          <span className={styles.tag}>Industrial Designer</span>
+          <span className={styles.tag}>UI/UX Designer</span>
+        </div>
         
         <div className={styles.footerRow}>
           <motion.p 

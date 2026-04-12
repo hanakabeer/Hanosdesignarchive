@@ -26,14 +26,14 @@ export default function ProjectDetail() {
   // Cascader case study
   if (id === 2) return <CascaderProjectPage project={project} />;
 
-  // VersaGrip case study
-  if (id === 3) return <VersaGripProjectPage project={project} />;
-
-  // Pencil Sharpener case study (replaces PortaPalm at slot 4)
-  if (id === 4) return <PencilSharpenerPage project={project} />;
-
   // Mycrochet case study
-  if (id === 5) return <MycrochetProjectPage project={project} />;
+  if (id === 3) return <MycrochetProjectPage project={project} />;
+
+  // VersaGrip case study
+  if (id === 4) return <VersaGripProjectPage project={project} />;
+
+  // Pencil Sharpener case study
+  if (id === 5) return <PencilSharpenerPage project={project} />;
 
   // Bukhoorie case study
   if (id === 6) return <BukhooriePage project={project} />;
@@ -43,7 +43,7 @@ export default function ProjectDetail() {
     <div style={{ background: '#f6f6f4', minHeight: '100vh', color: '#101319' }}>
       <Navbar />
       <main style={{ padding: '8rem 3rem 5rem', maxWidth: '1100px', margin: '0 auto' }}>
-        <Link href="/">
+        <Link href="/#work">
           <a style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#aaa', textDecoration: 'none', marginBottom: '3rem', fontFamily: 'Inter, sans-serif', fontSize: '0.85rem' }}>
             <ArrowLeft size={15} /> Back to Archive
           </a>

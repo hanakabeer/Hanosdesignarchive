@@ -19,11 +19,27 @@
     background: var(--mumo-cream);
     color: var(--mumo-ink);
     font-family: var(--font-body);
+    position: relative;
+}
+
+:global(body[data-mumo-immersive="true"]) {
+    overscroll-behavior-y: none;
+}
+
+@media (min-width: 901px) and (pointer: fine) {
+    :global(html:has(body[data-mumo-immersive="true"])) {
+        scroll-behavior: auto; /* We handle smooth scroll via JS for more control */
+        scroll-snap-type: none; /* Disable CSS snap to avoid conflict with JS animator */
+    }
+
+    :global(body[data-mumo-immersive="true"] [data-mumo-snap="true"]) {
+        scroll-snap-align: none;
+    }
 }
 
 /* ── Shared layout ──────────────────────────────────────────── */
 .sectionInner {
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 3rem;
 }
@@ -47,22 +63,22 @@
 
 .sectionHeading {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.1;
     color: var(--mumo-ink);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 .sectionHeadingLight {
     font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-size: clamp(1.5rem, 2.6vw, 2.2rem);
     font-weight: 700;
     letter-spacing: -0.035em;
     line-height: 1.15;
     color: #fff;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 .sectionHeadingLight em {
@@ -71,11 +87,11 @@
 }
 
 .sectionBody {
-    font-size: 1.05rem;
-    line-height: 1.75;
+    font-size: 0.95rem;
+    line-height: 1.7;
     color: #555;
     max-width: 680px;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .lightText {
@@ -125,7 +141,7 @@
 }
 
 .heroInner {
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 3rem;
 }
@@ -246,8 +262,12 @@
 
 .contextSection {
     background: var(--mumo-dark);
-    padding: 7rem;
-
+    padding: 5rem 0 7rem;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: clip;
 }
 
 /* Stats */
@@ -331,13 +351,14 @@
 
 .feedbackLoopSection {
     background: var(--mumo-cream2);
-    paddingX: 7rem;
     padding-top: 7rem;
     padding-bottom: 0;
+    min-height: 100svh;
+    overflow: clip;
 }
 
 .feedbackLoopInner {
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 3rem;
 }
@@ -359,7 +380,7 @@
     letter-spacing: -0.04em;
     line-height: 1.1;
     color: var(--mumo-ink);
-    margin-bottom: 1rem;
+    margin-bottom: 4rem;
 }
 
 .feedbackLoopBody {
@@ -374,13 +395,53 @@
     width: 100%;
     border-radius: 24px;
     overflow: hidden;
-
 }
+
+/* Side-by-side columns for Cycle section */
+.feedbackLoopColumns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .feedbackLoopColumns {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+.feedbackLoopQuoteBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.feedbackLoopQuote {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.25;
+    color: var(--mumo-ink);
+    border-left: 3px solid var(--mumo-pink);
+    padding-left: 1.4rem;
+    font-style: italic;
+}
+
 
 .feedbackLoopImg {
     width: 100%;
     height: auto;
     display: block;
+}
+
+@media (max-width: 768px) {
+    .feedbackLoopInner {
+        padding: 0 1.5rem;
+    }
 }
 
 /* Callout */
@@ -423,7 +484,26 @@
 
 .approachSection {
     background: var(--mumo-darker);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100svh;
+    overflow: clip;
+}
+
+.approachFlowchartDesktop {
+    width: 100%;
+}
+
+.approachFlowchartDesktop svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.approachFlowchartMobile {
+    display: none;
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
 }
 
 .processFlow {
@@ -436,6 +516,14 @@
 @media (max-width: 768px) {
     .processFlow {
         grid-template-columns: 1fr;
+    }
+
+    .approachFlowchartDesktop {
+        display: none;
+    }
+
+    .approachFlowchartMobile {
+        display: block;
     }
 }
 
@@ -516,7 +604,9 @@
 
 .ideateSection {
     background: var(--mumo-cream2);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100svh;
+    overflow: clip;
 }
 
 /* ──────────────────────────────────────────────────────────── */
@@ -525,8 +615,16 @@
 
 .prototypeSection {
     background: var(--mumo-dark);
-    paddingX: 7rem;
-    padding-top: 7rem;
+    padding: 5rem 0 7rem;
+    min-height: 100svh;
+    overflow: clip;
+}
+
+.prototypeImg {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 24px;
 }
 
 /* ──────────────────────────────────────────────────────────── */
@@ -535,8 +633,9 @@
 
 .finalSection {
     background: var(--mumo-cream);
-    padding: 7rem;
-
+    padding: 5rem 0 7rem;
+    min-height: 100svh;
+    overflow: clip;
 }
 
 .finalHero {
@@ -568,7 +667,81 @@
     overflow: hidden;
     margin-bottom: 2rem;
     background: #000;
-    box-shadow: 0 8px 40px rgba(24, 24, 43, 0.12);
+
+}
+
+/* Technical drawings strip — matches sectionHeading style, no line */
+.techDrawingsStrip {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* Heading matches sectionHeading exactly */
+.techDrawingsLabel {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    color: var(--mumo-ink);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+/* Technical drawings divider sub-section layout */
+.techDrawingsDivider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.techDrawingsDivider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.techDrawingsDividerLabel {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mumo-pink);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.techDrawingsSections {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+}
+
+.techDrawingSubSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.techDrawingsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+
+.techDrawingImg {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: transparent;
+    border-radius: 18px;
 }
 
 .finalVideo {
@@ -645,20 +818,59 @@
 
 .evalSection {
     background: var(--mumo-darker);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100svh;
+    overflow: clip;
 }
 
-.evalCards {
+@media (max-width: 768px) {
+    .contextSection,
+    .feedbackLoopSection,
+    .approachSection,
+    .ideateSection,
+    .prototypeSection,
+    .finalSection,
+    .evalSection {
+        min-height: auto;
+    }
+}
+
+/* Evaluation side-by-side layout */
+.evalLayout {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: stretch; /* both columns stretch to equal height */
 }
 
 @media (max-width: 900px) {
-    .evalCards {
+    .evalLayout {
         grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
 }
+
+.evalImageWrap {
+    border-radius: 20px;
+    overflow: hidden;
+    /* fills the full height of the grid row — no sticky, no drift */
+    min-height: 320px;
+}
+
+.evalImg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.evalCards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
 
 .evalCard {
     background: rgba(255, 255, 255, 0.04);

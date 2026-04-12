@@ -375,7 +375,7 @@ export function PortaPalmPage({ project }: Props) {
                     </motion.div>
 
                     <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        <Link href="/"><a className={styles.backNavLink}><ArrowLeft size={14} /> Back to Archive</a></Link>
+                        <Link href="/#work"><a className={styles.backNavLink}><ArrowLeft size={14} /> Back to Archive</a></Link>
                     </motion.div>
                 </div>
             </section>

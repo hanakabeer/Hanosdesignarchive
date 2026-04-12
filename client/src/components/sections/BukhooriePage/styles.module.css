@@ -12,8 +12,8 @@
     --bk-darker: #0E0E0E;
     --bk-light: #F7F3EA;
     --bk-light2: #EDE9DF;
-    --bk-gold: #C89B3C;
-    --bk-gold2: #D9AF5A;
+    --bk-gold: #c72a09;
+    --bk-gold2: #c72a09;
     --bk-ink: #141414;
     --bk-dim: rgba(255, 255, 255, 0.44);
     --bk-margin: clamp(2.5rem, 4vw, 4rem);
@@ -23,6 +23,9 @@
 .page {
     font-family: var(--font-body);
     color: var(--bk-ink);
+    --hero-bg: var(--bk-light);
+    --hero-ink: var(--bk-ink);
+    --hero-body: rgba(20, 20, 20, 0.6);
 }
 
 /* ── Shared inner layout ────────────────────────────────────── */
@@ -226,115 +229,141 @@
     padding: 7rem 0;
 }
 
+.contextDark {
+    background: var(--bk-darker);
+}
+
+.ideation {
+    background: var(--bk-light);
+    padding: 7rem 0;
+}
+
+.ideationImage {}
+
 .contextLead {
     font-family: var(--font-display);
-    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
     font-weight: 700;
     letter-spacing: -0.035em;
-    line-height: 1.25;
+    line-height: 1.18;
     color: var(--bk-ink);
-    max-width: 720px;
-    margin-bottom: 1.2rem;
+    max-width: 680px;
+    margin-bottom: 0.7rem;
 }
 
 .contextSub {
-    font-size: 0.92rem;
-    line-height: 1.7;
+    font-size: 0.84rem;
+    line-height: 1.5;
     color: #777;
-    max-width: 620px;
-    margin-bottom: 3rem;
+    max-width: 520px;
+    margin-bottom: 1.35rem;
 }
 
-/* reference images — 2 images side by side */
-.contextImages {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-    margin-bottom: 3.5rem;
+.contextVenn {
+    margin: 0 auto 1.2rem;
+    max-width: 50rem;
+    position: relative;
+    z-index: 1;
 }
 
-@media (max-width: 768px) {
-    .contextImages {
-        grid-template-columns: 1fr;
-    }
-}
-
-.contextImgBox {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.contextImg {
+.contextVennImage {
     width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    border-radius: 14px;
     display: block;
-    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.08);
-    filter: sepia(0.1) saturate(0.9);
+    border-radius: 14px;
+    object-fit: cover;
 }
 
-/* two columns */
-.contextCols {
+.contextTraitsRow {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 2rem;
-    align-items: center;
-    margin-bottom: 3rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem;
+    width: 100%;
+    max-width: none;
+    margin: -7.25rem 0 0;
+    align-items: start;
+    position: relative;
+    z-index: 2;
 }
 
-@media (max-width: 768px) {
-    .contextCols {
-        grid-template-columns: 1fr;
-    }
+.contextTraitsBlock {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0.8rem 0.95rem 0.85rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
-.contextCard {
-    background: #fff;
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.06);
+.contextTraitsLeft {
+    justify-items: start;
+    text-align: left;
+    justify-self: start;
+    margin-left: 0;
+}
+
+.contextTraitsRight {
+    justify-items: end;
+    text-align: right;
+    justify-self: end;
+    margin-right: 0;
 }
 
 .contextCardLabel {
     display: block;
-    font-size: 0.67rem;
+    font-size: 0.6rem;
     font-weight: 700;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--bk-gold);
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.25rem;
 }
 
-.contextCardDesc {
-    font-size: 0.9rem;
-    line-height: 1.65;
-    color: #555;
+.contextTraitsRight .contextCardLabel {
+    text-align: right;
 }
 
-/* divider */
-.contextDivider {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
+.contextTraitList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.32rem;
+    max-width: 13.5rem;
 }
 
-.dividerLine {
-    width: 1px;
-    height: 40px;
-    background: rgba(0, 0, 0, 0.12);
+.contextTraitList li {
+    position: relative;
+    padding-left: 0.78rem;
+    font-size: 0.75rem;
+    line-height: 1.32;
 }
 
-.dividerIcon {
-    font-size: 1.4rem;
-    color: var(--bk-gold);
-    font-weight: 700;
-    line-height: 1;
+.contextTraitsRight .contextTraitList li {
+    padding-left: 0;
+    padding-right: 0.78rem;
 }
 
-/* key insight */
+.contextTraitList li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.42rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--bk-gold);
+}
+
+.contextTraitsRight .contextTraitList li::before {
+    left: auto;
+    right: 0;
+}
+
 .contextInsight {
     font-family: var(--font-display);
     font-size: clamp(1.1rem, 2.2vw, 1.6rem);
@@ -345,6 +374,103 @@
     max-width: 700px;
     border-top: 2px solid var(--bk-gold);
     padding-top: 1.5rem;
+}
+
+.contextDark .contextLead {
+    color: #fff;
+}
+
+.contextDark .contextSub {
+    color: rgba(255, 255, 255, 0.58);
+}
+
+.contextDark .cap {
+    color: rgba(255, 255, 255, 0.46);
+}
+
+@media (min-width: 901px) {
+    .context {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 3.5rem 0;
+    }
+
+    .context .sectionInner {
+        width: 100%;
+    }
+
+    .context .sectionTag {
+        margin-bottom: 1.1rem;
+    }
+}
+
+.contextDark .contextTraitList li {
+    color: rgba(255, 255, 255, 0.62);
+}
+
+@media (max-width: 900px) {
+    .contextTraitsRow {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        max-width: 100%;
+        margin: 1rem auto 0;
+        position: static;
+    }
+
+    .contextTraitsLeft,
+    .contextTraitsRight {
+        justify-items: start;
+        justify-self: start;
+        text-align: left;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .contextTraitsBlock {
+        width: 100%;
+    }
+
+    .contextTraitList {
+        max-width: none;
+    }
+
+    .contextTraitsRight .contextCardLabel {
+        text-align: left;
+    }
+
+    .contextTraitsRight .contextTraitList li {
+        padding-right: 0;
+        padding-left: 0.78rem;
+    }
+
+    .contextTraitsRight .contextTraitList li::before {
+        left: 0;
+        right: auto;
+    }
+}
+
+.contextDark .contextImg {
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
+    filter: brightness(0.9) sepia(0.1) saturate(0.9);
+}
+
+.contextDark .contextCard {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+}
+
+.contextDark .contextCardDesc {
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.contextDark .dividerLine {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.contextDark .contextInsight {
+    color: #fff;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -511,121 +637,206 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   PAGE 4 — PRODUCT DESIGN (light)
+   PAGE 4 — FEATURES SCROLLTELLING (dark)
    ══════════════════════════════════════════════════════════════ */
-.product {
-    background: var(--bk-light);
-    padding: 7rem 0;
+.featuresSection {
+    background: #050505;
+    position: relative;
 }
 
-.productLayout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-}
-
-@media (max-width: 900px) {
-    .productLayout {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-}
-
-.productImgWrap {
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
-}
-
-.productImg {
-    width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
+.featuresDesktop {
     display: block;
-    filter: sepia(0.08) saturate(0.95);
 }
 
-/* vertical diagram */
-.systemDiagram {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-bottom: 2rem;
-    border-left: 2px solid rgba(0, 0, 0, 0.08);
-    padding-left: 1.5rem;
+.featuresMobile {
+    display: none;
 }
 
-.diagramRow {
+.featuresScroller {
+    position: relative;
+}
+
+.featuresSticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #050505;
+}
+
+.featuresMeta {
+    position: absolute;
+    top: calc(var(--nav-height, 64px) + 1.2rem);
+    left: clamp(2rem, 5vw, 4rem);
+    z-index: 3;
     display: grid;
-    grid-template-columns: auto auto 1fr 3fr;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    gap: 0.35rem;
 }
 
-.diagramRow:last-child {
-    border-bottom: none;
+.featuresMedia {
+    position: absolute;
+    inset: 0;
 }
 
-.diagramDot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.25);
-    flex-shrink: 0;
+.featuresTextLayer {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    width: min(100%, 38rem);
+    margin-left: clamp(2rem, 5vw, 4rem);
+    pointer-events: none;
 }
 
-.diagramDotAccent {
-    background: var(--bk-gold);
-    box-shadow: 0 0 8px rgba(200, 155, 60, 0.4);
+.featureImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    background: #050505;
 }
 
-.diagramLine {
-    width: 1.5rem;
-    height: 1px;
-    background: rgba(0, 0, 0, 0.15);
+.featureImageActive {
+    opacity: 1;
 }
 
-.diagramLabel {
+.featuresCounter {
+    display: block;
     font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.2em;
+    font-weight: 700;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--bk-gold);
+    color: rgba(255, 255, 255, 0.44);
+}
+
+.featureTextCard {
+    position: absolute;
+    top: calc(var(--nav-height, 64px) + 6.2rem);
+    left: 0;
+    width: min(100%, 34rem);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.45s ease, transform 0.55s ease;
+}
+
+.featureTextCardActive {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.featureMarkers {
+    position: relative;
+    z-index: 1;
+}
+
+.featureMarker {
+    height: 100vh;
+}
+
+.featureMobileList {
+    display: grid;
+    gap: 2rem;
+}
+
+.featureMobileCard {
+    display: grid;
+    gap: 1rem;
+}
+
+.featureMobileImage {
+    width: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+    display: block;
+    background: #050505;
+}
+
+.featureMobileCopy {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.featureTitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 0.94;
+    color: #f0c28a;
+    margin: 0 0 0.9rem;
+    max-width: 12.5ch;
     white-space: nowrap;
 }
 
-.diagramDetail {
-    font-size: 0.82rem;
-    color: #666;
-    line-height: 1.4;
-}
-
-.productBody {
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: #555;
-    margin-bottom: 1.5rem;
-}
-
-.productKeyLine {
-    font-family: var(--font-display);
-    font-size: 1rem;
+.featureSubtitle {
+    margin: 0 0 1.2rem;
+    font-size: clamp(1.35rem, 2.6vw, 2rem);
     font-weight: 700;
-    color: var(--bk-ink);
-    padding: 1rem 1.2rem;
-    border-left: 3px solid var(--bk-gold);
-    background: var(--bk-light2);
-    border-radius: 0 10px 10px 0;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--bk-gold);
+}
+
+.featureBulletList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.35rem;
+    max-width: 31rem;
+}
+
+.featureBulletList li {
+    position: relative;
+    padding-left: 1.35rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
     line-height: 1.5;
 }
 
-.productRight {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+.featureBulletList li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .featuresDesktop {
+        display: none;
+    }
+
+    .featuresMobile {
+        display: block;
+        padding: 6rem 0;
+        background: #050505;
+    }
+
+    .featureTitle {
+        font-size: clamp(1.65rem, 7vw, 2.35rem);
+        max-width: none;
+        white-space: normal;
+        margin-bottom: 0.7rem;
+    }
+
+    .featureSubtitle {
+        font-size: 1.25rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .featureBulletList {
+        gap: 0.9rem;
+    }
+
+    .featureBulletList li {
+        font-size: 0.92rem;
+        line-height: 1.55;
+    }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -779,7 +990,7 @@
     font-size: clamp(1.2rem, 2.5vw, 1.85rem);
     font-weight: 700;
     letter-spacing: -0.04em;
-    color: var(--bk-ink);
+    color: rgba(255, 255, 255, 0.82);
     line-height: 1.25;
     max-width: 800px;
     margin-bottom: 3rem;
@@ -788,11 +999,11 @@
 /* reflection */
 .reflection {
     display: flex;
-    gap: 2rem;
+    gap: 1.25rem;
     align-items: flex-start;
-    background: var(--bk-light2);
+    background: transparent;
     border-radius: 16px;
-    padding: 2.5rem;
+    padding: 0;
     margin-bottom: 3rem;
 }
 
@@ -808,7 +1019,7 @@
 .reflectionText {
     font-size: 1rem;
     line-height: 1.75;
-    color: #444;
+    color: #fff;
     margin-bottom: 1.2rem;
 }
 
@@ -818,6 +1029,11 @@
     font-weight: 700;
     color: var(--bk-gold);
     letter-spacing: -0.01em;
+}
+
+.recognitionBlock {
+    padding-top: 1rem;
+    background: transparent;
 }
 
 /* back nav */
@@ -960,16 +1176,28 @@
 }
 
 /* ══ Recognition section (light) ══ */
-.recognition {
+.recognitionSection {
     background: var(--bk-light);
     padding: 7rem 0;
+}
+
+.recognitionBlock {
+    padding-top: 0;
+    background: transparent;
+}
+
+.recognitionNote {
+    max-width: 32rem;
+    margin: 0 0 2rem;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: rgba(44, 36, 28, 0.62);
 }
 
 .recognitionGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    margin-top: 1rem;
 }
 
 @media (max-width: 680px) {

@@ -16,10 +16,17 @@ vite.config.ts.*
 .vscode/
 .trae/
 
-# Large video files
-*.mp4
-*.mov
-*.webm
+# Portfolio Assets - Keep these!
+# We keep these because they are essential for the portfolio's functionality
+# (e.g. final_2.mp4 is 41MB which is well under the 100MB git limit)
+
+# Large media files (>100MB)
+client/public/images/Playground/interfaces/DIDI Concept Library.MP4
+client/public/images/Playground/videos/BLACKBIRD.mp4
+client/public/images/Playground/videos/Haikyu Title Animation.mp4
+client/public/images/PROJECTS/Cascader/rotomolding.mov
+client/public/images/Playground/interfaces/TURABH.mp4
 
 # Large image sequences — serve from CDN in production
 client/public/images/systematic/
+.vercel

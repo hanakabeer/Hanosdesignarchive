@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "wouter";
 import type { Project } from "@shared/schema";
 import { Navbar } from "@/components/sections/Navbar";
 import { ProjectNav } from "@/components/sections/ProjectNav";
+import { ProjectHero } from "@/components/sections/ProjectHero";
+import { ProjectSideNav } from "@/components/sections/ProjectSideNav";
 import styles from "./styles.module.css";
 
 const fadeUp = {
@@ -22,64 +22,53 @@ export function PencilSharpenerPage({ project }: Props) {
     return (
         <div className={styles.page}>
             <Navbar />
+            <ProjectSideNav
+                accentColor="#00AEEF"
+                sections={[
+                    { id: "context", label: "Context" },
+                    { id: "ergonomics", label: "Ergonomics" },
+                    { id: "teardown", label: "Teardown" },
+                    { id: "cad", label: "CAD" },
+                    { id: "docs", label: "Docs" },
+                    { id: "dfma", label: "DFMA" },
+                ]}
+            />
 
-            {/* ═══════════════════════════════════════════════════════
-              PAGE 1 — OVERVIEW  (dark)
-          ═══════════════════════════════════════════════════════ */}
-            <section className={styles.hero}>
-                <div className={styles.heroInner}>
-                    <motion.div className={styles.breadcrumb}
-                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                        <Link href="/"><a className={styles.backLink}><ArrowLeft size={13} /> Archive</a></Link>
-                        <span className={styles.sep}>/</span>
-                        <span className={styles.curr}>Pencil Sharpener</span>
-                    </motion.div>
-
-                    <motion.div variants={fadeUp} initial="hidden" animate="visible">
-                        <span className={styles.eyebrow}>Reverse Engineering Study</span>
-                    </motion.div>
-
-                    <motion.div className={styles.titleBlock} variants={fadeUp} custom={1} initial="hidden" animate="visible">
-                        <h1 className={styles.heroTitle}>Pencil<br />Sharpener</h1>
-                        <div className={styles.accentLine} />
-                        <p className={styles.heroSub}>Manual Helical Mechanism — Teardown to Digital Reconstruction</p>
-                    </motion.div>
-
-                    {/* Render — full-width hero image */}
-                    <motion.div className={styles.heroImgWrap}
-                        initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}>
-                        <img src={`${IMG}/Render.png`} alt="Pencil sharpener render" className={styles.heroImg} />
-                    </motion.div>
-
-                    <motion.p className={styles.heroHook} variants={fadeUp} custom={2} initial="hidden" animate="visible">
-                        A reverse-engineering study of a manual helical pencil sharpener, focused on understanding
-                        how a compact everyday object balances mechanism, usability, and manufacturability. The project
-                        moved from physical teardown to digital reconstruction.
-                    </motion.p>
-
-                    <motion.div className={styles.metaRow} variants={fadeUp} custom={3} initial="hidden" animate="visible">
-                        {[
-                            { label: "Type", value: "Reverse Engineering" },
-                            { label: "Method", value: "Teardown · CAD · DFMA" },
-                            { label: "Tools", value: "SolidWorks · Physical Analysis" },
-                            { label: "Year", value: project.year },
-                        ].map(m => (
-                            <div key={m.label} className={styles.metaItem}>
-                                <span className={styles.metaLabel}>{m.label}</span>
-                                <span className={styles.metaValue}>{m.value}</span>
-                            </div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
+            {/* PAGE 1 — HERO (universal two-column component) */}
+            <ProjectHero
+                title="Pencil Sharpener"
+                breadcrumbLabel="Pencil Sharpener"
+                subtitle="Manual Helical Mechanism Study"
+                description="A reverse-engineering study of a manual helical pencil sharpener, focused on understanding how a compact everyday object balances mechanism, usability, and manufacturability."
+                tags={["Mechanical Object", "Desktop Tool"]}
+                meta={[
+                    { label: "Year", value: project.year },
+                    { label: "Type", value: "Reverse Engineering" },
+                    { label: "Method", value: "Teardown · CAD · DFMA" },
+                    { label: "Tools", value: "SolidWorks · Physical Analysis" },
+                ]}
+                panel={{
+                    heading: "Project Data",
+                    items: [
+                        { label: "Year", value: "2026" },
+                        { label: "Type", value: "Mechanical Product" },
+                        { label: "Team", value: "Solo" },
+                        { label: "Context", value: "Academic" },
+                    ],
+                }}
+                imageSrc="/images/PROJECTS/Pencil sharper/Render.png"
+                imageAlt="Pencil sharpener render"
+                accentColor="#00AEEF"
+                theme="dark"
+                darkBgColor="#06080c"
+                darkPanelBgColor="rgba(10, 15, 24, 0.92)"
+                darkPanelBorderColor="rgba(0, 174, 239, 0.18)"
+            />
 
             {/* ═══════════════════════════════════════════════════════
               PAGE 2 — OBJECT + USE CONTEXT  (light)
-              product picture.png side-by-side with text,
-              no Key Internal Systems
           ═══════════════════════════════════════════════════════ */}
-            <section className={styles.context}>
+            <section id="context" className={styles.context} data-theme="light">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionHeader}
                         variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -118,7 +107,7 @@ export function PencilSharpenerPage({ project }: Props) {
             {/* ═══════════════════════════════════════════════════════
               PAGE 3 — USER EXPERIENCE + ERGONOMICS  (dark)
           ═══════════════════════════════════════════════════════ */}
-            <section className={styles.ergonomics}>
+            <section id="ergonomics" className={styles.ergonomics} data-theme="dark">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionHeader}
                         variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -184,7 +173,7 @@ export function PencilSharpenerPage({ project }: Props) {
               flow steps LEFT, sectview.svg (mechanical diagram) RIGHT
               disassmebledparts.png full-width below, no bg
           ═══════════════════════════════════════════════════════ */}
-            <section className={styles.teardown}>
+            <section id="teardown" className={styles.teardown} data-theme="light">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionHeader}
                         variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -243,14 +232,6 @@ export function PencilSharpenerPage({ project }: Props) {
                         <span className={styles.imgCaption}>23 identified and numbered components</span>
                     </motion.div>
 
-                    <motion.blockquote className={styles.insight}
-                        variants={fadeUp} custom={3} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        <div className={styles.insightBar} />
-                        <p>
-                            This stage helped reveal the object as a compact mechanical system rather than just
-                            a desktop accessory.
-                        </p>
-                    </motion.blockquote>
                 </div>
             </section>
 
@@ -258,7 +239,7 @@ export function PencilSharpenerPage({ project }: Props) {
               PAGE 5 — CAD RECONSTRUCTION  (dark)
               moddeled parts + assembled (booklet) + Animation video
           ═══════════════════════════════════════════════════════ */}
-            <section className={styles.cad}>
+            <section id="cad" className={styles.cad} data-theme="dark">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionHeader}
                         variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -317,7 +298,7 @@ export function PencilSharpenerPage({ project }: Props) {
               PAGE 6 — TECHNICAL DOCUMENTATION  (light)
               sectview / exp / ortho — displayed without card bg
           ═══════════════════════════════════════════════════════ */}
-            <section className={styles.techDoc}>
+            <section id="docs" className={styles.techDoc} data-theme="light">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionHeader}
                         variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -359,7 +340,7 @@ export function PencilSharpenerPage({ project }: Props) {
             {/* ═══════════════════════════════════════════════════════
               PAGE 7 — DFMA + FMEA TABLE  (light)
           ═══════════════════════════════════════════════════════ */}
-            <section className={styles.fmea}>
+            <section id="dfma" className={styles.fmea} data-theme="light">
                 <div className={styles.sectionInner}>
                     <motion.div className={styles.sectionHeader}
                         variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -454,30 +435,26 @@ export function PencilSharpenerPage({ project }: Props) {
                                     },
                                 ].map((row, i) => (
                                     <tr key={i} className={styles.fmRow}>
-                                        <td className={`${styles.fmTd} ${styles.fmTdItem}`}>{row.item}</td>
-                                        <td className={styles.fmTd}>{row.mode}</td>
-                                        <td className={styles.fmTd}>{row.effect}</td>
-                                        <td className={`${styles.fmTd} ${styles.fmTdAccent}`}>{row.s}</td>
-                                        <td className={styles.fmTd}>{row.cause}</td>
-                                        <td className={`${styles.fmTd} ${styles.fmTdAccent}`}>{row.o}</td>
-                                        <td className={styles.fmTd}>{row.controls}</td>
-                                        <td className={`${styles.fmTd} ${styles.fmTdAccent}`}>{row.d}</td>
-                                        <td className={`${styles.fmTd} ${styles.fmTdRpn}`}>{row.rpn}</td>
-                                        <td className={styles.fmTd}>{row.action}</td>
+                                        <td className={`${styles.fmTd} ${styles.fmTdItem}`} data-label="Item / Function">{row.item}</td>
+                                        <td className={styles.fmTd} data-label="Failure Mode">{row.mode}</td>
+                                        <td className={styles.fmTd} data-label="Effect">{row.effect}</td>
+                                        <td className={`${styles.fmTd} ${styles.fmTdAccent}`} data-label="S">{row.s}</td>
+                                        <td className={styles.fmTd} data-label="Cause">{row.cause}</td>
+                                        <td className={`${styles.fmTd} ${styles.fmTdAccent}`} data-label="O">{row.o}</td>
+                                        <td className={styles.fmTd} data-label="Controls">{row.controls}</td>
+                                        <td className={`${styles.fmTd} ${styles.fmTdAccent}`} data-label="D">{row.d}</td>
+                                        <td className={`${styles.fmTd} ${styles.fmTdRpn}`} data-label="RPN">{row.rpn}</td>
+                                        <td className={styles.fmTd} data-label="Action">{row.action}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </motion.div>
 
-                    <motion.div variants={fadeUp} custom={3} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                        style={{ marginTop: "3rem" }}>
-                        <Link href="/"><a className={styles.backNavLink}><ArrowLeft size={14} /> Back to Archive</a></Link>
-                    </motion.div>
                 </div>
             </section>
 
-            <ProjectNav currentId={4} />
+            <ProjectNav currentId={5} />
         </div>
     );
 }

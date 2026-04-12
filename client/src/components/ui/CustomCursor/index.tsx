@@ -9,6 +9,7 @@ export function CustomCursor() {
   const mouseY = useMotionValue(-100);
   const [isVisible, setIsVisible] = useState(false);
   const cursorType = useCursorStore((state) => state.cursorType);
+  const cursorVisible = useCursorStore((state) => state.cursorVisible);
 
   // Smooth springs for the cursor movement
   const springConfig = { damping: 25, stiffness: 250 };
@@ -48,7 +49,7 @@ export function CustomCursor() {
         style={{
           x: cursorX,
           y: cursorY,
-          opacity: isVisible ? 1 : 0,
+          opacity: isVisible && cursorVisible ? 1 : 0,
         }}
       >
         <AnimatePresence mode="wait">

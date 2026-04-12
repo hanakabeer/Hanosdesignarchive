@@ -1,10 +1,10 @@
 import { useState, useRef, useMemo, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import styles from "./styles.module.css";
 import { Button } from "@/components/ui/button";
 
-interface PlaygroundItem {
+export interface PlaygroundItem {
   id: string;
   title: string;
   year: string;
@@ -21,7 +21,7 @@ interface PlaygroundItem {
   role?: string;
 }
 
-const playgroundItems: PlaygroundItem[] = [
+export const playgroundItems: PlaygroundItem[] = [
   // Industrial Category
   {
     id: "ind-1",
@@ -181,21 +181,51 @@ const playgroundItems: PlaygroundItem[] = [
   {
     id: "vid-4",
     title: "QuantumQi",
-    year: "2025",
+    year: "2024",
     tags: ["Tech", "Motion"],
     coverColor: "#2a2a2a",
     category: "Videos",
     type: 'video',
     src: "/images/Playground/videos/QuantumQi.mp4",
-    description: "A 45-second product animation designed as a step-by-step interaction sequence, visualizing how a user enters, engages with, and activates the Quantum Qi pod.",
+    description: "A speculative product film for a wellness device. Blends sci-fi aesthetics with clean UI overlays.",
     industry: "Motion — Speculative Design",
-    duration: "3 weeks",
+    duration: "4 weeks",
     team: ["Solo Project"],
     role: "Director & Motion Designer"
   },
+  {
+    id: "vid-5",
+    title: "Redbull ChromaDepth",
+    year: "2024",
+    tags: ["Motion", "ChromaDepth"],
+    coverColor: "#1a1a1a",
+    category: "Videos",
+    type: 'video',
+    src: "/images/Playground/videos/Redbull_ChromaDepth_HanaKabeer.mp4",
+    description: "A high-energy motion piece exploring the ChromaDepth 3D effect for Red Bull, focusing on depth-based color separation and dynamic transitions.",
+    industry: "Motion Design — 3D Visuals",
+    duration: "1 week",
+    team: ["Duo Project"],
+    role: "Motion Designer"
+  },
+  {
+    id: "vid-6",
+    title: "Interior Design",
+    year: "2024",
+    tags: ["Interior", "CGI"],
+    coverColor: "#333333",
+    category: "Videos",
+    type: 'video',
+    src: "/images/Playground/videos/Interior design.MOV",
+    description: "A cinematic walkthrough of a contemporary interior space, focusing on lighting, materiality, and spatial flow.",
+    industry: "CGI — Architectural Visualization",
+    duration: "3 weeks",
+    team: ["Solo Project"],
+    role: "3D Artist"
+  }
 ];
 
-const categories = ["All", "Industrial", "Interfaces", "Videos"];
+export const playgroundCategories = ["All", "Industrial", "Interfaces", "Videos"];
 
 export function Playground() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -248,10 +278,28 @@ export function Playground() {
   return (
     <section className={styles.playground}>
       <div className={styles.container}>
+        <div className={styles.intro}>
+          <span className={styles.kicker}>Playground</span>
+          <div className={styles.introCopy}>
+            <h2 className={styles.heading}>Playground</h2>
+            <p className={styles.description}>
+              A curated archive of finished work across disciplines.
+            </p>
+            <div className={styles.mobileEntry}>
+              <p className={styles.mobileEntryText}>
+                Explore smaller experiments, interfaces, objects, and films in a mobile-friendly archive.
+              </p>
+              <Link href="/playground">
+                <a className={styles.mobileEntryButton}>Enter Playground</a>
+              </Link>
+            </div>
+          </div>
+        </div>
+
         {/* Filters */}
         <div className={styles.sidebar}>
           <div className={styles.filters}>
-            {categories.map((cat) => (
+            {playgroundCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}

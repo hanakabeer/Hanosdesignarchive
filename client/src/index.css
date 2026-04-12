@@ -16,6 +16,15 @@
   /* Typography */
   --font-display: 'Bricolage Grotesque', sans-serif;
   --font-body: 'Inter', sans-serif;
+
+  /* Navbar height — used for scroll offset */
+  --nav-height: 64px;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset anchor links so the fixed navbar doesn't cover the target */
+  scroll-padding-top: calc(var(--nav-height) + 2rem);
 }
 
 @layer base {
@@ -28,7 +37,12 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }

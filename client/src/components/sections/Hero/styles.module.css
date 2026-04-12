@@ -45,7 +45,7 @@
 .tags {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .tag {
@@ -60,13 +60,15 @@
 
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 6rem);
-  line-height: 1;
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  line-height: 0.94;
   font-weight: 800;
   text-transform: uppercase;
   color: var(--ink);
   letter-spacing: -0.04em;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  margin-top: -1rem;
+  max-width: 9ch;
 }
 
 .footerRow {
@@ -125,4 +127,35 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1.5rem 3rem;
+  }
+
+  .headline {
+    font-size: clamp(3.2rem, 17vw, 5.8rem);
+    max-width: 6.6ch;
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+  }
+
+  .tags,
+  .cta {
+    display: none;
+  }
+
+  .subline {
+    max-width: 19rem;
+    font-size: 0.98rem;
+  }
+
+  .footerRow {
+    justify-content: flex-start;
+  }
+
+  .scrollIndicator {
+    bottom: 1.5rem;
+  }
 }

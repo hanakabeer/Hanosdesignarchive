@@ -1,0 +1,143 @@
+/* ══════════════════════════════════════════════════════════════
+   ProjectSideNav — minimal editorial right-side section anchors
+   Fixed position, desktop only, accent-colour-thémed dots
+   ══════════════════════════════════════════════════════════════ */
+
+.sideNav {
+    position: fixed;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 80;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-end; /* Labels on left, rail on right */
+    padding: 2rem 0;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.sideNav[data-visible="false"] {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Vertical rail line — subtle and stable */
+.railLine {
+    position: absolute;
+    right: 7px; /* Half of dotContainer width (14px) */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.06);
+    z-index: -1;
+    transition: background 0.3s ease;
+}
+
+.sideNav[data-theme="dark"] .railLine {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Each dot + label row */
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    background: none;
+    border: none;
+    padding: 0.4rem 0;
+    cursor: pointer !important;
+    flex-direction: row;
+    justify-content: flex-end;
+    outline: none;
+    position: relative;
+}
+
+/* Label — positioned beside the dot container */
+.label {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s;
+    pointer-events: none;
+    text-align: right;
+}
+
+.sideNav[data-theme="dark"] .label {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Fixed-width container for the dot to ensure perfect vertical alignment */
+.dotContainer {
+    width: 14px; /* Max width of active dot */
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Dot */
+.dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.18);
+    transition: background 0.28s ease, width 0.28s cubic-bezier(0.16, 1, 0.3, 1), height 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.28s ease;
+}
+
+.sideNav[data-theme="dark"] .dot {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+/* Hover state — reveal label, brighten dot */
+.navItem:hover .label {
+    opacity: 0.6;
+    transform: translateX(0);
+}
+
+.navItem:hover .dot {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.sideNav[data-theme="dark"] .navItem:hover .dot {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.sideNav[data-theme="dark"] .navItem:hover .label {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Active state — accent dot, show label */
+.active .dot {
+    width: 14px;
+    height: 4px; /* Pill shape */
+    border-radius: 2px;
+    background: var(--accent, #E93D82);
+}
+
+.active .label {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--accent, #E93D82);
+}
+
+.sideNav[data-theme="dark"] .active .label {
+    color: var(--accent, #E93D82);
+}
+
+/* Hide on mobile */
+@media (max-width: 1024px) {
+    .sideNav {
+        display: none;
+    }
+}

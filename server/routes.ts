@@ -2,6 +2,25 @@ import type { Express } from "express";
 import type { Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
+import type { Project } from "@shared/schema";
+
+function normalizeProject(project: Project): Project {
+  if (project.id === 5 || project.route === "/work/5" || project.title === "Pencil Sharpener") {
+    return {
+      ...project,
+      imageUrl: "/images/hero images/sharpner.png",
+    };
+  }
+
+  if (project.id === 6 || project.route === "/work/6" || project.title === "Bukhoorie") {
+    return {
+      ...project,
+      imageUrl: "/images/hero images/kartell.png",
+    };
+  }
+
+  return project;
+}
 
 export async function registerRoutes(
   httpServer: Server,
@@ -10,7 +29,7 @@ export async function registerRoutes(
 
   app.get(api.projects.list.path, async (req, res) => {
     const projects = await storage.getProjects();
-    res.json(projects);
+    res.json(projects.map(normalizeProject));
   });
 
   app.get(api.projects.get.path, async (req, res) => {
@@ -18,7 +37,7 @@ export async function registerRoutes(
     if (!project) {
       return res.status(404).json({ message: "Project not found" });
     }
-    res.json(project);
+    res.json(normalizeProject(project));
   });
 
   // Seed data if empty
@@ -51,40 +70,40 @@ async function seedDatabase() {
       imageUrl: "/images/hero images/rotomoldin.png"
     },
     {
-      title: "Versa Grip",
-      category: "Adaptive Grip Exploration",
-      year: "2023",
-      route: "/work/3",
-      role: "Competition Project | Exploratory Assistive Design Study",
-      overview: "An assistive design study on adaptive grip mechanisms for individuals with limited dexterity.",
-      imageUrl: "/images/hero images/versagrip.png"
-    },
-    {
-      title: "PortaPalm",
-      category: "Gesture-Controlled Robotics",
-      year: "2024",
-      route: "/work/4",
-      role: "Individual Project | Prototype + Code",
-      overview: "A gesture-controlled robotic arm prototype exploring how remote hands could intervene in hazardous environments through natural hand motion.",
-      imageUrl: "/images/Playground/industrial/Portapalm.jpg"
-    },
-    {
       title: "Mycrochet",
       category: "Robotic Biocomposite Fabrication System",
       year: "2023",
-      route: "/work/5",
+      route: "/work/3",
       role: "Group Project | Robotic End-Effector POC",
       overview: "Exploring robotic-assisted biocomposite fabrication through custom end-effector design.",
       imageUrl: "/images/hero images/Mycrochet.png"
     },
     {
+      title: "Versa Grip",
+      category: "Adaptive Grip Exploration",
+      year: "2023",
+      route: "/work/4",
+      role: "Competition Project | Exploratory Assistive Design Study",
+      overview: "An assistive design study on adaptive grip mechanisms for individuals with limited dexterity.",
+      imageUrl: "/images/hero images/versagrip.png"
+    },
+    {
+      title: "Pencil Sharpener",
+      category: "Reverse Engineering Study",
+      year: "2022",
+      route: "/work/5",
+      role: "Individual Project | CAD & Mechanical Teardown",
+      overview: "A reverse-engineering study of a manual helical pencil sharpener, from physical teardown to digital reconstruction.",
+      imageUrl: "/images/hero images/sharpner.png"
+    },
+    {
       title: "Bukhoorie",
-      category: "An Adaptive Menstrual Care",
+      category: "A Ritual Lighting Experience",
       year: "2022",
       route: "/work/6",
       role: "Individual Project | Functional POC",
       overview: "A specialized project exploring traditional materials and adaptive functional design.",
-      imageUrl: "/images/hero images/Kartell.png"
+      imageUrl: "/images/hero images/kartell.png"
     }
   ];
 

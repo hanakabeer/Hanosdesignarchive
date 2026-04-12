@@ -25,7 +25,7 @@
 
 /* ── Shared inner layout ────────────────────────────────────── */
 .sectionInner {
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 3rem;
     contain: layout style;
@@ -101,7 +101,7 @@
 }
 
 .introInner {
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 3rem;
 }
@@ -113,7 +113,7 @@
 
 .heroTitle {
     font-family: var(--font-display);
-    font-size: clamp(4.5rem, 11vw, 10rem);
+    font-size: clamp(3.5rem, 8vw, 7.5rem);
     font-weight: 900;
     letter-spacing: -0.06em;
     line-height: 0.88;
@@ -225,7 +225,10 @@
    ══════════════════════════════════════════════════════════════ */
 .mechanism {
     background: var(--c-dark);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
     contain: paint;
 }
 
@@ -265,12 +268,12 @@
 /* Right text — on dark bg */
 .darkHeading {
     font-family: var(--font-display);
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.15;
     color: #fff;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
 }
 
 .darkBody {
@@ -361,26 +364,29 @@
    ══════════════════════════════════════════════════════════════ */
 .scrap {
     background: var(--c-light);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
     contain: paint;
 }
 
 .scrapTitle {
     font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.1;
     color: var(--c-ink);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
 }
 
 .scrapIntro {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: rgba(30, 31, 35, 0.6);
-    line-height: 1.7;
+    line-height: 1.65;
     max-width: 640px;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
 }
 
 /* Page 3: grid goes full width, logic row sits below */
@@ -402,6 +408,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
+    margin-top: 0;
 }
 
 @media (max-width: 900px) {
@@ -760,7 +767,10 @@
    ══════════════════════════════════════════════════════════════ */
 .iteration {
     background: var(--c-darker);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
     contain: paint;
 }
 
@@ -778,11 +788,11 @@
 
 .iterLabel {
     font-family: var(--font-display);
-    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
     font-weight: 800;
     letter-spacing: -0.03em;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.5rem;
     line-height: 1.1;
 }
 
@@ -1087,13 +1097,16 @@
    ══════════════════════════════════════════════════════════════ */
 .polyhedral {
     background: var(--c-light);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
     contain: paint;
 }
 
 .polyTitle {
     font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     color: var(--c-ink);
@@ -1101,163 +1114,372 @@
     line-height: 1.1;
 }
 
-/* Top row — two panels */
-.polyTopRow {
+.processBoard {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 3.5rem;
-}
-
-@media (max-width: 768px) {
-    .polyTopRow {
-        grid-template-columns: 1fr;
-    }
-}
-
-.polyPlaceholder {
-    border-radius: 14px;
-    overflow: hidden;
-    background: var(--c-light2);
-    border: 1px solid rgba(30, 31, 35, 0.07);
-    display: flex;
-    flex-direction: column;
-}
-
-.polySvg {
-    width: 100%;
-    height: auto;
-    display: block;
-    padding: 2rem;
-}
-
-.polyImg {
-    width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    display: block;
-}
-
-.polyImgCap {
-    font-size: 0.72rem;
-    color: rgba(30, 31, 35, 0.45);
-    letter-spacing: 0.08em;
-    padding: 0.6rem 0.9rem;
-}
-
-/* magnet diagram */
-.magnetSection {
-    background: #fff;
-    border-radius: 14px;
-    border: 1px solid rgba(30, 31, 35, 0.07);
-    padding: 2rem;
-    margin-bottom: 3rem;
-    display: flex;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 2.5rem;
-    align-items: center;
-    flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(30, 31, 35, 0.12);
+    align-items: stretch;
 }
 
-.magnetDiagram {
-    flex: 1;
-    min-width: 240px;
-}
-
-.magnetSvg {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.magnetCallouts {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    min-width: 160px;
-}
-
-.magnetCallout {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    font-size: 0.83rem;
-    color: rgba(30, 31, 35, 0.65);
-}
-
-.magnetDot {
-    display: block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--c-orange);
-    flex-shrink: 0;
-}
-
-/* bottom casting row */
-.castingRow {
+.boardSection {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-}
-
-@media (max-width: 768px) {
-    .castingRow {
-        grid-template-columns: 1fr;
-    }
-}
-
-.castingPhotos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-
-.castingPhoto {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-.castingImg {
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block;
-    filter: saturate(0.5);
-    transition: filter 0.3s;
-}
-
-.castingPhoto:hover .castingImg {
-    filter: saturate(1);
-}
-
-.castingCap {
-    font-size: 0.7rem;
-    color: rgba(30, 31, 35, 0.4);
-    letter-spacing: 0.06em;
-}
-
-.castingBullets {
-    padding-top: 0.5rem;
-}
-
-.castingList {
-    list-style: none;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 1.5rem;
     padding: 0;
+    border-bottom: none;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.boardSection + .boardSection {
+    border-left: 1px solid rgba(30, 31, 35, 0.12);
+    padding-left: 2.5rem;
+}
+
+.boardSection:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.boardHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-self: start;
+    padding-top: 0.2rem;
+    max-width: 100%;
+}
+
+.boardEyebrow {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+}
+
+.boardTitle {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.1vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+    color: var(--c-ink);
+    text-transform: none;
+}
+
+.geometryGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+    height: 100%;
+}
+
+.editorialFigure {
     margin: 0;
     display: flex;
     flex-direction: column;
+    gap: 0.7rem;
+    height: 100%;
+}
+
+.editorialImage {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+}
+
+.geometryImage {
+    aspect-ratio: 4 / 3;
+}
+
+.editorialCaption {
+    display: block;
+    margin: 0;
+    font-size: 0.7rem;
+    line-height: 1.55;
+    letter-spacing: 0.03em;
+    color: rgba(30, 31, 35, 0.45);
+}
+
+.magnetBoard {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.9fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.magnetStudies {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.magnetStudiesTop {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.studyImage {
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+}
+
+.magnetDiagramImage {
+    aspect-ratio: 16 / 7.8;
+    object-fit: contain;
+}
+
+.magnetPrototypeFigure {
+    height: 100%;
+}
+
+.prototypeImage {
+    aspect-ratio: 4 / 5.1;
+}
+
+/* ── Casting / Mold Trials ──────────────────────────────────── */
+.castingRow {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Give more space to the mold image */
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 2.5rem;
+}
+
+.castingText {
+    position: sticky;
+    top: 8rem;
+}
+
+.castingTitle {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--c-dark);
+    margin: 0 0 1.5rem;
+}
+
+.castingBody {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--c-dark-dim);
+    max-width: 380px;
+}
+
+.castingTrials {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.moldImageWrap {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.moldImage {
+    width: 100%;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.trialsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.trialCard {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 
-.castingList li {
-    font-size: 0.9rem;
-    color: rgba(30, 31, 35, 0.65);
-    padding-left: 1.2rem;
-    position: relative;
-    line-height: 1.6;
+.trialImgWrap {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.trialImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.trialLabel {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--c-dark-dim);
+}
+
+/* Board section descriptive text (under heading, above images) */
+.boardDesc {
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(30, 31, 35, 0.52);
+    max-width: 26rem;
+}
+
+/* Section B — two-column: left=tall, right=2 stacked */
+.magnetTwoCol {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+    height: 100%;
+}
+
+@media (max-width: 900px) {
+    .magnetTwoCol {
+        grid-template-columns: 1fr;
+    }
+}
+
+.magnetTallImage {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.magnetStackImage {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+/* Stacked Assemblies — 2/3 + 1/3 layout */
+.stackedLayout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    margin-top: 2.5rem;
+}
+
+@media (max-width: 900px) {
+    .stackedLayout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stackedGridCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.stackedInnerGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .stackedInnerGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.stackedGridItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stackedGridImg {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    filter: brightness(0.82) saturate(0.7);
+    transition: filter 0.35s;
+}
+
+.stackedGridItem:hover .stackedGridImg {
+    filter: brightness(1) saturate(1);
+}
+
+.stackedGridCap {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.stackedRenderCol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: sticky;
+    top: 5rem;
+}
+
+.stackedRenderImg {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.stackedRenderCap {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+}
+
+
+@media (max-width: 1100px) {
+    .processBoard {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+    }
+
+    .boardHeader {
+        max-width: 100%;
+    }
+
+    .magnetBoard,
+    .castingBoard {
+        grid-template-columns: 1fr;
+    }
+
+    .prototypeImage,
+    .moldImage {
+        aspect-ratio: 16 / 10;
+    }
+}
+
+@media (max-width: 768px) {
+    .polyTitle {
+        margin-bottom: 2rem;
+    }
+
+    .geometryGrid,
+    .magnetStudiesTop,
+    .trialsGrid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .castingList li::before {
@@ -1276,7 +1498,10 @@
    ══════════════════════════════════════════════════════════════ */
 .outcome {
     background: var(--c-light);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
     contain: paint;
 }
 
@@ -1320,6 +1545,23 @@
     letter-spacing: 0.08em;
 }
 
+.outcomeVideoWrap {
+    margin-bottom: 4rem;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid rgba(30, 31, 35, 0.08);
+}
+
+.outcomeVideo {
+    width: 100%;
+    max-height: 70vh;
+    display: block;
+    object-fit: cover;
+    transform: scale(1.08);
+    transform-origin: center center;
+}
+
 .outcomeLine {
     font-family: var(--font-display);
     font-size: clamp(1.4rem, 2.8vw, 2rem);
@@ -1334,14 +1576,14 @@
 /* Reflection */
 .reflection {
     display: flex;
-    gap: 2rem;
+    gap: 1.25rem;
     align-items: flex-start;
-    background: #fff;
-    border: 1px solid rgba(30, 31, 35, 0.07);
+    background: transparent;
+    border: none;
     border-radius: 16px;
-    padding: 2.5rem;
+    padding: 0;
     margin-bottom: 4rem;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+    box-shadow: none;
 }
 
 .reflectionAccent {
@@ -1360,6 +1602,31 @@
     color: rgba(30, 31, 35, 0.55);
     margin: 0;
     font-style: normal;
+}
+
+.reflectionHighlight {
+    color: rgba(30, 31, 35, 0.9);
+    font-weight: 700;
+    font-size: 1.28rem;
+    line-height: 1.45;
+    display: inline;
+}
+
+@media (max-width: 768px) {
+    .outcomeVideoWrap {
+        aspect-ratio: 4 / 5;
+    }
+
+    .outcomeVideo {
+        height: 100%;
+        max-height: none;
+        transform: scale(1.14);
+    }
+
+    .reflectionHighlight {
+        font-size: 1.42rem;
+        line-height: 1.38;
+    }
 }
 
 /* Back nav */
@@ -1428,83 +1695,6 @@
     filter: saturate(1);
 }
 
-/* Stacked product applications row */
-.polyStackRow {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 3rem;
-    align-items: start;
-    margin-bottom: 3rem;
-    padding: 2.5rem;
-    background: #fff;
-    border-radius: 14px;
-    border: 1px solid rgba(30, 31, 35, 0.07);
-}
-
-@media (max-width: 900px) {
-    .polyStackRow {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
-
-.polyStackLeft {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.polyStackLabel {
-    font-family: var(--font-body);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--c-orange);
-}
-
-.polyStackHeading {
-    font-family: var(--font-display);
-    font-size: clamp(1rem, 2vw, 1.35rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    color: var(--c-ink);
-    line-height: 1.25;
-    margin: 0;
-}
-
-.polyStackGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.8rem;
-}
-
-@media (max-width: 700px) {
-    .polyStackGrid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-.polyStackItem {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-.polyStackImg {
-    width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    border-radius: 8px;
-    display: block;
-    filter: saturate(0.5) brightness(0.95);
-    transition: filter 0.3s;
-}
-
-.polyStackItem:hover .polyStackImg {
-    filter: saturate(1) brightness(1);
-}
-
 .castingBodyText {
     font-size: 0.9rem;
     color: rgba(30, 31, 35, 0.6);
@@ -1528,33 +1718,13 @@
 /* ── C — Frame Decision: 3 options ─────────────────────────── */
 .frameOptions {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.2rem;
     margin-bottom: 2.5rem;
+    align-items: stretch;
 }
 
-@media (max-width: 800px) {
-    .frameOptions {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-/* 5-card variant — Bracket Evolution */
-.frameOptions5 {
-    grid-template-columns: repeat(5, 1fr);
-}
-
-@media (max-width: 900px) {
-    .frameOptions5 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .frameOptions5 {
-        grid-template-columns: 1fr 1fr;
-    }
-}
+/* Optional variants removed */
 
 .frameOption {
     display: flex;
@@ -1566,6 +1736,10 @@
     overflow: hidden;
     padding-bottom: 1rem;
     transition: border-color 0.25s;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    height: auto;
 }
 
 .frameOptionSelected {
@@ -1628,30 +1802,295 @@
     line-height: 1.5;
 }
 
+.castingBoard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem;
+    height: 100%;
+}
+
+.moldFigure {
+    margin-bottom: 0;
+}
+
+.trialFigure {
+    max-width: 100%;
+}
+
+.trialImage {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+@media (max-width: 1100px) {
+    .frameOptions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .processBoard {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .boardSection + .boardSection {
+        border-left: none;
+        border-top: 1px solid rgba(30, 31, 35, 0.12);
+        padding-left: 0;
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .frameOptions {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 1101px) {
+    .boardHeader {
+        min-height: 10.5rem;
+    }
+}
+
+/* ── Mechanism Analysis Grid ────────────────────────────────── */
+.mechanismAnalysisGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.mechanismOption {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.mechanismName {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 1rem;
+}
+
+.mechanismImgWrap {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #000;
+}
+
+.mechanismImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mechanismProsCons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.mechanismProsCons h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.5rem;
+}
+
+.mechanismProsCons ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--c-dim);
+}
+
+.pros ul { color: #8fde8f; }
+.cons ul { color: #ff9e9e; }
+
 /* ── Page 6: Stacked Assemblies section (dark) ─────────────── */
 .stackedSection {
     background: var(--c-dark);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* ── Assemblies Row ─────────────────────────────────────────── */
+.assembliesRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+}
+
+@media (max-width: 900px) {
+    .assembliesRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+.assemblyCol {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 2.5rem;
+}
+
+.assemblyDiagram {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    width: 100%;
+}
+
+.assemblyDiagramImg {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* Removed filter and mix-blend-mode to show original image */
+}
+
+.assemblyRender {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    width: 100%;
+}
+
+.assemblyRenderImg {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.assemblyCol:hover .assemblyRenderImg {
+    transform: scale(1.04);
+}
+
+
+
+.assembliesBoard {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    gap: 1.5rem 1.75rem;
+    align-items: start;
+}
+
+.assemblyCard {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid rgba(240, 90, 40, 0.38);
+}
+
+.assemblyCardFeature {
+    min-height: 100%;
+}
+
+.assemblyCardSupport {
+    min-height: 100%;
+}
+
+.assemblyImage {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    background: #090909;
+}
+
+.assemblyCardFeature .assemblyImage {
+    aspect-ratio: 16 / 9;
+}
+
+.assemblyCardSupport .assemblyImage {
+    aspect-ratio: 1 / 1;
+}
+
+.assemblyMeta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.assemblyTitle {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+.assemblyDivider {
+    width: 2.4rem;
+    height: 1px;
+    background: rgba(240, 90, 40, 0.5);
+    transform: translateY(-0.15rem);
+}
+
+.assemblyNote {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--c-orange);
+}
+
+@media (max-width: 900px) {
+    .assembliesBoard {
+        grid-template-columns: 1fr;
+    }
+
+    .assemblyCardSupport .assemblyImage {
+        aspect-ratio: 16 / 11;
+    }
 }
 
 /* ── Page 7: Digital Simulation section (light) ─────────────── */
 .simulation {
     background: var(--c-light);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.simInner {
+    max-width: 1440px;
 }
 
 .simTitle {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
     font-weight: 800;
     letter-spacing: -0.045em;
     color: var(--c-ink);
     line-height: 1.05;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .simVideoWrap {
     margin-top: 3rem;
+    width: 100%;
+    max-width: 100%;
     border-radius: 14px;
     overflow: hidden;
     border: 1px solid rgba(30, 31, 35, 0.1);
@@ -1660,9 +2099,12 @@
 
 .simVideo {
     width: 100%;
+    height: 100%;
     display: block;
     max-height: 70vh;
-    object-fit: contain;
+    object-fit: cover;
+    transform: scale(1.08);
+    transform-origin: center center;
 }
 
 .simCaption {
@@ -1677,22 +2119,31 @@
 /* ── Page 8: Technical Drawings section (dark) ──────────────── */
 .techDraw {
     background: var(--c-dark);
-    padding: 7rem 0;
+    padding: 5rem 0 7rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .techDrawImgWrap {
-    margin-top: 3rem;
-    border-radius: 14px;
+    margin-top: 2rem;
+    border-radius: 16px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    width: 100%;
 }
 
 .techDrawImg {
     width: 100%;
+    max-width: 1200px;
+    height: auto;
     display: block;
     object-fit: contain;
-    max-height: 75vh;
-    background: rgba(255, 255, 255, 0.03);
 }
 
 .techDrawCaption {

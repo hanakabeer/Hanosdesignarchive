@@ -580,8 +580,8 @@
 .mechDiagramCol {
     display: flex;
     flex-direction: column;
-    position: sticky;
-    top: 6rem;
+    position: relative;
+    top: auto;
 }
 
 .mechDiagramColImg {
@@ -601,36 +601,6 @@
     width: 100%;
     display: block;
     mix-blend-mode: multiply;
-}
-
-/* insight quote */
-.insight {
-    display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
-    background: #fff;
-    border-radius: 12px;
-    padding: 1.8rem 2rem;
-    margin: 2rem 0 0;
-}
-
-.insight p {
-    font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
-    font-size: 0.97rem;
-    font-weight: 600;
-    color: #444;
-    line-height: 1.6;
-    margin: 0;
-    font-style: italic;
-}
-
-.insightBar {
-    flex-shrink: 0;
-    width: 3px;
-    align-self: stretch;
-    background: var(--ps-blue);
-    border-radius: 99px;
-    min-height: 2.5rem;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1062,4 +1032,16 @@
     font-size: 0.88rem;
     color: var(--ps-blue);
     background: rgba(0, 174, 239, 0.11);
+}
+
+@media (max-width: 768px) {
+    .fmeaTableWrap {
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .fmeaTable {
+        min-width: 860px;
+    }
 }

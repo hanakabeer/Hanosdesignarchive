@@ -6,11 +6,14 @@
   background: #EFEFEF;
   padding: 5rem 3rem 6rem;
   min-height: 100vh;
+  scroll-margin-top: 5.75rem;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  transform: scale(0.8);
+  transform-origin: top center;
 }
 
 /* ── Section heading ───────────────────────────────────────── */
@@ -60,6 +63,7 @@
 
   .wrapper {
     padding: 4rem 1.25rem 5rem;
+    scroll-margin-top: 4.75rem;
   }
 }
 
@@ -112,42 +116,37 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  gap: 0.3rem;
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.32rem;
   font-weight: 700;
-  margin: 0 0 0.9rem;
-  line-height: 1.1;
+  margin: 0;
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  color: #16181d;
 }
 
 .number {
-  color: inherit;
-  opacity: 0.75;
-  margin-right: 0.3rem;
-}
-
-.details {
-  margin-top: auto;
-  padding-top: 0.9rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
-}
-
-.category {
-  font-size: 0.78rem;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
   font-weight: 600;
-  color: #BDBDBD;
-  margin: 0 0 0.25rem;
-  letter-spacing: 0.01em;
+  color: rgba(22, 24, 29, 0.46);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.role {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #1A1A1A;
+.subtitle {
   margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  line-height: 1.45;
+  color: rgba(22, 24, 29, 0.62);
+  max-width: 24ch;
 }
 
 /* ── Loading ───────────────────────────────────────────────── */

@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import ProjectDetail from "@/pages/ProjectDetail";
 import PortaPalmStandalone from "@/pages/PortaPalmStandalone";
 import CV from "@/pages/CV";
+import PlaygroundMobile from "@/pages/PlaygroundMobile";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/work/:id" component={ProjectDetail} />
       <Route path="/portapalm" component={PortaPalmStandalone} />
       <Route path="/cv" component={CV} />
+      <Route path="/playground" component={PlaygroundMobile} />
       <Route component={NotFound} />
     </Switch>
   );

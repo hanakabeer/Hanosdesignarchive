@@ -1,142 +1,155 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import styles from "./styles.module.css";
 
-const TOTAL_FRAMES = 2243;
-const FRAME_PATH = (i: number) =>
-  `/images/systematic/final_${String(i).padStart(5, "0")}.png`;
-
-// Sample every Nth frame to keep memory manageable (~748 images)
-const SAMPLE_STEP = 3;
-const SAMPLED_COUNT = Math.ceil(TOTAL_FRAMES / SAMPLE_STEP);
+const VIDEO_PATH = "/images/final_2.mp4";
 
 export function ApproachNetwork() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<(HTMLImageElement | null)[]>(
-    new Array(SAMPLED_COUNT).fill(null)
-  );
-  const currentFrameRef = useRef(0);
-  const rafRef = useRef<number | null>(null);
-  const [loadProgress, setLoadProgress] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
   const [isReady, setIsReady] = useState(false);
-  const [imagesAvailable, setImagesAvailable] = useState(true);
+  const [videoError, setVideoError] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(0);
 
-  // Draw a sampled frame index onto the canvas
-  const drawFrame = useCallback((sampledIndex: number) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const img = imagesRef.current[sampledIndex];
-    if (!img) return;
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  }, []);
+  // Scroll tracking with Framer Motion
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"]
+  });
 
-  // Set canvas size and redraw
-  const resizeCanvas = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drawFrame(currentFrameRef.current);
-  }, [drawFrame]);
+  // Smooth out the scroll progress for a more responsive but fluid feel
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 200,
+    damping: 50,
+    mass: 0.1,
+    restDelta: 0.0001
+  });
 
-  // Resize listener
+  // Opacity transforms
+  const textOpacity = useTransform(smoothProgress, [0, 0.2], [1, 0]);
+  const videoOpacity = useTransform(smoothProgress, [0.15, 0.25], [0, 1]);
+
+  // Handle video scrubbing with a frame-aware sync loop
+  const targetTimeRef = useRef(0);
+  
   useEffect(() => {
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-    return () => window.removeEventListener("resize", resizeCanvas);
-  }, [resizeCanvas]);
+    const video = videoRef.current;
+    if (!video || !isReady) return;
 
-  // Preload frames
+    // 1. Update the target time whenever scroll progress changes
+    const unsubscribe = smoothProgress.on("change", (v) => {
+      if (!video.duration) return;
+      
+      const videoStart = 0.1; // Start scrubbing earlier for more immediate feedback
+      const videoEnd = 0.95; // End slightly before the very end to avoid issues
+      
+      let adjustedProgress = 0;
+      if (v > videoStart) {
+        adjustedProgress = Math.min(1, (v - videoStart) / (videoEnd - videoStart));
+      }
+      
+      targetTimeRef.current = Math.min(adjustedProgress * video.duration, video.duration - 0.05);
+    });
+
+    // 2. Use a high-frequency loop to sync the video's currentTime to the target
+    // but only if the video isn't already busy seeking. This prevents "stutter"
+    // caused by overlapping seek requests.
+    let rafId: number;
+    const syncVideo = () => {
+      if (video && !video.seeking) {
+        // Only update if the difference is meaningful (e.g. > 1/60th of a second)
+        const diff = Math.abs(video.currentTime - targetTimeRef.current);
+        if (diff > 0.01) {
+          video.currentTime = targetTimeRef.current;
+        }
+      }
+      rafId = requestAnimationFrame(syncVideo);
+    };
+
+    rafId = requestAnimationFrame(syncVideo);
+
+    return () => {
+      unsubscribe();
+      cancelAnimationFrame(rafId);
+    };
+  }, [isReady, smoothProgress]);
+
+  // Handle video loading
   useEffect(() => {
-    let loaded = 0;
-    let firstFailed = false;
+    const video = videoRef.current;
+    if (!video) return;
 
-    for (let i = 0; i < SAMPLED_COUNT; i++) {
-      const frameIndex = i * SAMPLE_STEP;
-      const img = new Image();
-      img.src = FRAME_PATH(frameIndex);
+    const handleLoadedMetadata = () => {
+      setIsReady(true);
+    };
 
-      img.onload = () => {
-        imagesRef.current[i] = img;
-        loaded++;
+    const handleCanPlayThrough = () => {
+      setIsReady(true);
+    };
 
-        if (i === 0) {
-          setIsReady(true);
-          resizeCanvas();
-          drawFrame(0);
+    const handleProgress = () => {
+      if (video.buffered.length > 0) {
+        const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+        const duration = video.duration;
+        if (duration > 0) {
+          setLoadProgress(Math.round((bufferedEnd / duration) * 100));
         }
-
-        if (loaded % 30 === 0 || loaded === SAMPLED_COUNT) {
-          setLoadProgress(Math.round((loaded / SAMPLED_COUNT) * 100));
-        }
-      };
-
-      img.onerror = () => {
-        loaded++;
-        // If the very first frame fails, images aren't available in this env
-        if (i === 0 && !firstFailed) {
-          firstFailed = true;
-          setImagesAvailable(false);
-          setIsReady(true);
-        }
-      };
-    }
-  }, [drawFrame, resizeCanvas]);
-
-  // Scroll-driven frame selection
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section || !isReady || !imagesAvailable) return;
-
-    const handleScroll = () => {
-      const rect = section.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
-      const scrolled = -rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / scrollable));
-      const targetIndex = Math.round(progress * (SAMPLED_COUNT - 1));
-
-      if (targetIndex !== currentFrameRef.current) {
-        currentFrameRef.current = targetIndex;
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-        rafRef.current = requestAnimationFrame(() => drawFrame(targetIndex));
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    const handleError = () => {
+      setVideoError(true);
+    };
+
+    video.addEventListener("loadedmetadata", handleLoadedMetadata);
+    video.addEventListener("canplaythrough", handleCanPlayThrough);
+    video.addEventListener("progress", handleProgress);
+    video.addEventListener("error", handleError);
+
+    if (video.readyState >= 2) {
+      setIsReady(true);
+    }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      video.removeEventListener("canplaythrough", handleCanPlayThrough);
+      video.removeEventListener("progress", handleProgress);
+      video.removeEventListener("error", handleError);
     };
-  }, [isReady, imagesAvailable, drawFrame]);
-
-  /* ── Fallback: shown in production until images are served from CDN ── */
-  if (imagesAvailable === false) {
-    return (
-      <section id="approach" className={styles.fallback}>
-        <div className={styles.fallbackInner}>
-          <p className={styles.fallbackLabel}>Systemic Approach</p>
-          <h2 className={styles.fallbackTitle}>
-            Structure is everywhere.<br />We just make it visible.
-          </h2>
-          <p className={styles.fallbackSub}>
-            Every project begins as a chaotic cloud of ideas. We connect the
-            dots, finding the hidden structure that transforms abstract concepts
-            into tangible digital reality.
-          </p>
-        </div>
-      </section>
-    );
-  }
+  }, []);
 
   return (
     <section id="approach" ref={sectionRef} className={styles.container}>
       <div className={styles.sticky}>
-        <canvas ref={canvasRef} className={styles.canvas} />
-        {!isReady && (
+        <div className={styles.stage}>
+          <motion.video
+            ref={videoRef}
+            src={VIDEO_PATH}
+            muted
+            playsInline
+            preload="auto"
+            className={styles.video}
+            style={{ opacity: isReady ? videoOpacity : 0 }}
+          />
+        </div>
+        
+        <motion.div 
+          className={styles.overlayText}
+          style={{ opacity: textOpacity }}
+        >
+          <p className={styles.label}>Systemic Approach</p>
+          <h2 className={styles.title}>
+            Structure is everywhere.<br />We just make it visible.
+          </h2>
+          <p className={styles.sub}>
+            Every project begins as a chaotic cloud of ideas. We connect the
+            dots, finding the hidden structure that transforms abstract concepts
+            into tangible digital reality.
+          </p>
+        </motion.div>
+
+        {!isReady && !videoError && (
           <div className={styles.loader}>
             <div
               className={styles.loaderTrack}
