@@ -13,6 +13,7 @@ export interface PlaygroundItem {
   category: string;
   type: 'image' | 'video';
   src: string;
+  embedUrl?: string;
   link?: string;
   description?: string;
   industry?: string;
@@ -111,6 +112,8 @@ export const playgroundItems: PlaygroundItem[] = [
     category: "Interfaces",
     type: 'video',
     src: "/images/Playground/interfaces/DIDI Concept Library.MP4",
+    embedUrl: "https://www.youtube.com/embed/8sN00m4IzEs",
+    link: "https://youtu.be/8sN00m4IzEs",
     description: "DIDI Concept Library is a digital archive platform designed to organize and showcase design objects from our university museum in a more interactive and accessible way. The project focused on building the platform experience, including the interface, structure, and navigation system, to make exploring the collection feel intuitive, engaging, and visually rich.",
     industry: "UI/UX — Motion Design",
     duration: "2 months",
@@ -126,6 +129,8 @@ export const playgroundItems: PlaygroundItem[] = [
     category: "Interfaces",
     type: 'video',
     src: "/images/Playground/interfaces/TURABH.mp4",
+    embedUrl: "https://www.youtube.com/embed/gGJ_flgjBis",
+    link: "https://youtu.be/gGJ_flgjBis",
     description: "Turabh is an interactive cultural platform that reimagines how UAE village heritage can be explored through digital experience. The project combines mapping, storytelling, and community-driven features to make local history, crafts, and traditions more engaging, accessible, and immersive.",
     industry: "UI/UX — Cultural Heritage",
     duration: "4 weeks",
@@ -157,6 +162,8 @@ export const playgroundItems: PlaygroundItem[] = [
     category: "Videos",
     type: 'video',
     src: "/images/Playground/videos/BLACKBIRD.mp4",
+    embedUrl: "https://www.youtube.com/embed/H_dJCcVeiuA",
+    link: "https://youtu.be/H_dJCcVeiuA",
     description: "This fashion show opener introduces the dress as a symbol of rebellion against a simulacric world — a world built on appearances, control, and endless imitation. It begins in artificial perfection and ends in rupture, where the dress emerges as a symbol of defiance, raw identity, and power.",
     industry: "Motion — CGI & VFX",
     duration: "2 weeks",
@@ -172,6 +179,8 @@ export const playgroundItems: PlaygroundItem[] = [
     category: "Videos",
     type: 'video',
     src: "/images/Playground/videos/Haikyu Title Animation.mp4",
+    embedUrl: "https://www.youtube.com/embed/AVcfo63zHvM",
+    link: "https://youtu.be/AVcfo63zHvM",
     description: "A title sequence animation inspired by Haikyu!! Combines dynamic typography, impactful transitions, and a high-energy color palette.",
     industry: "Motion — Title Design",
     duration: "2 weeks",
@@ -429,6 +438,7 @@ function Card({
   const scale = useTransform(t, (v: number) => 1 - Math.min(Math.abs(v) * 0.1, 0.3));
   const opacity = useTransform(t, (v: number) => 1 - Math.min(Math.abs(v) * 0.2, 0.85));
   const blur = useTransform(t, (v: number) => Math.min(Math.abs(v) * 2, 8));
+  const isYouTube = item.type === 'video' && !!item.embedUrl;
 
   return (
     <motion.div
@@ -454,6 +464,14 @@ function Card({
             alt={item.title}
             className={styles.cardMedia}
             loading="lazy"
+          />
+        ) : isYouTube ? (
+          <iframe
+            className={styles.cardMedia}
+            src={item.embedUrl}
+            title={item.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
           />
         ) : (
           <video
@@ -489,9 +507,10 @@ function ProjectModal({
   onNavigate: () => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isYouTube = item.type === "video" && !!item.embedUrl;
 
   useEffect(() => {
-    if (item.type === "video" && videoRef.current) {
+    if (item.type === "video" && videoRef.current && !item.embedUrl) {
       videoRef.current.play().catch(() => { });
     }
   }, [item]);
@@ -529,6 +548,14 @@ function ProjectModal({
           <div className={styles.modalMedia}>
             {item.type === "image" ? (
               <img src={item.src} alt={item.title} className={styles.modalImage} />
+            ) : isYouTube ? (
+              <iframe
+                className={styles.modalImage}
+                src={item.embedUrl}
+                title={item.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             ) : (
               <video
                 ref={videoRef}

@@ -532,13 +532,12 @@ export function CascaderProjectPage({ project }: Props) {
 
                     {/* Final Video */}
                     <motion.div className={styles.outcomeVideoWrap} variants={item}>
-                        <video
+                        <iframe
                             className={styles.outcomeVideo}
-                            src="/images/PROJECTS/Cascader/rotomolding.mov"
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
+                            src="https://www.youtube.com/embed/8lMyrNt_Wkc"
+                            title="Cascader — Final Machine Operation"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
                         />
                         <p className={styles.outcomeCap}>Final Machine Operation — 2-Axis Rotation</p>
                     </motion.div>
