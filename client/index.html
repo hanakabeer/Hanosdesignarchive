@@ -7,8 +7,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Code:wght@300..700&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Oxanium:wght@200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+      #boot-loader{position:fixed;inset:0;z-index:11000;background:#0b0b0c;display:grid;place-items:center}
+      #boot-loader-inner{display:grid;place-items:center;gap:1.05rem}
+      #boot-loader-mark{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:clamp(1.4rem,3vw,2.15rem);color:rgba(255,255,255,.92);line-height:1}
+      #boot-loader-bar{width:min(360px,58vw);height:1px;background:rgba(255,255,255,.16);overflow:hidden;position:relative}
+      #boot-loader-fill{position:absolute;left:-40%;top:0;height:100%;width:40%;background:rgba(255,255,255,.78);animation:bootLoaderSweep 1.35s cubic-bezier(.16,1,.3,1) infinite}
+      @keyframes bootLoaderSweep{0%{transform:translate3d(0,0,0);opacity:.2}40%{opacity:.75}100%{transform:translate3d(350%,0,0);opacity:.2}}
+      @media (prefers-reduced-motion: reduce){#boot-loader-fill{animation:none;left:0;width:100%;opacity:.5}}
+    </style>
   </head>
   <body>
+    <div id="boot-loader" aria-hidden="true">
+      <div id="boot-loader-inner">
+        <div id="boot-loader-mark">HANO</div>
+        <div id="boot-loader-bar"><div id="boot-loader-fill"></div></div>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
