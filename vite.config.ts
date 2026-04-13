@@ -1,9 +1,9 @@
-import { defineConfig } from "vite";
+import { defineConfig, type PluginOption } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig(async () => {
-  const plugins = [react()];
+  const plugins: PluginOption[] = [react()];
 
   // Only load Replit plugins when running in a Replit environment
   if (process.env.REPL_ID !== undefined) {

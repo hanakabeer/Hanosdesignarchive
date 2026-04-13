@@ -125,7 +125,7 @@ export function MycrochetProjectPage({ project }: Props) {
                         { label: "Context", value: "Academic" },
                     ],
                 }}
-                imageSrc="/images/hero images/Mycrochet.png"
+                imageSrc="/images/hero%20images/Mycrochet.png"
                 imageAlt="Mycroche grown bio-fabricated structure"
                 accentColor="#8FAF8E"
                 theme="dark"

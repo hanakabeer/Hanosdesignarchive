@@ -166,7 +166,7 @@ export function VersaGripProjectPage({ project }: Props) {
                             { label: "Context", value: "Competition" },
                         ],
                     }}
-                    imageSrc="/images/hero images/versagrip.png"
+                    imageSrc="/images/hero%20images/versagrip.png"
                     imageAlt="VersaGrip wearable system on a hand"
                     accentColor="#C5B359"
                 />
@@ -510,7 +510,7 @@ export function VersaGripProjectPage({ project }: Props) {
                                         viewport={{ once: true }}
                                     >
                                         <div className={styles.trackStepHeader}>
-                                            <span className={styles.trackStepIndex}>{item.index}</span>
+                                            <span className={styles.trackStepIndex}>{String(index + 1).padStart(2, "0")}</span>
                                             <h4 className={styles.trackStepTitle}>{item.title}</h4>
                                         </div>
                                         <div className={styles.systemVisual}>
@@ -575,7 +575,7 @@ export function VersaGripProjectPage({ project }: Props) {
                                         viewport={{ once: true }}
                                     >
                                         <div className={styles.trackStepHeader}>
-                                            <span className={styles.trackStepIndex}>{item.index}</span>
+                                            <span className={styles.trackStepIndex}>{String(index + 1).padStart(2, "0")}</span>
                                             <h4 className={styles.trackStepTitle}>{item.title}</h4>
                                         </div>
                                         <div className={styles.interactionVisual}>
