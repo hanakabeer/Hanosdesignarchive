@@ -9,14 +9,14 @@ function normalizeProject(project: Project): Project {
   if (project.id === 5 || project.route === "/work/5" || project.title === "Pencil Sharpener") {
     return {
       ...project,
-      imageUrl: "/images/hero%20images/sharpner.png",
+      imageUrl: "/images/hero-images/sharpner.png",
     };
   }
 
   if (project.id === 6 || project.route === "/work/6" || project.title === "Bukhoorie") {
     return {
       ...project,
-      imageUrl: "/images/hero%20images/kartell.png",
+      imageUrl: "/images/hero-images/kartell.png",
     };
   }
 
@@ -126,7 +126,7 @@ async function seedDatabase() {
         route: "/work/1",
         role: "Individual Project | Functional POC",
         overview: "An Adaptive Menstrual Care solution designed for accessibility and comfort.",
-        imageUrl: "/images/hero%20images/Mumo.png"
+        imageUrl: "/images/hero-images/Mumo.png"
       },
       {
         title: "Cascader",
@@ -135,7 +135,7 @@ async function seedDatabase() {
         route: "/work/2",
         role: "Group Project | Modular Fabrication System",
         overview: "A modular fabrication system exploring large-scale rotomolding techniques.",
-        imageUrl: "/images/hero%20images/rotomoldin.png"
+        imageUrl: "/images/hero-images/rotomoldin.png"
       },
       {
         title: "Mycrochet",
@@ -144,7 +144,7 @@ async function seedDatabase() {
         route: "/work/3",
         role: "Group Project | Robotic End-Effector POC",
         overview: "Exploring robotic-assisted biocomposite fabrication through custom end-effector design.",
-        imageUrl: "/images/hero%20images/Mycrochet.png"
+        imageUrl: "/images/hero-images/Mycrochet.png"
       },
       {
         title: "Versa Grip",
@@ -153,7 +153,7 @@ async function seedDatabase() {
         route: "/work/4",
         role: "Competition Project | Exploratory Assistive Design Study",
         overview: "An assistive design study on adaptive grip mechanisms for individuals with limited dexterity.",
-        imageUrl: "/images/hero%20images/versagrip.png"
+        imageUrl: "/images/hero-images/versagrip.png"
       },
       {
         title: "Pencil Sharpener",
@@ -162,7 +162,7 @@ async function seedDatabase() {
         route: "/work/5",
         role: "Individual Project | CAD & Mechanical Teardown",
         overview: "A reverse-engineering study of a manual helical pencil sharpener, from physical teardown to digital reconstruction.",
-        imageUrl: "/images/hero%20images/sharpner.png"
+        imageUrl: "/images/hero-images/sharpner.png"
       },
       {
         title: "Bukhoorie",
@@ -171,7 +171,7 @@ async function seedDatabase() {
         route: "/work/6",
         role: "Individual Project | Functional POC",
         overview: "A specialized project exploring traditional materials and adaptive functional design.",
-        imageUrl: "/images/hero%20images/kartell.png"
+        imageUrl: "/images/hero-images/kartell.png"
       }
     ];
 

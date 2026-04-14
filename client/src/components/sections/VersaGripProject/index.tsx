@@ -166,7 +166,7 @@ export function VersaGripProjectPage({ project }: Props) {
                             { label: "Context", value: "Competition" },
                         ],
                     }}
-                    imageSrc="/images/hero%20images/versagrip.png"
+                    imageSrc="/images/hero-images/versagrip.png"
                     imageAlt="VersaGrip wearable system on a hand"
                     accentColor="#C5B359"
                 />

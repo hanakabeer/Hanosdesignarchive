@@ -116,7 +116,7 @@ export function BukhooriePage({ project }: Props) {
                         { label: "Context", value: "Competiton" },
                     ],
                 }}
-                imageSrc="/images/hero%20images/kartell.png"
+                imageSrc="/images/hero-images/kartell.png"
                 imageAlt="Bukhoorie lamp with smoke — ritual lighting"
                 accentColor="#C72A09"
                 theme="light"

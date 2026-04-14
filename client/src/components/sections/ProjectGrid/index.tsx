@@ -60,7 +60,7 @@ export function ProjectGrid({ projects, isLoading }: ProjectGridProps) {
             >
               <div className={styles.imageContainer}>
                 <img
-                  src={project.id === 5 ? "/images/hero%20images/sharpner.png" : project.imageUrl}
+                  src={project.id === 5 ? "/images/hero-images/sharpner.png" : project.imageUrl}
                   alt={project.title}
                   className={styles.image}
                 />

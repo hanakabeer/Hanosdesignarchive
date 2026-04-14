@@ -61,7 +61,7 @@ export function CascaderProjectPage({ project }: Props) {
                         { label: "Context", value: "Academic" },
                     ],
                 }}
-                imageSrc="/images/hero%20images/rotomoldin.png"
+                imageSrc="/images/hero-images/rotomoldin.png"
                 imageAlt="Cascader rotational molding machine"
                 accentColor="#F05A28"
             />
