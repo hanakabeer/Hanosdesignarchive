@@ -3,6 +3,7 @@ import type { Server } from "http";
 import { storage } from "./storage.js";
 import { api } from "../shared/routes.js";
 import type { Project } from "../shared/schema.js";
+import nodemailer from "nodemailer";
 
 function normalizeProject(project: Project): Project {
   if (project.id === 5 || project.route === "/work/5" || project.title === "Pencil Sharpener") {
@@ -49,6 +50,57 @@ export async function registerRoutes(
       return res.status(404).json({ message: "Project not found" });
     }
     res.json(normalizeProject(project));
+  });
+
+  app.post(api.contact.send.path, async (req, res) => {
+    const parsed = api.contact.send.body.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ message: "Invalid form data" });
+    }
+
+    const { name, email, message } = parsed.data;
+
+    const to = process.env.CONTACT_TO || "kabeer.hana@hotmail.com";
+    const host = process.env.SMTP_HOST;
+    const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587;
+    const user = process.env.SMTP_USER;
+    const pass = process.env.SMTP_PASS;
+    const secure = process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : port === 465;
+
+    if (!host || !user || !pass) {
+      return res.status(500).json({ message: "Email service is not configured" });
+    }
+
+    const from = process.env.CONTACT_FROM || user;
+
+    try {
+      const transporter = nodemailer.createTransport({
+        host,
+        port,
+        secure,
+        auth: { user, pass },
+      });
+
+      const subject = `Portfolio message${name ? ` — ${name}` : ""}`;
+      const text = [
+        `Name: ${name ?? ""}`,
+        `Email: ${email}`,
+        "",
+        message,
+      ].join("\n");
+
+      await transporter.sendMail({
+        from,
+        to,
+        replyTo: email,
+        subject,
+        text,
+      });
+
+      return res.status(200).json({ ok: true });
+    } catch {
+      return res.status(500).json({ message: "Failed to send message" });
+    }
   });
 
   // Seed data if empty

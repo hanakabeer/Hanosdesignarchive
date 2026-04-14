@@ -25,6 +25,22 @@ export const api = {
       },
     },
   },
+  contact: {
+    send: {
+      method: 'POST' as const,
+      path: '/api/contact',
+      body: z.object({
+        name: z.string().trim().min(1).max(80).optional(),
+        email: z.string().trim().email(),
+        message: z.string().trim().min(1).max(2000),
+      }),
+      responses: {
+        200: z.object({ ok: z.literal(true) }),
+        400: z.object({ message: z.string() }),
+        500: z.object({ message: z.string() }),
+      },
+    },
+  },
 };
 
 export function buildUrl(path: string, params?: Record<string, string | number>): string {

@@ -80,10 +80,6 @@ export function ApproachNetwork() {
     const video = videoRef.current;
     if (!video) return;
 
-    const handleLoadedMetadata = () => {
-      setIsReady(true);
-    };
-
     const handleCanPlayThrough = () => {
       setIsReady(true);
     };
@@ -102,17 +98,15 @@ export function ApproachNetwork() {
       setVideoError(true);
     };
 
-    video.addEventListener("loadedmetadata", handleLoadedMetadata);
     video.addEventListener("canplaythrough", handleCanPlayThrough);
     video.addEventListener("progress", handleProgress);
     video.addEventListener("error", handleError);
 
-    if (video.readyState >= 2) {
+    if (video.readyState >= 4) {
       setIsReady(true);
     }
 
     return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
       video.removeEventListener("canplaythrough", handleCanPlayThrough);
       video.removeEventListener("progress", handleProgress);
       video.removeEventListener("error", handleError);
@@ -132,6 +126,24 @@ export function ApproachNetwork() {
             className={styles.video}
             style={{ opacity: isReady ? videoOpacity : 0 }}
           />
+
+          {!isReady && !videoError && (
+            <div className={styles.loader}>
+              <div
+                className={styles.loaderTrack}
+                role="progressbar"
+                aria-valuenow={loadProgress}
+                aria-valuemin={0}
+                aria-valuemax={100}
+              >
+                <div
+                  className={styles.loaderBar}
+                  style={{ width: `${loadProgress}%` }}
+                />
+              </div>
+              <span className={styles.loaderText}>Loading {loadProgress}%</span>
+            </div>
+          )}
         </div>
         
         <motion.div 
@@ -148,24 +160,6 @@ export function ApproachNetwork() {
             into tangible digital reality.
           </p>
         </motion.div>
-
-        {!isReady && !videoError && (
-          <div className={styles.loader}>
-            <div
-              className={styles.loaderTrack}
-              role="progressbar"
-              aria-valuenow={loadProgress}
-              aria-valuemin={0}
-              aria-valuemax={100}
-            >
-              <div
-                className={styles.loaderBar}
-                style={{ width: `${loadProgress}%` }}
-              />
-            </div>
-            <span className={styles.loaderText}>Loading {loadProgress}%</span>
-          </div>
-        )}
       </div>
     </section>
   );

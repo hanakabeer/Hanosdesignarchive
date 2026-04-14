@@ -1,4 +1,9 @@
 import { useRef, useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "@shared/routes";
+import { toast } from "@/hooks/use-toast";
 import styles from "./styles.module.css";
 
 /* ── stamp image pool ─────────────────────────────────── */
@@ -84,8 +89,25 @@ export function FooterContact() {
   const lastPos = useRef<{ x: number; y: number } | null>(null);
   const [stamps, setStamps] = useState<StampInstance[]>([]);
   const [hinted, setHinted] = useState(false);
-  const [email, setEmail] = useState("");
   const stampIndexRef = useRef(0); // cycles through stamps in order
+
+  const contactSchema = api.contact.send.body;
+  type ContactFormValues = z.infer<typeof contactSchema>;
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+    mode: "onSubmit",
+  });
 
   const addStamp = useCallback((clientX: number, clientY: number) => {
     const el = canvasRef.current;
@@ -139,17 +161,27 @@ export function FooterContact() {
     setHinted(false);
   }, []);
 
-  const handleContactSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const recipient = "kabeer.hana@hotmail.com";
-    const trimmed = email.trim();
-    const subject = encodeURIComponent("Portfolio inquiry");
-    const body = trimmed
-      ? encodeURIComponent(`Hello,\n\nI'd love to connect.\n\nMy email: ${trimmed}`)
-      : encodeURIComponent("Hello,\n\nI'd love to connect.");
+  const handleContactSubmit = useCallback(async (values: ContactFormValues) => {
+    try {
+      const res = await fetch(api.contact.send.path, {
+        method: api.contact.send.method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
 
-    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-  }, [email]);
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        const message = typeof data?.message === "string" ? data.message : "Failed to send message";
+        toast({ title: "Message not sent", description: message, variant: "destructive" });
+        return;
+      }
+
+      toast({ title: "Message sent", description: "I’ll get back to you soon." });
+      reset();
+    } catch {
+      toast({ title: "Message not sent", description: "Network error. Please try again.", variant: "destructive" });
+    }
+  }, [reset]);
 
   return (
     <footer id="contact" className={styles.footer}>
@@ -197,19 +229,43 @@ export function FooterContact() {
             <img src="/images/envelop.png" alt="" className={styles.envelopeImage} draggable={false} />
           </div>
 
-          <form className={styles.contactForm} onSubmit={handleContactSubmit}>
-            <label className={styles.inputShell}>
-              <span className={styles.srOnly}>Your email</span>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your Message"
-                className={styles.emailInput}
-              />
-            </label>
-            <button type="submit" className={styles.contactButton}>
-              Get in Touch
+          <form className={styles.contactForm} onSubmit={handleSubmit(handleContactSubmit)}>
+            <div className={styles.formFields}>
+              <label className={styles.inputShell}>
+                <span className={styles.srOnly}>Your name</span>
+                <input
+                  type="text"
+                  placeholder="Name (optional)"
+                  className={styles.emailInput}
+                  {...register("name")}
+                />
+              </label>
+              <label className={styles.inputShell}>
+                <span className={styles.srOnly}>Your email</span>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className={styles.emailInput}
+                  {...register("email")}
+                />
+              </label>
+              <label className={styles.inputShellArea}>
+                <span className={styles.srOnly}>Your message</span>
+                <textarea
+                  placeholder="Message"
+                  className={styles.messageInput}
+                  rows={3}
+                  {...register("message")}
+                />
+              </label>
+              {(errors.name || errors.email || errors.message) && (
+                <p className={styles.formError}>
+                  {errors.email?.message || errors.message?.message || errors.name?.message}
+                </p>
+              )}
+            </div>
+            <button type="submit" className={styles.contactButton} disabled={isSubmitting}>
+              {isSubmitting ? "Sending…" : "Get in Touch"}
             </button>
           </form>
 
