@@ -7,7 +7,7 @@ const VIDEO_PATH = "/images/final_2.mp4";
 export function ApproachNetwork() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  
+
   const [isReady, setIsReady] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
@@ -32,7 +32,7 @@ export function ApproachNetwork() {
 
   // Handle video scrubbing with a frame-aware sync loop
   const targetTimeRef = useRef(0);
-  
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !isReady) return;
@@ -40,15 +40,15 @@ export function ApproachNetwork() {
     // 1. Update the target time whenever scroll progress changes
     const unsubscribe = smoothProgress.on("change", (v) => {
       if (!video.duration) return;
-      
+
       const videoStart = 0.1; // Start scrubbing earlier for more immediate feedback
       const videoEnd = 0.95; // End slightly before the very end to avoid issues
-      
+
       let adjustedProgress = 0;
       if (v > videoStart) {
         adjustedProgress = Math.min(1, (v - videoStart) / (videoEnd - videoStart));
       }
-      
+
       targetTimeRef.current = Math.min(adjustedProgress * video.duration, video.duration - 0.05);
     });
 
@@ -145,19 +145,17 @@ export function ApproachNetwork() {
             </div>
           )}
         </div>
-        
-        <motion.div 
+
+        <motion.div
           className={styles.overlayText}
           style={{ opacity: textOpacity }}
         >
           <p className={styles.label}>Systemic Approach</p>
           <h2 className={styles.title}>
-            Structure is everywhere.<br />We just make it visible.
+            Different mediums. One experience.
           </h2>
           <p className={styles.sub}>
-            Every project begins as a chaotic cloud of ideas. We connect the
-            dots, finding the hidden structure that transforms abstract concepts
-            into tangible digital reality.
+            I move between tools, systems, and mediums to turn complex ideas into unified experiences.
           </p>
         </motion.div>
       </div>

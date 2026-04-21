@@ -52,6 +52,42 @@ export async function registerRoutes(
     res.json(normalizeProject(project));
   });
 
+  // ── Diagnostic endpoint: GET /api/contact/test ──────────────────────────
+  app.get("/api/contact/test", async (_req, res) => {
+    const host = process.env.SMTP_HOST;
+    const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587;
+    const user = process.env.SMTP_USER;
+    const pass = process.env.SMTP_PASS;
+    const secure = process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : port === 465;
+    const to   = process.env.CONTACT_TO   || "kabeer.hana@hotmail.com";
+    const from = process.env.CONTACT_FROM || user || "";
+
+    const missing: string[] = [];
+    if (!host) missing.push("SMTP_HOST");
+    if (!user) missing.push("SMTP_USER");
+    if (!pass || pass === "YOUR_HOTMAIL_PASSWORD_OR_APP_PASSWORD") missing.push("SMTP_PASS (needs a real App Password)");
+
+    if (missing.length > 0) {
+      return res.status(500).json({
+        ok: false,
+        error: "Missing or placeholder env vars",
+        missing,
+        hint: "Generate a Hotmail App Password at https://account.microsoft.com/security → Advanced security options → App passwords, then set SMTP_PASS in your Vercel dashboard.",
+      });
+    }
+
+    try {
+      const transporter = nodemailer.createTransport({
+        host, port, secure, auth: { user, pass },
+      });
+      await transporter.verify();
+      return res.json({ ok: true, host, port, user, to, from, message: "SMTP connection verified ✓" });
+    } catch (err: any) {
+      return res.status(500).json({ ok: false, error: err.message, host, port, user });
+    }
+  });
+
+  // ── Contact form submission: POST /api/contact ───────────────────────────
   app.post(api.contact.send.path, async (req, res) => {
     const parsed = api.contact.send.body.safeParse(req.body);
     if (!parsed.success) {
@@ -60,15 +96,19 @@ export async function registerRoutes(
 
     const { name, email, message } = parsed.data;
 
-    const to = process.env.CONTACT_TO || "kabeer.hana@hotmail.com";
+    const to   = process.env.CONTACT_TO   || "kabeer.hana@hotmail.com";
     const host = process.env.SMTP_HOST;
     const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587;
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS;
     const secure = process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : port === 465;
 
-    if (!host || !user || !pass) {
-      return res.status(500).json({ message: "Email service is not configured" });
+    const isPlaceholder = !pass || pass === "YOUR_HOTMAIL_PASSWORD_OR_APP_PASSWORD";
+    if (!host || !user || isPlaceholder) {
+      console.error("[contact] Email env vars not configured:", { host: !!host, user: !!user, pass: !isPlaceholder });
+      return res.status(500).json({
+        message: "Email service is not configured. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS (Hotmail App Password) in your Vercel environment variables.",
+      });
     }
 
     const from = process.env.CONTACT_FROM || user;
@@ -79,6 +119,7 @@ export async function registerRoutes(
         port,
         secure,
         auth: { user, pass },
+        tls: { ciphers: "SSLv3" },
       });
 
       const subject = `Portfolio message${name ? ` — ${name}` : ""}`;
@@ -97,9 +138,11 @@ export async function registerRoutes(
         text,
       });
 
+      console.log(`[contact] Message sent from ${email} to ${to}`);
       return res.status(200).json({ ok: true });
-    } catch {
-      return res.status(500).json({ message: "Failed to send message" });
+    } catch (err: any) {
+      console.error("[contact] Failed to send email:", err.message);
+      return res.status(500).json({ message: "Failed to send message. Please try again later." });
     }
   });
 
