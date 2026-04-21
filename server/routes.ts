@@ -5,6 +5,10 @@ import { api } from "../shared/routes.js";
 import type { Project } from "../shared/schema.js";
 import nodemailer from "nodemailer";
 
+const DEFAULT_CONTACT_EMAIL = "kabeer.hana@hotmail.com";
+const DEFAULT_SMTP_HOST = "smtp-mail.outlook.com";
+const DEFAULT_SMTP_PORT = 587;
+
 function normalizeProject(project: Project): Project {
   if (project.id === 5 || project.route === "/work/5" || project.title === "Pencil Sharpener") {
     return {
@@ -54,16 +58,15 @@ export async function registerRoutes(
 
   // ── Diagnostic endpoint: GET /api/contact/test ──────────────────────────
   app.get("/api/contact/test", async (_req, res) => {
-    const host = process.env.SMTP_HOST;
-    const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587;
+    const host = process.env.SMTP_HOST || DEFAULT_SMTP_HOST;
+    const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : DEFAULT_SMTP_PORT;
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS;
     const secure = process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : port === 465;
-    const to   = process.env.CONTACT_TO   || "kabeer.hana@hotmail.com";
+    const to   = process.env.CONTACT_TO   || DEFAULT_CONTACT_EMAIL;
     const from = process.env.CONTACT_FROM || user || "";
 
     const missing: string[] = [];
-    if (!host) missing.push("SMTP_HOST");
     if (!user) missing.push("SMTP_USER");
     if (!pass || pass === "YOUR_HOTMAIL_PASSWORD_OR_APP_PASSWORD") missing.push("SMTP_PASS (needs a real App Password)");
 
@@ -72,7 +75,7 @@ export async function registerRoutes(
         ok: false,
         error: "Missing or placeholder env vars",
         missing,
-        hint: "Generate a Hotmail App Password at https://account.microsoft.com/security → Advanced security options → App passwords, then set SMTP_PASS in your Vercel dashboard.",
+        hint: `Use SMTP_HOST=${DEFAULT_SMTP_HOST}, SMTP_PORT=${DEFAULT_SMTP_PORT}, SMTP_USER=your Hotmail/Outlook email, then generate a Microsoft App Password at https://account.microsoft.com/security and set it as SMTP_PASS.`,
       });
     }
 
@@ -96,18 +99,18 @@ export async function registerRoutes(
 
     const { name, email, message } = parsed.data;
 
-    const to   = process.env.CONTACT_TO   || "kabeer.hana@hotmail.com";
-    const host = process.env.SMTP_HOST;
-    const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587;
+    const to   = process.env.CONTACT_TO   || DEFAULT_CONTACT_EMAIL;
+    const host = process.env.SMTP_HOST || DEFAULT_SMTP_HOST;
+    const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : DEFAULT_SMTP_PORT;
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS;
     const secure = process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : port === 465;
 
     const isPlaceholder = !pass || pass === "YOUR_HOTMAIL_PASSWORD_OR_APP_PASSWORD";
-    if (!host || !user || isPlaceholder) {
+    if (!user || isPlaceholder) {
       console.error("[contact] Email env vars not configured:", { host: !!host, user: !!user, pass: !isPlaceholder });
       return res.status(500).json({
-        message: "Email service is not configured. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS (Hotmail App Password) in your Vercel environment variables.",
+        message: `Email service is not configured. Use SMTP_HOST=${DEFAULT_SMTP_HOST}, SMTP_PORT=${DEFAULT_SMTP_PORT}, SMTP_USER=your Hotmail/Outlook email, and SMTP_PASS=your Microsoft App Password in your environment variables.`,
       });
     }
 
