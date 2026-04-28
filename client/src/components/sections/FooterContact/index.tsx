@@ -1,8 +1,4 @@
 import { useRef, useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { api } from "@shared/routes";
 import { toast } from "@/hooks/use-toast";
 import styles from "./styles.module.css";
 
@@ -84,30 +80,55 @@ function BehanceIcon() {
   );
 }
 
+function CopyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path
+        d="M9 9.75C9 8.09315 10.3431 6.75 12 6.75H16.25C17.9069 6.75 19.25 8.09315 19.25 9.75V16C19.25 17.6569 17.9069 19 16.25 19H12C10.3431 19 9 17.6569 9 16V9.75Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M5 14.25V8C5 6.34315 6.34315 5 8 5H14.25"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+const CONTACT_EMAIL = "kabeer.hana@hotmail.com";
+
+const SOCIAL_LINKS = [
+  {
+    href: "https://www.instagram.com/hano.archives?igsh=YjJqaTBsdGw5eHg0&utm_source=qr",
+    label: "Instagram",
+    Icon: InstagramIcon,
+  },
+  {
+    href: "https://www.linkedin.com/in/hana-kabeer-3015972b1",
+    label: "LinkedIn",
+    Icon: LinkedInIcon,
+  },
+  {
+    href: "https://wa.me/971529901551",
+    label: "WhatsApp",
+    Icon: WhatsAppIcon,
+  },
+  {
+    href: "https://www.behance.net/hanakabeer",
+    label: "Behance",
+    Icon: BehanceIcon,
+  },
+] as const;
+
 export function FooterContact() {
   const canvasRef = useRef<HTMLDivElement>(null);
   const lastPos = useRef<{ x: number; y: number } | null>(null);
   const [stamps, setStamps] = useState<StampInstance[]>([]);
   const [hinted, setHinted] = useState(false);
   const stampIndexRef = useRef(0); // cycles through stamps in order
-
-  const contactSchema = api.contact.send.body;
-  type ContactFormValues = z.infer<typeof contactSchema>;
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-    mode: "onSubmit",
-  });
 
   const addStamp = useCallback((clientX: number, clientY: number) => {
     const el = canvasRef.current;
@@ -161,27 +182,14 @@ export function FooterContact() {
     setHinted(false);
   }, []);
 
-  const handleContactSubmit = useCallback(async (values: ContactFormValues) => {
+  const handleCopyEmail = useCallback(async () => {
     try {
-      const res = await fetch(api.contact.send.path, {
-        method: api.contact.send.method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        const message = typeof data?.message === "string" ? data.message : "Failed to send message";
-        toast({ title: "Message not sent", description: message, variant: "destructive" });
-        return;
-      }
-
-      toast({ title: "Message sent", description: "I’ll get back to you soon." });
-      reset();
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      toast({ title: "Email copied", description: CONTACT_EMAIL });
     } catch {
-      toast({ title: "Message not sent", description: "Network error. Please try again.", variant: "destructive" });
+      toast({ title: "Copy failed", description: "Please copy the email manually.", variant: "destructive" });
     }
-  }, [reset]);
+  }, []);
 
   return (
     <footer id="contact" className={styles.footer}>
@@ -229,45 +237,30 @@ export function FooterContact() {
             <img src="/images/envelop.png" alt="" className={styles.envelopeImage} draggable={false} />
           </div>
 
-          <form className={styles.contactForm} onSubmit={handleSubmit(handleContactSubmit)}>
-            <div className={styles.formFields}>
-              <label className={styles.inputShell}>
-                <span className={styles.srOnly}>Your name</span>
-                <input
-                  type="text"
-                  placeholder="Name (optional)"
-                  className={styles.emailInput}
-                  {...register("name")}
-                />
-              </label>
-              <label className={styles.inputShell}>
-                <span className={styles.srOnly}>Your email</span>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className={styles.emailInput}
-                  {...register("email")}
-                />
-              </label>
-              <label className={styles.inputShellArea}>
-                <span className={styles.srOnly}>Your message</span>
-                <textarea
-                  placeholder="Message"
-                  className={styles.messageInput}
-                  rows={3}
-                  {...register("message")}
-                />
-              </label>
-              {(errors.name || errors.email || errors.message) && (
-                <p className={styles.formError}>
-                  {errors.email?.message || errors.message?.message || errors.name?.message}
-                </p>
-              )}
-            </div>
-            <button type="submit" className={styles.contactButton} disabled={isSubmitting}>
-              {isSubmitting ? "Sending…" : "Get in Touch"}
+          <div className={styles.directContact}>
+            <button type="button" className={styles.emailPill} onClick={handleCopyEmail}>
+              <span className={styles.emailText}>{CONTACT_EMAIL}</span>
+              <span className={styles.copyBadge}>
+                <CopyIcon />
+              </span>
+              <span className={styles.srOnly}>Copy {CONTACT_EMAIL}</span>
             </button>
-          </form>
+            <div className={styles.inlineSocials}>
+              {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  title={label}
+                  className={styles.socialIcon}
+                >
+                  <Icon />
+                </a>
+              ))}
+            </div>
+          </div>
 
           <div className={`${styles.mobileStickerLine} ${styles.mobileStickerLineBottom}`} aria-hidden="true">
             <span className={styles.mobileStickerRule} />
@@ -307,46 +300,19 @@ export function FooterContact() {
         <div className={styles.contactList}>
           <span className={styles.label}>Contact Me</span>
           <div className={styles.socials}>
-            <a
-              href="https://www.instagram.com/hano.archives?igsh=YjJqaTBsdGw5eHg0&utm_source=qr"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram"
-              title="Instagram"
-              className={styles.socialIcon}
-            >
-              <InstagramIcon />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/hana-kabeer-3015972b1"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn"
-              title="LinkedIn"
-              className={styles.socialIcon}
-            >
-              <LinkedInIcon />
-            </a>
-            <a
-              href="https://wa.me/971529901551"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="WhatsApp"
-              title="WhatsApp"
-              className={styles.socialIcon}
-            >
-              <WhatsAppIcon />
-            </a>
-            <a
-              href="https://www.behance.net/hanakabeer"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Behance"
-              title="Behance"
-              className={styles.socialIcon}
-            >
-              <BehanceIcon />
-            </a>
+            {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                title={label}
+                className={styles.socialIcon}
+              >
+                <Icon />
+              </a>
+            ))}
           </div>
         </div>
 

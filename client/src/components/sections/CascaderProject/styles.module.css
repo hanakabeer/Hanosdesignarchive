@@ -1546,7 +1546,9 @@
 }
 
 .outcomeVideoWrap {
-    margin-bottom: 4rem;
+    width: min(100%, 1920px);
+    aspect-ratio: 1920 / 1080;
+    margin: 0 auto 4rem;
     border-radius: 16px;
     overflow: hidden;
     background: #000;
@@ -1555,11 +1557,9 @@
 
 .outcomeVideo {
     width: 100%;
-    max-height: 70vh;
+    height: 100%;
     display: block;
-    object-fit: cover;
-    transform: scale(1.08);
-    transform-origin: center center;
+    border: 0;
 }
 
 .outcomeLine {
@@ -1614,13 +1614,11 @@
 
 @media (max-width: 768px) {
     .outcomeVideoWrap {
-        aspect-ratio: 4 / 5;
+        width: 100%;
     }
 
     .outcomeVideo {
         height: 100%;
-        max-height: none;
-        transform: scale(1.14);
     }
 
     .reflectionHighlight {
